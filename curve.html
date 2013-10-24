@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<link rel="stylesheet" type = "text/css" href="leaflet/leaflet.css" />
+   		<script src = "leaflet/leaflet.js"></script>
+   		<style type="text/css">
+   			#map{
+   				height: 500px;
+   				margin-top:50px;
+   				margin-right:20%;
+   				margin-left:20%;
+   			}
+   		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script type="text/javascript">
+			var points_list = [];
+			var map = L.map('map').setView([51.505, -0.09], 13); //initialize map with center location and zoom level
+			L.tileLayer('http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/997/256/{z}/{x}/{y}.png', {
+			    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+			    maxZoom: 18
+			}).addTo(map); // add a tile
+			var marker = L.marker([51.5, -0.09]).addTo(map); // add a marker
+			marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+			
+			
+			
+			
+			
+			//events section
+			function onMapClick(e) {
+				var maker = L.marker(e.latlng).addTo(map);
+				points_list.push(e.latlng);
+				if(points_list.length % 2 == 1){
+					//draw nothing
+				}else{
+					//draw a line
+					var latlngs = [];
+					latlngs.push(e.latlng);
+					points_list.pop();
+					latlngs.push(points_list.pop());
+					// create a red polyline from an arrays of LatLng points
+					var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+					
+					// zoom the map to the polyline
+					//map.fitBounds(polyline.getBounds());
+					
+					
+					//draw curves
+				}
+			    //alert("You clicked the map at " + e.latlng);
+			}
+			
+			map.on('click', onMapClick);
+		</script>
+	</body>
+</html>
