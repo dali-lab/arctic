@@ -48,6 +48,7 @@
 			info.update = function (props) {
 				this._div.innerHTML = '<h4>World</h4>' +  (props ?
 					'<b>' + props.NAME + '</b><br />'
+					+ 'Reports'
 					: 'Hover over a country');
 			};
 	
@@ -84,7 +85,8 @@
 			}
 			
 			
-			var geojson;
+			var geojson_c;
+			var geojson_r;
 			function highlightFeature(e) {
 			    var layer = e.target;
 			
@@ -102,7 +104,7 @@
 			}
 			
 			function resetHighlight(e) {
-			    geojson.resetStyle(e.target);
+			    geojson_c.resetStyle(e.target);
 			    info.update();
 			}
 			
@@ -117,14 +119,27 @@
 					click: zoomToFeature
 				});
 			}
-	
-			geojson = L.geoJson(countryData, {
+			// var pointsData = {
+			// 	"type": "FeatureCollection", "features":  [    
+			// 	{"type": "Feature",
+   //  			"properties": {
+   //      			"name": "arctic",
+   //  			},
+   //  			"geometry": {
+   //      			"type": "Point",
+   //      			"coordinates": [180, 0]
+   //  			}},
+			// 	]
+			// }
+			geojson_c = L.geoJson(countryData, {
 				style: style,
 				onEachFeature: onEachFeature
 			}).addTo(map);
 			//
 			
-			
+			geojson_r = L.geoJson(pointsData, {
+				style: style
+			}).addTo(map)
 			
 			//events section
 			function onMapClick(e) {
