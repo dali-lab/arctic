@@ -1,0 +1,199 @@
+<html>
+	<head>
+		<link rel="stylesheet" type = "text/css" href="leaflet/leaflet.css" />
+   		<script src = "leaflet/leaflet.js"></script>
+   		<style type="text/css">
+   			#map{
+   				height: 500px;
+   				margin-top:50px;
+   				margin-right:20%;
+   				margin-left:20%;
+   			}
+        .info {
+            padding: 6px 8px;
+            font: 14px/16px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .info h4 {
+            margin: 0 0 5px;
+            color: #777;
+        }
+   		</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<script type="text/javascript" src="us-states.js"></script>
+		<script type="text/javascript" src="countries-hires.js"></script>
+		<script type="text/javascript">
+            var littleton = L.marker([39.61, -105.02]).bindPopup('This is Littleton, CO.'),
+            denver    = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+            aurora    = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.'),
+            golden    = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+            var cities = L.layerGroup([littleton, denver, aurora, golden]);
+            var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/{styleId}/256/{z}/{x}/{y}.png',
+            cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+            
+            var minimal   = L.tileLayer(cloudmadeUrl, {styleId: 22677, attribution: cloudmadeAttribution}),
+            midnight  = L.tileLayer(cloudmadeUrl, {styleId: 999,   attribution: cloudmadeAttribution}),
+            motorways = L.tileLayer(cloudmadeUrl, {styleId: 46561, attribution: cloudmadeAttribution});
+            
+            var map = L.map('map', {
+                            center: new L.LatLng(39.73, -104.99),
+                            zoom: 10,
+                            layers: [minimal, motorways,cities]
+                            });
+            var baseMaps = {
+                "Minimal": minimal,
+                "Night View": midnight
+            };
+        
+            var overlayMaps = {
+                "Motorways": motorways,
+                "Cities": cities
+            };
+            L.control.layers(baseMaps, overlayMaps).addTo(map);
+//			var points_list = [];
+//			var map = L.map('map').setView([51.505, -0.09], 5); //initialize map with center location and zoom level
+//			L.tileLayer('http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/22677/256/{z}/{x}/{y}.png', {
+//                        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+//                        maxZoom: 18
+//                        }).addTo(map); // add a tile
+//                        //var marker = L.marker([51.5, -0.09]).addTo(map); // add a marker
+//                        //marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+//                        // control that shows state info on hover
+//                        var info = L.control();
+//                        
+//                        info.onAdd = function (map) {
+//                            this._div = L.DomUtil.create('div', 'info');
+//                            this.update();
+//                            return this._div;
+//                        };
+//        
+//        info.update = function (props) {
+//            this._div.innerHTML = '<h4>World</h4>' +  (props ?
+//                                                       '<b>' + props.NAME + '</b><br />'
+//                                                       + 'Reports'
+//                                                       : 'Hover over a country');
+//        };
+//        
+//        info.addTo(map);
+//        //
+//        // function getColor(name) {
+//        // 	if (name == 'United Kingdom'){
+//        // 		return '#800026';
+//        // 	}else{
+//        // 		return '#FED976';
+//        // 	}
+//        // }
+//        
+//        function getColor(c) {
+//            return c == 6  ? '#800026' :
+//            c == 5  ? '#BD0026' :
+//            c == 4  ? '#E31A1C' :
+//            c == 3  ? '#FC4E2A' :
+//            c == 2  ? '#FD8D3C' :
+//            c == 1  ? '#FEB24C' :
+//            c == 0  ? '#FED976' :
+//            '#FFEDA0';
+//        }
+//        
+//        function style(feature) {
+//            return {
+//                fillColor: getColor(feature.properties.MAP_COLOR),
+//                weight: 2,
+//                opacity: 1,
+//                color: 'white',
+//                dashArray: '3',
+//                fillOpacity: 0.7
+//            };
+//        }
+//        
+//        
+//        var geojson_c;
+//        var geojson_r;
+//        function highlightFeature(e) {
+//            var layer = e.target;
+//			
+//            layer.setStyle({
+//                           weight: 5,
+//                           color: '#666',
+//                           dashArray: '',
+//                           fillOpacity: 0.7
+//                           });
+//                           
+//                           if (!L.Browser.ie && !L.Browser.opera) {
+//                               layer.bringToFront();
+//                           }
+//                           info.update(layer.feature.properties);
+//        }
+//        
+//        function resetHighlight(e) {
+//            geojson_c.resetStyle(e.target);
+//            info.update();
+//        }
+//        
+//        function zoomToFeature(e) {
+//            map.fitBounds(e.target.getBounds());
+//        }
+//        
+//        function onEachFeature(feature, layer) {
+//            layer.on({
+//                     mouseover: highlightFeature,
+//                     mouseout: resetHighlight,
+//                     click: zoomToFeature
+//                     });
+//        }
+//        // var pointsData = {
+//        // 	"type": "FeatureCollection", "features":  [
+//        // 	{"type": "Feature",
+//        //  			"properties": {
+//        //      			"name": "arctic",
+//        //  			},
+//        //  			"geometry": {
+//        //      			"type": "Point",
+//        //      			"coordinates": [180, 0]
+//        //  			}},
+//        // 	]
+//        // }
+//        geojson_c = L.geoJson(countryData, {
+//                              style: style,
+//                              onEachFeature: onEachFeature
+//                              }).addTo(map);
+//                              //
+//                              
+//                              geojson_r = L.geoJson(pointsData, {
+//                                                    style: style
+//                                                    }).addTo(map)
+//                                                    
+//                                                    //events section
+//                                                    function onMapClick(e) {
+//                                                        var maker = L.marker(e.latlng).addTo(map);
+//                                                        points_list.push(e.latlng);
+//                                                        if(points_list.length % 2 == 1){
+//                                                            //draw nothing
+//                                                        }else{
+//                                                            //draw a line
+//                                                            var latlngs = [];
+//                                                            latlngs.push(e.latlng);
+//                                                            points_list.pop();
+//                                                            latlngs.push(points_list.pop());
+//                                                            // create a red polyline from an arrays of LatLng points
+//                                                            var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
+//                                                            
+//                                                            // zoom the map to the polyline
+//                                                            //map.fitBounds(polyline.getBounds());
+//                                                            
+//                                                            
+//                                                            //draw curves
+//                                                            
+//                                                        }
+//                                                        //alert("You clicked the map at " + e.latlng);
+//                                                    }
+//        
+//        map.on('click', onMapClick);
+            </script>
+	</body>
+</html>
