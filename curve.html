@@ -1,8 +1,15 @@
 <html>
 	<head>
+
 		<link rel="stylesheet" type = "text/css" href="leaflet/leaflet.css" />
    		<script src = "leaflet/leaflet.js"></script>
+
+   		<!--This defines some basic styles associated with the map and .info-->
    		<style type="text/css">
+   			body {
+   				color: green;
+   				background-color: rgb(02, 10, 19);
+   			}
    			#map{
    				height: 500px;
    				margin-top:50px;
@@ -25,19 +32,19 @@
 	</head>
 	<body>
 		<div id="map"></div>
-		<script type="text/javascript" src="us-states.js"></script>
+		<!-- GeoJSON Data (countries-hires.js) -->
 		<script type="text/javascript" src="countries-hires.js"></script>
+
+		<!-- Our javascript code-->
 		<script type="text/javascript">
 			var points_list = [];
-			var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/{styleId}/256/{z}/{x}/{y}.png',
+			var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/111453/256/{z}/{x}/{y}.png',
             cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
-			var normal = L.tileLayer('http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/22677/256/{z}/{x}/{y}.png', {
+			var normal = L.tileLayer(cloudmadeUrl, {
 			    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 			    maxZoom: 18
 			})// add a tile
-			//var marker = L.marker([51.5, -0.09]).addTo(map); // add a marker
-			//marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-			// control that shows state info on hover
+
 			var info = L.control();
 	
 			info.onAdd = function (map) {
@@ -53,16 +60,6 @@
 					: 'Hover over a country');
 			};
 	
-
-			//
-			// function getColor(name) {
-			// 	if (name == 'United Kingdom'){
-			// 		return '#800026';
-			// 	}else{
-			// 		return '#FED976';
-			// 	}
-			// }
-			
 			function getColor(c) {
     			return c == 6  ? '#800026' :
 			           c == 5  ? '#BD0026' :
@@ -85,9 +82,11 @@
 			    };
 			}
 			
-			
+			// Variables to hold the GeoJSON data for the countries and reports respectively
 			var geojson_c;
 			var geojson_r;
+
+			// Function that will highlight a feature that is passed to it
 			function highlightFeature(e) {
 			    var layer = e.target;
 			
@@ -104,15 +103,19 @@
 			    info.update(layer.feature.properties);
 			}
 			
+			// Resets the highlight
 			function resetHighlight(e) {
 			    geojson_c.resetStyle(e.target);
 			    info.update();
 			}
 			
+			// Acquires the bounds of a feature e and zooms in on them
 			function zoomToFeature(e) {
 				map.fitBounds(e.target.getBounds());
 			}
-	
+			
+			// Takes a feature and a layer and highlights the feature while mouse is on it
+			// Also zooms on to the feature when the feature is clicked
 			function onEachFeature(feature, layer) {
 				layer.on({
 					mouseover: highlightFeature,
@@ -120,6 +123,7 @@
 					click: zoomToFeature
 				});
 			}
+
 			var pointsData = {
 				"type": "FeatureCollection", "features":  [    
 				{"type": "Feature",
@@ -128,25 +132,52 @@
     			},
     			"geometry": {
         			"type": "Point",
-        			"coordinates": [180, 0]
+        			"coordinates": [0, 66]
     			}},
 				]
 			}
 
+			// Adding in an icon
+			var blackIcon = L.icon({
+			    iconUrl: 'black-dot.png',
+
+			    iconSize:     [6, 6], // size of the icon
+			    shadowSize:   [0, 0], // size of the shadow
+			    iconAnchor:   [3, 3], // point of the icon which will correspond to marker's location
+			    shadowAnchor: [4, 62],  // the same for the shadow
+			    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+			});
+
+			// Creating a geoJSON layer for the country data with highlight and zoom capabilities
 			geojson_c = L.geoJson(countryData, {
 				style: style,
 				onEachFeature: onEachFeature
 			});
-			//
+
+			/* Creating a geoJSON layer for the report data with custom icon.
+			Has highlight and zoom capabilities. */
 			geojson_r = L.geoJson(pointsData, {
-				style: style
+				style: style,
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng, {icon: blackIcon});
+				},
+				onEachFeature: onEachFeature
 			});
-			//var geoData = L.layerGroup([geojson_c, geojson_r]);
+
+			// Initialize the map with center location and zoom level.
 			var map = L.map('map', {
-				center: new L.LatLng(39.73, -104.99),
-                zoom: 10,
+				center: new L.LatLng(66, 0),
+                zoom: 3,
+                maxZoom: 8,
+                minZoom: 0,
 				layers: [normal, geojson_c, geojson_r]
-			}); //initialize map with center location and zoom level
+			});
+
+
+			var arcticCircle = L.circle(new L.LatLng(66, 0), 1274200, {
+				color: 'red'
+			}).addTo(map);
+			// Add info control to the map
 			info.addTo(map);
 			var baseMaps = {
             	"Normal": normal
@@ -158,10 +189,16 @@
             };
 
 
-			//events section
+			// Events
+
+			// Add a layer controller to the map
 			L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+			// When the map is clicked, initialize an icon
 			function onMapClick(e) {
-				var maker = L.marker(e.latlng).addTo(map);
+				var maker = L.marker(e.latlng, {icon: blackIcon}).addTo(map);
+
+				/*// Draw two points
 				points_list.push(e.latlng);
 				if(points_list.length % 2 == 1){
 					//draw nothing
@@ -180,8 +217,7 @@
 					
 					//draw curves
 					
-				}
-			    //alert("You clicked the map at " + e.latlng);
+				}*/
 			}
 			
 			map.on('click', onMapClick);
