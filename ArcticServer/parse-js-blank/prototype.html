@@ -1,0 +1,314 @@
+<!doctype html>
+<head>
+  <style type="text/css">
+    #top{
+      text-align: center
+    }
+    #navi{
+      float:left;
+      padding-right:20px;
+      
+    }
+    #wrapper{
+      height:auto;
+      overflow: hidden;
+    }
+    #headline{
+      color: #544C4A;
+      font-size: 5em;
+      margin: 20px 0;
+      position: relative;
+      text-align: center;
+      font-family: 'GentiumBasicRegular',Tahoma,Geneva,sans-serif;
+
+    }
+    #navi_ul{
+      list-style: none;
+
+    }
+    #navi_ul li{
+      padding-top: 5px;
+      padding-left: 3px;
+      padding-right: 3px;
+      background-color: #C0C0C0;
+      border-radius:10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    #navi_ul li:hover{
+      background-color: #FFFFFF;
+      cursor: pointer
+    }
+    .content{
+      margin-left:10%;
+      padding-top: 20px;
+      width:60%;
+      float:left;
+    }
+    .ops{
+
+    }
+    .ops:hover{
+      cursor:pointer;
+      text-decoration: underline;
+    }
+    
+  </style>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <LINK href="demo_table.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script type="text/javascript" src="jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
+  <script type="text/javascript" src="jquery.dataTables.js"></script>
+</head>
+
+<body>
+  
+  <div id="main">
+      <div id='top'>
+        <span id='headline'>Arctic Admin</span>
+      </div>
+      <div id='wrapper'>
+        <div id='navi'>
+          <ul id='navi_ul'>
+            <li onclick='changeDiv(1)'>Conferences</li>
+            <li onclick='changeDiv(2)'>Reports</li>
+            <li onclick='changeDiv(3)'>Websites</li>
+            <li onclick='changeDiv(4)'>About</li>
+          </ul>
+        </div>
+        <div id='c_content' class='content'>
+          <table id="table_id" class="display">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>Column 1</th>
+                      <th>Column 2</th>
+                      <th>Column 3</th>
+                      <th>Column 4</th>
+                      <th>Column 5</th>
+                      <th>etc</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>hjfh 1 Data 1</td>
+                      <td>Row 1 Data 2</td>
+                      <td>Row 1 Data 3</td>
+                      <td>Row 1 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+                  <tr>
+                      <td><input type="checkbox" /></td>
+                      <td>Row 2 Data 1</td>
+                      <td>Row 2 Data 2</td>
+                      <td>Row 2 Data 3</td>
+                      <td>Row 2 Data 4</td>
+                      <td>Row 1 Data 5</td>
+                      <td><span class='ops'>edit</span></td>
+                  </tr>
+              </tbody>
+          </table>
+          <div id='opp' align='right'>
+              <span class='ops'>-delete</span>&nbsp;&nbsp;&nbsp;<span class='ops'>+add</span>
+          </div>
+        </div>
+        <div id='r_content' hidden class='content'>
+          reports edit page
+        </div>
+        <div id='w_content' hidden class='content'>
+          <ul>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+          </ul>
+        </div>
+        <div id='a_content' hidden class='content'>
+          WASHINGTON — Amid the low enrollment numbers for health insurance via the HealthCare.gov website, the Obama administration found one bright spot: Medicaid.
+
+          Almost 400,000 people have learned they are eligible to enroll in the states' Medicaid programs, and the numbers are high even in Republican-dominated states that have chosen not to expand the program.
+
+          President Obama highlighted the Medicaid enrollment numbers Thursday, even as he took blame for the poor early performance of the health exchanges and for misleading some Americans that their health care policies would not change. Obama said the 396,000 new enrollees for Medicaid are something "that's been less reported on, but it shouldn't be
+          <div align='right'>
+            <span class='ops'>edit</span>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+
+  <script type="text/javascript">
+    // Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+    $(document).ready( function () {
+        $('#table_id').dataTable();
+    } );
+    // var TestObject = Parse.Object.extend("TestObject");
+    // var testObject = new TestObject();
+    //   testObject.save({foo: "bar"}, {
+    //   success: function(object) {
+    //     $(".success").show();
+    //   },
+    //   error: function(model, error) {
+    //     $(".error").show();
+    //   }
+    // });
+    // var About = Parse.Object.extends("About");
+    // var about = new About();
+    // about.set("about","Welcome to Arctic Institute");
+    // about.save(null, {
+    //   success: function(gameScore) {
+    //     // Execute any logic that should take place after the object is saved.
+    //     alert('New object created with objectId: ' + gameScore.id);
+    //   },
+    //   error: function(gameScore, error) {
+    //     // Execute any logic that should take place if the save fails.
+    //     // error is a Parse.Error with an error code and description.
+    //     alert('Failed to create new object, with error code: ' + error.description);
+    //   }
+    // });
+    function changeDiv(index){
+      if (index==1){
+        $('#r_content').hide();
+        $('#a_content').hide();
+        $('#w_content').hide();
+        $('#c_content').show();
+      }else if(index==2){
+        $('#c_content').hide();
+        $('#a_content').hide();
+        $('#w_content').hide();
+        $('#r_content').show();
+      }else if(index==3){
+        $('#c_content').hide();
+        $('#a_content').hide();
+        $('#r_content').hide();
+        $('#w_content').show();
+      }else if(index==4){
+        $('#c_content').hide();
+        $('#r_content').hide();
+        $('#w_content').hide();
+        $('#a_content').show();
+      }
+      
+    }
+  </script>
+</body>
+
+</html>

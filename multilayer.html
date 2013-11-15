@@ -2,12 +2,13 @@
 	<head>
 		<link rel="stylesheet" type = "text/css" href="leaflet/leaflet.css" />
    		<script src = "leaflet/leaflet.js"></script>
+        <script src = "countries-hires"></script>
    		<style type="text/css">
-   			#map{
-   				height: 500px;
-   				margin-top:50px;
-   				margin-right:20%;
-   				margin-left:20%;
+   		#map{
+			height: 600px;
+			margin-top:50px;
+			margin-right:5%;
+			margin-left:5%;
    			}
         .info {
             padding: 6px 8px;
@@ -40,7 +41,17 @@
             	maxZoom: 5
             }),
             midnight  = L.tileLayer(cloudmadeUrl, {styleId: 999,   attribution: cloudmadeAttribution}),
-            motorways = L.tileLayer(cloudmadeUrl, {styleId: 46561, attribution: cloudmadeAttribution});
+            motorways = L.tileLayer(cloudmadeUrl, {styleId: 22677, attribution: cloudmadeAttribution});
+            //create a geojson tile
+            data = countryData;
+            showBorders = L.geoJson(data, {
+                                style: function (feature) {
+                                    return {color: feature.properties.color};
+                                },
+                                onEachFeature: function (feature, layer) {
+                                    layer.bindPopup(feature.properties.description);
+                                }
+                            });
             
             var map = L.map('map', {
                             center: new L.LatLng(39.73, -104.99),
@@ -48,13 +59,14 @@
                             layers: [minimal, motorways,cities]
                             });
             var baseMaps = {
-                "Minimal": minimal,
-                "Night View": midnight
+                "Show Connection": minimal,
+                "No Connection": midnight
             };
         
             var overlayMaps = {
-                "Motorways": motorways,
-                "Cities": cities
+                "Conferences": motorways,
+                "Reports": cities,
+                //"ShowContryBorders":showBorders
             };
             L.control.layers(baseMaps, overlayMaps).addTo(map);
 //			var points_list = [];
