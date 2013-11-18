@@ -3,12 +3,17 @@
 
 		<link rel="stylesheet" type = "text/css" href="leaflet/leaflet.css" />
    		<script src = "leaflet/leaflet.js"></script>
+   		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+		<script type="text/javascript" src="jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
+		<script type="text/javascript" src="jquery.dataTables.js"></script>
 
    		<!--This defines some basic styles associated with the map and .info-->
    		<link rel="stylesheet" type="text/css" href="style.css">
    		</style>
-	</head>
-	<body>
+		</head>
+		<body>
 		<div id="control">
 			<img src="arctic_map.jpg">
 		</div>
@@ -19,6 +24,8 @@
 
 		<!-- Our javascript code-->
 		<script type="text/javascript">
+			Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+
 			var points_list = [];
 			var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/e2c7205a90f64eec9d06b4f89e44ce0c/111453/256/{z}/{x}/{y}.png',
             cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
@@ -65,8 +72,8 @@
 			}
 			
 			// Variables to hold the GeoJSON data for the countries and reports respectively
-			var geojson_c;
-			var geojson_r;
+			var countries;
+			var reports;
 
 			// Function that will highlight a feature that is passed to it
 			function highlightFeature(e) {
@@ -87,7 +94,7 @@
 			
 			// Resets the highlight
 			function resetHighlight(e) {
-			    geojson_c.resetStyle(e.target);
+			    countries.resetStyle(e.target);
 			    info.update();
 			}
 			
@@ -118,14 +125,15 @@
 			});
 
 			// Creating a geoJSON layer for the country data with highlight and zoom capabilities
-			geojson_c = L.geoJson(countryData, {
+			countries = L.geoJson(countryData, {
 				style: style,
 				onEachFeature: onEachFeature
 			});
 
+
 			/* Creating a geoJSON layer for the report data with custom icon.
 			Has highlight and zoom capabilities. */
-			geojson_r = L.geoJson(pointsData, {
+			reports = L.geoJson(pointsData, {
 				style: style,
 				pointToLayer: function(feature, latlng) {
 					return L.marker(latlng); //, {icon: blackIcon});
@@ -133,13 +141,57 @@
 				onEachFeature: onEachFeature
 			});
 
+			conferences = L.geoJson(null, {
+				pointToLayer: function(feature, latlng) {
+					return new L.Marker(latlng)
+				},
+				onEachFeature: onEachFeature
+			});
+
+
+			var Conference = Parse.Object.extend("Conference");
+    		var query = new Parse.Query(Conference);
+		    function getAllConferences() {
+		    	query.find({
+			      success: function(results) {
+
+			        // Do something with the returned Parse.Object values
+			        for (var i = 0; i < results.length; i++) {
+			        	var latitude = results[i].get('latitude');
+			        	alert(latitude);
+			        	var longitude = results[i].get('longitude');
+			        	var point = {
+			        		"type": "Feature",
+			        		"id": i,
+			        		"geometry": {
+			        			"type": "Point",
+			        			"coordinates": [latitude, longitude]
+			        		},
+			        		"properties": {
+			        			"LATITUDE": latitude,
+			        			"LONGITUDE": longitude
+			        		}
+			        		
+			        	};	
+			        	conferences.addData(point);		        	
+			        }
+			        
+			      },
+
+			      error: function(error) {}
+				});
+		    }
+
+		    getAllConferences();
+
+		    
 			// Initialize the map with center location and zoom level.
 			var map = L.map('map', {
 				center: new L.LatLng(66, 0),
                 zoom: 1,
                 maxZoom: 8,
                 minZoom: 0,
-				layers: [normal, geojson_c, geojson_r]
+				layers: [normal, countries, reports]
 			});
 
 			var geojsonMarkerOptions = {
@@ -153,18 +205,14 @@
 			// Add info control to the map
 			info.addTo(map);
 
-            var lineLayer = L.polyline([new L.LatLng(38, -97), new L.LatLng(60, 100)], 
-        	{
-        		color: 'red'
-        	}).addTo(map);
 			var baseMaps = {
             	"Normal": normal
             };
         
             var overlayMaps = {
-            	"countries": geojson_c,
-            	"reports": geojson_r,
-            	"connections": lineLayer
+            	"countries": countries,
+            	"reports": reports,
+            	"conferences": conferences
             };
 
 
@@ -173,7 +221,7 @@
 
 			// Add a layer controller to the map
 			L.control.layers(baseMaps, overlayMaps).addTo(map);
-
+			
 			// When the map is clicked, initialize an icon
 			function onMapClick(e) {
 				var maker = L.marker(e.latlng, {icon: blackIcon}).addTo(map);
