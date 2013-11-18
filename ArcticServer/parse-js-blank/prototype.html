@@ -256,34 +256,61 @@
   </div>
 
   <script type="text/javascript">
-    // Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+    Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+    //insertion
+    // var Conference = Parse.Object.extend("Conference");
+    // var conference1 = new Conference();
+    // conference1.save({
+    //   name: "arctic conference 1",
+    //   longitude: 42.3581,
+    //   latitude: 71.0636,
+    //   description: "conference in Boston"
+    // }, {
+    //   success: function(conference1) {
+    //     // The object was saved successfully.
+    //   },
+    //   error: function(conference1, error) {
+    //     alert('something went wrong!');
+    //     // The save failed.
+    //     // error is a Parse.Error with an error code and description.
+    //   }
+    // });
+    // var conference2 = new Conference();
+    // conference2.save({
+    //   name: "arctic conference 2",
+    //   longitude: 34.0500,
+    //   latitude: 118.2500,
+    //   description: "conference in LA"
+    // }, {
+    //   success: function(conference2) {
+    //     // The object was saved successfully.
+    //   },
+    //   error: function(conference2, error) {
+    //     alert('something went wrong!');
+    //     // The save failed.
+    //     // error is a Parse.Error with an error code and description.
+    //   }
+    // });
+    //retrive
+    var Conference = Parse.Object.extend("Conference");
+    var query = new Parse.Query(Conference);
+    query.find({
+      success: function(results) {
+        alert("Successfully retrieved " + results.length + " conferences");
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          alert(object.id + ' - ' + object.get('name'));
+        }
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
     $(document).ready( function () {
         $('#table_id').dataTable();
     } );
-    // var TestObject = Parse.Object.extend("TestObject");
-    // var testObject = new TestObject();
-    //   testObject.save({foo: "bar"}, {
-    //   success: function(object) {
-    //     $(".success").show();
-    //   },
-    //   error: function(model, error) {
-    //     $(".error").show();
-    //   }
-    // });
-    // var About = Parse.Object.extends("About");
-    // var about = new About();
-    // about.set("about","Welcome to Arctic Institute");
-    // about.save(null, {
-    //   success: function(gameScore) {
-    //     // Execute any logic that should take place after the object is saved.
-    //     alert('New object created with objectId: ' + gameScore.id);
-    //   },
-    //   error: function(gameScore, error) {
-    //     // Execute any logic that should take place if the save fails.
-    //     // error is a Parse.Error with an error code and description.
-    //     alert('Failed to create new object, with error code: ' + error.description);
-    //   }
-    // });
+
     function changeDiv(index){
       if (index==1){
         $('#r_content').hide();
