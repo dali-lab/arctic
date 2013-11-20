@@ -2,22 +2,58 @@ body {
 	color: green;
    	background-color: rgb(02, 10, 19);
 }
+
+#reports-control {
+	position: absolute;
+	background-color: green;
+	z-index: 1;
+	opacity: .5;
+	top: 0px;
+	left: 0px;
+	width: 100px;
+	height: 100px;
+}
+#conferences-control {
+	position: absolute;
+	background-color: red;
+	z-index: 1;
+	opacity: .5;
+	top: 0px;
+	left: 100px;
+	width: 100px;
+	height: 100px;
+}
+#about-control {
+	position: absolute;
+	background-color: blue;
+	z-index: 1;
+	opacity: .5;
+	top: 100px;
+	left: 0px;
+	width: 100px;
+	height: 100px;
+}
 #control {
-	float: left
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 200px;
+	height: 200px;
+	z-index: 0;
 }
 #map{
 	margin-top: 0px;
-	margin-left: 00px;
+	margin-left: 200px;
 	width: 500px;
 	height: 500px;
 }
 .info {
-padding: 6px 8px;
-font: 14px/16px Arial, Helvetica, sans-serif;
-background: white;
-background: rgba(255,255,255,0.8);
-box-shadow: 0 0 15px rgba(0,0,0,0.2);
-border-radius: 5px;
+	padding: 6px 8px;
+	font: 14px/16px Arial, Helvetica, sans-serif;
+	background: white;
+	background: rgba(255,255,255,0.8);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
 }
 .info h4 {
 	margin: 0 0 5px;

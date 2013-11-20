@@ -15,8 +15,12 @@
 		</head>
 		<body>
 		<div id="control">
-			<img src="arctic_map.jpg">
+			<img id = "arctic-map" src="arctic_map.jpg">
+			<div id = "reports-control" ></div>
+			<div id = "conferences-control" ></div>
+			<div id = "about-control" ></div>
 		</div>
+
 		<div id="map"></div>
 		<!-- GeoJSON Data (countries-hires.js) -->
 		<script type="text/javascript" src="countries-hires.js"></script>
@@ -124,6 +128,12 @@
 			    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 			});
 
+			function onEachFeature(feature, layer) {
+				if (feature.properties && feature.properties.name) {
+					layer.bindPopup(feature.properties.name)
+				}
+			}
+
 			// Creating a geoJSON layer for the country data with highlight and zoom capabilities
 			countries = L.geoJson(countryData, {
 				style: style,
@@ -147,7 +157,12 @@
 				},
 				onEachFeature: onEachFeature
 			});
-
+			function toggleLayer(map, layer){
+				if (map.hasLayer(layer))
+					map.removeLayer(layer);
+				else
+					map.addLayer(layer);
+			}
 
 			var Conference = Parse.Object.extend("Conference");
     		var query = new Parse.Query(Conference);
@@ -157,17 +172,18 @@
 
 			        // Do something with the returned Parse.Object values
 			        for (var i = 0; i < results.length; i++) {
+			        	var name = results[i].get('name');
 			        	var latitude = results[i].get('latitude');
-			        	alert(latitude);
 			        	var longitude = results[i].get('longitude');
 			        	var point = {
 			        		"type": "Feature",
-			        		"id": i,
+			        		"idreports": i,
 			        		"geometry": {
 			        			"type": "Point",
 			        			"coordinates": [latitude, longitude]
 			        		},
 			        		"properties": {
+			        			"name": name,
 			        			"LATITUDE": latitude,
 			        			"LONGITUDE": longitude
 			        		}
@@ -214,7 +230,17 @@
             	"reports": reports,
             	"conferences": conferences
             };
+            $( document ).ready(function() {
+    			$( "#reports-control" ).click(function(){
+    				toggleLayer(map, reports);
+    			});
+    			$( "#conferences-control" ).click(function(){
+    				toggleLayer(map, conferences);
+    			});
+    			$( "#conferences-control" ).click(function(){
+    			});
 
+			});
 
 
 			// Events
