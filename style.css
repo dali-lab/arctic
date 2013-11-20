@@ -3,49 +3,127 @@ body {
    	background-color: rgb(02, 10, 19);
 }
 
+.header {
+	position: absolute;
+	top: 30px;
+	width: 1300px;
+	height: 200px;
+}
+
+.nav-bar {
+	color: white;
+	font-size: 125%;
+	top: 0px;
+	height: 25px;
+	width: 1300px;
+}
+
+#arctic-map {
+	position: absolute;
+	z-index: 0;
+	top: 225;
+	left: 50px;
+	width: 200px;
+	height: 200px;
+}
+
+.vertical {
+	position:absolute;
+    top:40%;    
+    left:0;
+    width:80%;
+    font-size: 125%;
+}
 #reports-control {
 	position: absolute;
-	background-color: green;
-	z-index: 1;
-	opacity: .5;
-	top: 0px;
-	left: 0px;
+	outline: 1px solid #eee;
+	background-color: rgba(76, 141, 90, .75);
+	color: white;
+	text-align: center;
+	z-index: 2;
+	top: 225px;
+	left: 50px;
 	width: 100px;
 	height: 100px;
 }
 #conferences-control {
 	position: absolute;
-	background-color: red;
-	z-index: 1;
-	opacity: .5;
-	top: 0px;
-	left: 100px;
+	outline: 1px solid #eee;
+	background-color: rgba(238, 117, 117, .75);
+	color: white;
+	text-align: center;
+	z-index: 2;
+	top: 225px;
+	left: 150px;
 	width: 100px;
 	height: 100px;
 }
 #about-control {
 	position: absolute;
-	background-color: blue;
-	z-index: 1;
-	opacity: .5;
-	top: 100px;
-	left: 0px;
+	outline: 1px solid #eee;
+	background-color: rgba(84, 86, 188, .75);
+	z-index: 2;
+	color: white;
+	text-align: center;
+	top: 325px;
+	left: 50px;
 	width: 100px;
 	height: 100px;
 }
+
+#websites-control {
+	position: absolute;
+	outline: 1px solid #eee;
+	background-color: rgba(195, 150, 73, .75);
+	z-index: 2;
+	color: white;
+	text-align: center;
+	top: 325px;
+	left: 150px;
+	width: 100px;
+	height: 100px;
+}
+
 #control {
 	position: absolute;
-	top: 0px;
+	top: 255px;
 	left: 0px;
-	width: 200px;
-	height: 200px;
+	width: 300px;
+	height: 650px;
 	z-index: 0;
 }
 #map{
-	margin-top: 0px;
-	margin-left: 200px;
-	width: 500px;
+	margin-top: 285px;
+	margin-left: 300px;
+	width: 1000px;
+	height: 650px;
+	z-index: 0;
+}
+
+#about-arctic {
+	display: none;
+	position: absolute;
+	top: 375px;
+	left: 400px;
+	width: 800px;
 	height: 500px;
+	color: white;
+	background-color: rgba(84, 86, 188, .8);
+	font-size: 125%;
+	z-index: 10;
+}
+
+#websites-arctic {
+	display: none;
+	position: absolute;
+	top: 375px;
+	left: 400px;
+	width: 800px;
+	height: 500px;
+	color: white;
+	background-color: rgba(195, 150, 73, .75);
+	font-size: 125%;
+	z-index: 10;
 }
 .info {
 	padding: 6px 8px;
