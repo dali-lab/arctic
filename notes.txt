@@ -1,0 +1,6 @@
+- entire site should be public, except the forum where people will have to be approved
+- storing pdf's in site or out-of-site
+- permissioning:
+  - members - add but not delete
+  - admin - do everythin
+
