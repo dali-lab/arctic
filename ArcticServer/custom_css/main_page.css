@@ -1,0 +1,80 @@
+#main {
+  background-color: #fff;
+}
+#top{
+  text-align: right;
+  background-color: #000;
+  height: 30px;
+  padding-right: 10%;
+}
+.top_span{
+  color:white;
+}
+.admin_acc{
+  color:#999999;
+}
+#navi{
+  float:left;
+  padding-right:20px;
+  padding-left:40px;
+  padding-top: 20px;
+}
+#wrapper{
+  height:auto;
+  overflow: hidden;
+}
+#headline{
+  color: #544C4A;
+  font-size: 5em;
+  margin: 20px 0;
+  position: relative;
+  text-align: center;
+  font-family: 'GentiumBasicRegular',Tahoma,Geneva,sans-serif;
+}
+#navi_ul{
+  list-style: none;
+
+}
+#navi_ul li{
+  padding-top: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: #C0C0C0;
+  border-radius:10px;
+  margin-top: 10px;
+  text-align: center;
+}
+#navi_ul li:hover{
+  background-color: #FFFFFF;
+  cursor: pointer
+}
+.content{
+  /*margin-left:5%;*/
+  padding-top: 20px;
+  width:80%;
+  float:left;
+}
+.ops{
+
+}
+.ops:hover{
+  cursor:pointer;
+  text-decoration: underline;
+}
+
+.add_input{
+  width:75%;
+}
+.glyphicon{
+  color:grey;
+}
+.glyphicon:hover{
+  color:white;
+  cursor: pointer;
+}
+#edit_modal{
+  clear:both;
+}
+.btn-my{
+  background-color:#999;
+}

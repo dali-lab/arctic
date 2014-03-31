@@ -1,170 +1,13 @@
 <!doctype html>
 <head>
-  <style type="text/css">
-    #main {
-      background-color: #fff;
-    }
-    #top{
-      text-align: right;
-      background-color: #000;
-      height: 30px;
-      padding-right: 10%;
-    }
-    .top_span{
-      color:white;
-    }
-    .admin_acc{
-      color:#999999;
-    }
-    #navi{
-      float:left;
-      padding-right:20px;
-      padding-left:40px;
-      padding-top: 20px;
-    }
-    #wrapper{
-      height:auto;
-      overflow: hidden;
-    }
-    #headline{
-      color: #544C4A;
-      font-size: 5em;
-      margin: 20px 0;
-      position: relative;
-      text-align: center;
-      font-family: 'GentiumBasicRegular',Tahoma,Geneva,sans-serif;
-    }
-    #navi_ul{
-      list-style: none;
-
-    }
-    #navi_ul li{
-      padding-top: 5px;
-      padding-left: 3px;
-      padding-right: 3px;
-      background-color: #C0C0C0;
-      border-radius:10px;
-      margin-top: 10px;
-      text-align: center;
-    }
-    #navi_ul li:hover{
-      background-color: #FFFFFF;
-      cursor: pointer
-    }
-    .content{
-      /*margin-left:5%;*/
-      padding-top: 20px;
-      width:80%;
-      float:left;
-    }
-    .ops{
-
-    }
-    .ops:hover{
-      cursor:pointer;
-      text-decoration: underline;
-    }
-    
-    .add_input{
-      width:75%;
-    }
-    .glyphicon{
-      color:grey;
-    }
-    .glyphicon:hover{
-      color:white;
-      cursor: pointer;
-    }
-    #edit_modal{
-      clear:both;
-    }
-    .btn-my{
-      background-color:#999;
-    }
-  </style>
   <meta charset="utf-8">
-
   <title>Arctic Admin</title>
-  <meta name="description" content="My Parse App">
-  <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="custom_css/main_page.css">
   <LINK href="custom_css/demo_table.css" rel="stylesheet" type="text/css">
   <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
-  <script type="text/javascript" src="jquery/jquery.js"></script>
-  <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
-  <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
-
-  <script>
-      Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
-      function getAllConferences(){
-          var Conference = Parse.Object.extend("Conference");
-          var query = new Parse.Query(Conference);
-          query.find({
-            success: function(results) {
-              var giCount = 1;
-              for (var i = 0; i < results.length; i++) {
-                $('#table_id').dataTable().fnAddData( [
-                  "<input type='checkbox' />",
-                  ""+results[i].get('name'),
-                  ""+results[i].get('abbr'),
-                  ""+results[i].get('city'),
-                  ""+results[i].get('latitude'),
-                  ""+results[i].get('longitude'),
-                  ""+results[i].get('description'),
-                  "<td><span class='ops' id='edit_"+results[i].get('objectId')+"'>"+
-                  "<span class='glyphicon glyphicon-edit' data-toggle='modal' data-target='#myModal'></span><span class='glyphicon glyphicon-remove' onclick='confirmDelete()'></span></span></td>"]);
-              }
-            }
-          });
-      }
-
-      
-      getAllConferences();
-
-      $(document).ready( function () {
-          $('#table_id').dataTable();
-      } );
-      
-
-      function changeDiv(index){
-        if (index==1){
-          $('#r_content').hide();
-          $('#a_content').hide();
-          $('#w_content').hide();
-          $('#c_content').show();
-        }else if(index==2){
-          $('#c_content').hide();
-          $('#a_content').hide();
-          $('#w_content').hide();
-          $('#r_content').show();
-        }else if(index==3){
-          $('#c_content').hide();
-          $('#a_content').hide();
-          $('#r_content').hide();
-          $('#w_content').show();
-        }else if(index==4){
-          $('#c_content').hide();
-          $('#r_content').hide();
-          $('#w_content').hide();
-          $('#a_content').show();
-        }
-        
-      }
-
-
-      function confirmDelete(){
-        bootbox.confirm("Are you sure?", function(result) {
-        Example.show("Confirm result: "+result);
-        }); 
-      }
-      function add_Conference(){
-        
-      }
-  </script>
 </head>
-
 <body>
   
   <div id="main">
@@ -340,7 +183,81 @@
         <!-- end of modal -->
       
   </div>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script type="text/javascript" src="jquery/jquery.js"></script>
+  <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
+  <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+  <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+  <script type="text/javascript" src="models/conference.js"></script>
+  <script type="text/javascript" src="collections/collections.js"></script>
+  <script>
+      Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+      function getAllConferences(){
+          var Conference = Parse.Object.extend("Conference");
+          var query = new Parse.Query(Conference);
+          query.find({
+            success: function(results) {
+              var giCount = 1;
+              for (var i = 0; i < results.length; i++) {
+                $('#table_id').dataTable().fnAddData( [
+                  "<input type='checkbox' />",
+                  ""+results[i].get('name'),
+                  ""+results[i].get('abbr'),
+                  ""+results[i].get('city'),
+                  ""+results[i].get('latitude'),
+                  ""+results[i].get('longitude'),
+                  ""+results[i].get('description'),
+                  "<td><span class='ops' id='edit_"+results[i].get('objectId')+"'>"+
+                  "<span class='glyphicon glyphicon-edit' data-toggle='modal' data-target='#myModal'></span><span class='glyphicon glyphicon-remove' onclick='confirmDelete()'></span></span></td>"]);
+              }
+            }
+          });
+      }
 
+      
+      getAllConferences();
+
+      $(document).ready( function () {
+          $('#table_id').dataTable();
+      } );
+      
+
+      function changeDiv(index){
+        if (index==1){
+          $('#r_content').hide();
+          $('#a_content').hide();
+          $('#w_content').hide();
+          $('#c_content').show();
+        }else if(index==2){
+          $('#c_content').hide();
+          $('#a_content').hide();
+          $('#w_content').hide();
+          $('#r_content').show();
+        }else if(index==3){
+          $('#c_content').hide();
+          $('#a_content').hide();
+          $('#r_content').hide();
+          $('#w_content').show();
+        }else if(index==4){
+          $('#c_content').hide();
+          $('#r_content').hide();
+          $('#w_content').hide();
+          $('#a_content').show();
+        }
+        
+      }
+
+
+      function confirmDelete(){
+        bootbox.confirm("Are you sure?", function(result) {
+        Example.show("Confirm result: "+result);
+        }); 
+      }
+      function add_Conference(){
+        
+      }
+  </script>
 </body>
 
 </html>
