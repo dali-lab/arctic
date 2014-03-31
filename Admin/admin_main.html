@@ -1,0 +1,346 @@
+<!doctype html>
+<head>
+  <style type="text/css">
+    #main {
+      background-color: #fff;
+    }
+    #top{
+      text-align: right;
+      background-color: #000;
+      height: 30px;
+      padding-right: 10%;
+    }
+    .top_span{
+      color:white;
+    }
+    .admin_acc{
+      color:#999999;
+    }
+    #navi{
+      float:left;
+      padding-right:20px;
+      padding-left:40px;
+      padding-top: 20px;
+    }
+    #wrapper{
+      height:auto;
+      overflow: hidden;
+    }
+    #headline{
+      color: #544C4A;
+      font-size: 5em;
+      margin: 20px 0;
+      position: relative;
+      text-align: center;
+      font-family: 'GentiumBasicRegular',Tahoma,Geneva,sans-serif;
+    }
+    #navi_ul{
+      list-style: none;
+
+    }
+    #navi_ul li{
+      padding-top: 5px;
+      padding-left: 3px;
+      padding-right: 3px;
+      background-color: #C0C0C0;
+      border-radius:10px;
+      margin-top: 10px;
+      text-align: center;
+    }
+    #navi_ul li:hover{
+      background-color: #FFFFFF;
+      cursor: pointer
+    }
+    .content{
+      /*margin-left:5%;*/
+      padding-top: 20px;
+      width:80%;
+      float:left;
+    }
+    .ops{
+
+    }
+    .ops:hover{
+      cursor:pointer;
+      text-decoration: underline;
+    }
+    
+    .add_input{
+      width:75%;
+    }
+    .glyphicon{
+      color:grey;
+    }
+    .glyphicon:hover{
+      color:white;
+      cursor: pointer;
+    }
+    #edit_modal{
+      clear:both;
+    }
+    .btn-my{
+      background-color:#999;
+    }
+  </style>
+  <meta charset="utf-8">
+
+  <title>Arctic Admin</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <LINK href="custom_css/demo_table.css" rel="stylesheet" type="text/css">
+  <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script type="text/javascript" src="jquery/jquery.js"></script>
+  <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
+
+  <script>
+      Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+      function getAllConferences(){
+          var Conference = Parse.Object.extend("Conference");
+          var query = new Parse.Query(Conference);
+          query.find({
+            success: function(results) {
+              var giCount = 1;
+              for (var i = 0; i < results.length; i++) {
+                $('#table_id').dataTable().fnAddData( [
+                  "<input type='checkbox' />",
+                  ""+results[i].get('name'),
+                  ""+results[i].get('abbr'),
+                  ""+results[i].get('city'),
+                  ""+results[i].get('latitude'),
+                  ""+results[i].get('longitude'),
+                  ""+results[i].get('description'),
+                  "<td><span class='ops' id='edit_"+results[i].get('objectId')+"'>"+
+                  "<span class='glyphicon glyphicon-edit' data-toggle='modal' data-target='#myModal'></span><span class='glyphicon glyphicon-remove' onclick='confirmDelete()'></span></span></td>"]);
+              }
+            }
+          });
+      }
+
+      
+      getAllConferences();
+
+      $(document).ready( function () {
+          $('#table_id').dataTable();
+      } );
+      
+
+      function changeDiv(index){
+        if (index==1){
+          $('#r_content').hide();
+          $('#a_content').hide();
+          $('#w_content').hide();
+          $('#c_content').show();
+        }else if(index==2){
+          $('#c_content').hide();
+          $('#a_content').hide();
+          $('#w_content').hide();
+          $('#r_content').show();
+        }else if(index==3){
+          $('#c_content').hide();
+          $('#a_content').hide();
+          $('#r_content').hide();
+          $('#w_content').show();
+        }else if(index==4){
+          $('#c_content').hide();
+          $('#r_content').hide();
+          $('#w_content').hide();
+          $('#a_content').show();
+        }
+        
+      }
+
+
+      function confirmDelete(){
+        bootbox.confirm("Are you sure?", function(result) {
+        Example.show("Confirm result: "+result);
+        }); 
+      }
+      function add_Conference(){
+        
+      }
+  </script>
+</head>
+
+<body>
+  
+  <div id="main">
+      <div id='top' align='right'>
+        <span class='glyphicon glyphicon-envelope'></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='top_span'>Welcome!</span>&nbsp;<span class='admin_acc'>admin</span>&nbsp;
+        <span class="glyphicon glyphicon-off"></span>
+      </div>
+      <div id='wrapper'>
+        <div id='navi' class='btn-group-vertical'>
+          <button type="button" class="btn btn-default">Conferences</button>
+          <button type="button" class="btn btn-default">Reports</button>
+          <button type="button" class="btn btn-default">Users</button>
+          <button type="button" class="btn btn-default">Posts</button>
+          <button type="button" class="btn btn-default">Websites</button>
+          <button type="button" class="btn btn-default">About</button>
+          <!-- <ul id='navi_ul'>
+            <li onclick='changeDiv(1)'>Conferences</li>
+            <li onclick='changeDiv(2)'>Reports</li>
+            <li onclick='changeDiv(3)'>Websites</li>
+            <li onclick='changeDiv(4)'>About</li>
+          </ul> -->
+        </div>
+        <div id='c_content' class='content'>
+          <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Conference</a></li>
+          </ol>
+
+          <table id="table_id" class="display">
+              <thead>
+                  <tr>
+                      <th></th>
+                      <th>name</th>
+                      <th>country</th>
+                      <th>city</th>
+                      <th>latitude</th>
+                      <th>longitude</th>
+                      <th>description</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+              </tbody>
+          </table>
+          <div id='opp' align='right'>
+              <span class='ops'>-delete</span>&nbsp;&nbsp;&nbsp;<span class='ops' onclick='add_Conference()'>+add</span>
+          </div>
+        </div>
+        <div id='r_content' hidden class='content'>
+          reports edit page
+        </div>
+        <div id='w_content' hidden class='content'>
+          <ul>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+            <li>www.dali.dartmouth.com</li>
+          </ul>
+        </div>
+        <div id='a_content' hidden class='content'>
+          WASHINGTON — Amid the low enrollment numbers for health insurance via the HealthCare.gov website, the Obama administration found one bright spot: Medicaid.
+
+          Almost 400,000 people have learned they are eligible to enroll in the states' Medicaid programs, and the numbers are high even in Republican-dominated states that have chosen not to expand the program.
+
+          President Obama highlighted the Medicaid enrollment numbers Thursday, even as he took blame for the poor early performance of the health exchanges and for misleading some Americans that their health care policies would not change. Obama said the 396,000 new enrollees for Medicaid are something "that's been less reported on, but it shouldn't be
+          <div align='right'>
+            <span class='ops'>edit</span>
+          </div>
+        </div>
+        
+
+        <!-- modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Information</h4>
+              </div>
+              <div class="modal-body">
+                <!-- body -->
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Conference Name</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="inputEmail3" placeholder="conference name">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Tier 1</label>
+                    <div class="col-sm-4">
+                      <select class="form-control">
+                          <option value="one">Science</option>
+                          <option value="two">Policy</option>
+                          <option value="three">Education</option>
+                          <option value="four">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Tier 2</label>
+                    <div class="col-sm-4">
+                      <select class="form-control">
+                          <option value="one">general</option>
+                          <option value="two">media communication</option>
+                          <option value="three">arctic security</option>
+                          <option value="four">energy</option>
+                          <option value="four">climate change</option>
+                          <option value="four">other</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Tier 3</label>
+                    <div class="col-sm-4">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Country</label>
+                      <select class="form-control">
+                          <option value="one">United States</option>
+                          <option value="two">Finland</option>
+                          <option value="three">Norway</option>
+                      </select>
+                    </div>
+                    <!-- <div class="col-sm-10">
+                      <select class="form-control">
+                          <option value="one">Alaska</option>
+                          <option value="two">City</option>
+                          <option value="three">City</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                    <!-- <div class="col-sm-10">
+                      <select class="form-control">
+                          <option value="one">United States</option>
+                          <option value="two">Finland</option>
+                          <option value="three">Norway</option>
+                      </select>
+                    </div> -->
+                    <div class="col-sm-4">
+                      <label for="inputPassword3" class="col-sm-2 control-label">City</label>
+                      <select class="form-control">
+                          <option value="one">Alaska</option>
+                          <option value="two">City</option>
+                          <option value="three">City</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Link</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="inputEmail3" placeholder="URL">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Organization</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="inputEmail3" placeholder="Organization">
+                    </div>
+                  </div>
+                </form>
+                <!-- end of body -->
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn-my btn">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- end of modal -->
+      
+  </div>
+
+</body>
+
+</html>
