@@ -80,10 +80,13 @@
 	</style>
 	<link href="imageslider/js-image-slider.css" rel="stylesheet" type="text/css" />
 	<link href="index.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="js/lib/leaflet/leaflet.css" />
     <script src="imageslider/js-image-slider.js" type="text/javascript"></script>
 </head>
 
 <body>
+    <script type="text/template" id='map-template'>
+    </script>
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
@@ -107,12 +110,12 @@
 	<!-- image slider-->
 	<div id="sliderFrame">
         <div id="slider">
-            <img src="website photos/Chris Polashenski 2.jpg" class='resized_img'/>
-            <!-- <img src="website photos/thumb-2.gif" class='resized_img'/> -->
-            <img src="website photos/Chris Polashenski.jpg" class='resized_img' />
-            <img src="website photos/Laura Levy.jpg" class='resized_img'/>
-            <img src="website photos/Lauren Culler (2).jpg" class='resized_img'/>
-            <img src="website photos/Lauren Culler 3.jpg" class='resized_img'/>
+            <img src="imgs/Chris2.jpg" class='resized_img'/>
+            <!-- <img src="imgs/thumb-2.gif" class='resized_img'/> -->
+            <img src="imgs/Chris.jpg" class='resized_img' />
+            <img src="imgs/Laura.jpg" class='resized_img'/>
+            <img src="imgs/Lauren2.jpg" class='resized_img'/>
+            <img src="imgs/Lauren3.jpg" class='resized_img'/>
         </div>
         <span class='textlayer'>
             	text on top of image
@@ -122,38 +125,44 @@
         </div>
     </div>
     <div id='main'>
+        
     	<div id='spin_navi'>
-    		<div class="wrapper">
-			    <div class="menu">
-			      <a href="#" class="one">One</a>
-			      <a href="#" class="two">Two</a>
-			      <a href="#" class="three">Three</a>
-			      <a href="#" class="four">Four</a>
-			      <div class="circle">
-			        <ul>
-			          <li>1</li>
-			          <li>2</li>
-			          <li>3</li>
-			          <li>4</li>
-			        </ul>
-			      </div>
-			    </div>
-			</div>
+            <div class="circle">
+                <ul>
+                    <li class="one">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                </ul>
+                <div class="arrow">
+                    <img src="imgs/arrow.png" class="arrow" />
+                </div>
+            </div>
     	</div>
     	<div id='content'>
-    	</div>
+            <div id='map'>
+            </div>
+        </div>
     </div>
     <div class='seperator'>
     </div>
 	<div id='footer'>
 		<div id='logos' align='center'>
-			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+			<img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+			<img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
 		</div>
 		<div id='footer_text' align='center'>
 			<span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
 		</div>
 	</div>
+    <script src="js/lib/jquery-2.1.0.min.js"></script>
+    <script src="js/lib/jquery-1.9.1.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/parse-1.2.18.min.js"></script>
+    <script src="js/lib/leaflet/leaflet.js"></script>
+    <script src="js/geoJson/countries.json"></script>
+    <script src="js/views/views.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
