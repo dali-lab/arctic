@@ -1,4 +1,4 @@
-var app = app || {},
+var app = app || {};
 
 app.Compass = Parse.View.extend({
 
@@ -19,22 +19,22 @@ app.Compass = Parse.View.extend({
     "click li#four": "moveArrow"
   },
 
-  moveArrow: function(ev) {
+  moveArrow: function(e) {
     var clickedEl = $(e.currentTarget);
     var id = clickedEl.attr("id");
 
     //Top
     if (id == "one") {
-
+       this.$el.children().find("#arrow").rotate(270);
     //Right
     } else if (id == "two") {
-
+       this.$el.children().find("#arrow").rotate(0);
     //Down
     } else if (id == "three") {
-
+       this.$el.children().find("#arrow").rotate(90);
     //Left
     } else {
-
+       this.$el.children().find("#arrow").rotate(180);
     }
   }
 });
