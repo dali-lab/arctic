@@ -25,6 +25,13 @@
   width: 370px;
 }
 
+.one:hover ~ img.arrow {
+    -webkit-transform: rotate(90deg);
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
 .menu a {
   margin-right: -4px;
   padding: 10px 30px;
@@ -67,15 +74,6 @@
   height: 300px;
   border-radius: 50%;
   background: #093b62;
-
-  box-shadow: inset 0px 0px 30px rgba(0,0,0,0.3);
-  -webkit-box-shadow: inset 0px 0px 30px rgba(0,0,0,0.3);
-
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 
 /*LITTLE CIRCLES*/
@@ -160,5 +158,11 @@
   transform: rotate(-270deg);
 }
 
+#map {
+    width: 885px;
+    height: 500px;
+}
 
-
+#content {
+    float: right;
+}
