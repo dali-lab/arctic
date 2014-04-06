@@ -25,13 +25,6 @@
   width: 370px;
 }
 
-.one:hover ~ img.arrow {
-    -webkit-transform: rotate(90deg);
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    -ms-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
 .menu a {
   margin-right: -4px;
   padding: 10px 30px;
@@ -165,4 +158,9 @@
 
 #content {
     float: right;
+}
+
+#arrow {
+    width: 120px;
+    height: 120px;
 }
