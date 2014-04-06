@@ -65,7 +65,6 @@ app.MapView = Parse.View.extend({
 
 
         var mouseOut = function(e, layer) {
-            debugger;
         }
 
         var onEachFeature = function(feature, layer) {
@@ -76,7 +75,7 @@ app.MapView = Parse.View.extend({
             });
         }
 
-        var countriesLayer = L.geoJson(app.MapData.MapData, {
+        var countriesLayer = L.geoJson(countryData, {
             style: getStyle,
             filter: function(feature, layer) {
                 return (feature.properties.name != 'Antarctica')
