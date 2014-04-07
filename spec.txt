@@ -1,0 +1,19 @@
+- js --> all of our code
+    - models
+        - Parse models
+    - views
+        - Parse views
+    - collections
+        - Parse collections
+    - lib
+        - all outside js scripts or libraries (JQuery, bootstrap, Parse, leaflet, etc.)
+    - geoJson
+        - Map Geojson
+- index.html -> static HTML, templates (for Parse), script inclusions (both CSS and JS)
+- index.css -> all of our CSS
+- imgs --> all imgs (no spaces in file names)
+
+TODOS: 
+- move Admin HTML and CSS into top-level directory
+- move or delete duplicates for admin-related libraries
+- remove Arctic Server
