@@ -1,4 +1,9 @@
-HELLO
+Compass Routes:
+1 (Top): Conference
+2 (Right): Forum
+3 (Bottom): Reports
+4 (Left) : Website
+
 - js --> all of our code
     - models
         - Parse models

@@ -12,7 +12,25 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showOne: function() {
-    console.log("sup muthafuckaaaa");
+    console.log("Pushed one");
+
+    // Display Information about Conference on Map
+  },
+
+  showTwo: function() {
+    console.log("Pushed two");a
+
+    //Go to Forum View
+    
+
+  },
+
+  showThree: function() {
+    console.log("Pushed three");
+  },
+
+  showFour: function() {
+    console.log("Pushed four");
   }
 });
 
