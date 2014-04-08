@@ -25,7 +25,7 @@ app.MapView = Parse.View.extend({
     setupMap: function(year) {
         var root = this;
         root.el._leaflet = false;
-        root.map = new L.map(this.el, {
+        app.MapData.MapDiv = new L.map(this.el, {
             center: [10, -110],
             zoom: 1.5,
             maxZoom: 4
@@ -61,27 +61,32 @@ app.MapView = Parse.View.extend({
                 dashArray: ''
             });
         }
-        var foo = "ste";
 
-
-        var mouseOut = function(e, layer) {
+        var mouseOut = function(e) {
+            app.MapData.MapLayer.resetStyle(e.target);
         }
 
-        var onEachFeature = function(feature, layer) {
+        var click = function(e) {
+            var layer = e.target;
+            var props = layer.feature.properties;
+            if (props.NAME == 
+        }
+
+        var onEachFeature = function(feature) {
             layer.on({
                 mouseover: mouseOver,
                 mouseout: mouseOut,
-                //click: click
+                click: click
             });
         }
 
-        var countriesLayer = L.geoJson(countryData, {
+        app.MapData.MapLayer = L.geoJson(countryData, {
             style: getStyle,
             filter: function(feature, layer) {
                 return (feature.properties.name != 'Antarctica')
             },
             onEachFeature: onEachFeature
-        }).addTo(root.map);
+        }).addTo(app.MapData.MapDiv);
         return this;
     }
 });
