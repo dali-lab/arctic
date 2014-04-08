@@ -55,12 +55,15 @@
 }
 
 #map {
-    width: 700px;
-    height: 500px;
+    width: 60%;
+    height: 100%;
+    float: right;
 }
 
 #content {
     float: right;
+    height: 100%;
+    width: 100%;
 }
 
 #arrow {
@@ -131,6 +134,8 @@ body{
 }
 #spin_navi{
   float:left;
+  width: 25%;
+  height: 25%;
 }
 #footer_text span{
   color:white;
