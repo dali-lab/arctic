@@ -8,6 +8,8 @@ app.MapView = Parse.View.extend({
     el: $("#map"),
     initialize: function() {
         var root = this;
+        root.collection = new Reports();
+        root.collection.fetch();
         root.render();
     },
     
@@ -40,7 +42,8 @@ app.MapView = Parse.View.extend({
 			       c == 1  ? '#FEB24C' :
 			       c == 0  ? '#FED976' :
 			                '#FFEDA0';
-			} 
+		} 
+
         var getStyle = function(feature) {
             return {
                 weight: .75,
@@ -69,10 +72,10 @@ app.MapView = Parse.View.extend({
         var click = function(e) {
             var layer = e.target;
             var props = layer.feature.properties;
-            if (props.NAME == 
+            root.collection.initPopup(props);
         }
 
-        var onEachFeature = function(feature) {
+        var onEachFeature = function(feature, layer) {
             layer.on({
                 mouseover: mouseOver,
                 mouseout: mouseOut,

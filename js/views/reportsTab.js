@@ -2,4 +2,14 @@ Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUD
 var app = app || {};
 
 app.ReportsTabView = Parse.View.extend({
-
+    template: _.template( $("#reports-tab-template").html() ),
+    tagName: "div",
+    initialize: function(options){
+        _.extend(this, _.pick(options, "reports"));
+        this.render();
+    },
+    
+    render: function() {
+        this.$el.html(this.template(this.reports.toJSON()));
+    }
+});
