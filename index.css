@@ -33,6 +33,13 @@
   font: 20px/50px Helvetica, Arial, sans-serif;
   top: 0;
   left: 0;
+  text-decoration:none;
+  background-color:#FFFFFF;
+}
+
+.circle a:hover, a:link, a:active, a:visited {
+  text-decoration:none;
+  background-color:#FFFFFF;
 }
 
 .circle li:nth-child(1) {

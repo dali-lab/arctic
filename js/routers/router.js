@@ -18,10 +18,9 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showTwo: function() {
-    console.log("Pushed two");a
+    console.log("Pushed two");
 
     //Go to Forum View
-    
 
   },
 
