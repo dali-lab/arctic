@@ -22,14 +22,6 @@ var Reports = Parse.Collection.extend({
         });
     },
 
-    // Create a modal on a country, using either a collection
-    // passed to the function or this collection.
-    initPopup: function(country, filtered) {
-        debugger;
-        var filtered = filtered || this.filterByCountry(country || Report.defaults.name),
-            marker = new L.Marker(new L.Latlng(country.lat, country.lon));
-    }
 });
 
 
-  

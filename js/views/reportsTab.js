@@ -6,10 +6,10 @@ app.ReportsTabView = Parse.View.extend({
     tagName: "div",
     initialize: function(options){
         _.extend(this, _.pick(options, "reports"));
-        this.render();
     },
     
     render: function() {
         this.$el.html(this.template(this.reports.toJSON()));
+        return this
     }
 });
