@@ -7,8 +7,8 @@ var MapData = Parse.Object.extend({
     className: "Datastore",
     defaults: {
         MapDiv: null, 
-        MapData: null
-        
+        MapData: null,
+        OpenTab: null 
     },
 
 });

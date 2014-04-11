@@ -54,7 +54,14 @@ app.MapView = Parse.View.extend({
                 fillColor: getColor(feature)
             }
         }
-        
+
+        // Create a modal on a country, using either a collection
+        // passed to the function or this collection.
+        var initPopup = function(country, filtered) {
+            var marker = new L.Marker(new L.LatLng(90, 90));
+            app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
+            country.bindPopup(app.MapData.OpenTab.render().el)
+        }
         var mouseOver = function(e) {
             var layer = e.target; 
             var props = layer.feature.properties;
@@ -63,25 +70,18 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
+            initPopup(layer, root.collection);
         }
 
         var mouseOut = function(e) {
             app.MapData.MapLayer.resetStyle(e.target);
         }
 
-        // Create a modal on a country, using either a collection
-        // passed to the function or this collection.
-        var initPopup = function(country, filtered) {
-            var marker = new L.Marker(new L.LatLng(90, 90));
-            var reportsTabView = new app.ReportsTabView({reports: filtered});
-            debugger;
-            country.openPopup(reportsTabView.render().el)
-        }
+        
 
         var click = function(e) {
             var layer = e.target;
             var props = layer.feature.properties;
-            initPopup(layer, root.collection);
         }
 
         

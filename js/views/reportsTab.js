@@ -9,7 +9,8 @@ app.ReportsTabView = Parse.View.extend({
     },
     
     render: function() {
-        this.$el.html(this.template(this.reports.toJSON()));
+        this.$el.html(this.template({reports: this.reports.models}));
+
         return this
     }
 });
