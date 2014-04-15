@@ -155,3 +155,6 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.reports-tab li {
+    list-style-type: none;    
+}

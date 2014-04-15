@@ -1,10 +1,10 @@
-Parse.initialize("g9E0CvsnPFgymkq8FxTN0khh9FZ5sqbaqsoN6GfH", "R83Wi2r7ndSyA3gFUDqk6f3tZ9RP1Sn7WO3L9q3G");
+Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
 var app = app || {};
 
 // Views
 
 app.MapView = Parse.View.extend({
-
+    
     el: $("#map"),
     initialize: function() {
         var root = this;
@@ -32,6 +32,7 @@ app.MapView = Parse.View.extend({
             zoom: 1.5,
             maxZoom: 4
         });
+
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -62,6 +63,7 @@ app.MapView = Parse.View.extend({
             app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             country.bindPopup(app.MapData.OpenTab.render().el)
         }
+
         var mouseOver = function(e) {
             var layer = e.target; 
             var props = layer.feature.properties;
@@ -70,7 +72,7 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
-            initPopup(layer, root.collection);
+            initPopup(layer, root.collection.filterByCountry(props.NAME));
         }
 
         var mouseOut = function(e) {

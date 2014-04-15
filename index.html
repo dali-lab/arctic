@@ -13,10 +13,28 @@
 <body>
     <script type="text/template" id='reports-tab-template'>
         <% _.each(reports, function(report) { %> 
-            <div id="<%= report.get("name") %>">
+            <div id="<%= report.get("name") %>" class="reports-tab">
                 <ul>
-                    <li><%= report.get("name") %></ul>
-                    <li><%= report.get("description") %></ul>
+                    <li> 
+                    <% if (report.has("name")) { %>
+                        <%= report.get("name") %>
+                    <% } else { %> 
+                        Unnamed
+                    <% } %>
+                    </li>
+                    <br />
+                    <li>Description: <%= report.get("description") %></li>
+                    <li>Category: 
+                    <% if (report.has("category")) { %>
+                        <%= report.get("category") %>
+                    <% } else { %>
+                        All 
+                    <% } %>
+                    </li>
+                    <% if (report.has("published")) { %>
+                        <li>Published: <%= report.get("published").getFullYear() %></li>
+                    <% } %>
+                <li><a href="#report/<%= report.id %>">More Info</a></li>
                 </ul>
             </div> 
         <% }); %>
