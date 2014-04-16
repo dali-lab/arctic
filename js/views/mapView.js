@@ -23,7 +23,7 @@ app.MapView = Parse.View.extend({
 
         return this;
     },
-
+    
     setupMap: function(year) {
         var root = this;
         root.el._leaflet = false;
@@ -32,7 +32,7 @@ app.MapView = Parse.View.extend({
             zoom: 1.5,
             maxZoom: 4
         });
-
+        
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -58,10 +58,20 @@ app.MapView = Parse.View.extend({
 
         // Create a modal on a country, using either a collection
         // passed to the function or this collection.
-        var initPopup = function(country, filtered) {
+        var initPopup = function(country, filtered, type) {
             var marker = new L.Marker(new L.LatLng(90, 90));
-            app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
-            country.bindPopup(app.MapData.OpenTab.render().el)
+            if (type === "report") {
+                app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
+            } else {
+                app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
+            }
+            country.bindPopup(app.MapData.OpenTab.render().el);
+           
+        }
+
+        var removePopup = function() {
+            console.log('removed ' + app.MapData.OpenTab);
+            app.MapData.OpenTab.close();
         }
 
         var mouseOver = function(e) {
@@ -72,7 +82,7 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
-            initPopup(layer, root.collection.filterByCountry(props.NAME));
+            initPopup(layer, root.collection.filterByCountry(props.NAME), app.MapData.LayerType);
         }
 
         var mouseOut = function(e) {
@@ -104,5 +114,7 @@ app.MapView = Parse.View.extend({
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         return this;
+
+        app.MapData.MapDiv.on('popupclose', removePopup);
     }
 });

@@ -39,6 +39,35 @@
             </div> 
         <% }); %>
     </script>
+    <script type="text/template" id='conferences-tab-template'>
+        <% _.each(conferences, function(conference) { %> 
+            <div id="<%= conference.get("name") %>" class="conferences-tab">
+                <ul>
+                    <li> 
+                    <% if (conference.has("name")) { %>
+                        <%= conference.get("name") %>
+                    <% } else { %> 
+                        Unnamed
+                    <% } %>
+                    </li>
+                    <br />
+                    <li>Description: <%= conference.get("description") %></li>
+                    <li>Category: 
+                    <% if (conference.has("category")) { %>
+                        <%= conference.get("category") %>
+                    <% } else { %>
+                        All 
+                    <% } %>
+                    </li>
+                    <% if (conference.has("published")) { %>
+                        <li>Published: <%= conference.get("published").getFullYear() %></li>
+                    <% } %>
+                <li><a href="#conference/<%= conference.id %>">More Info</a></li>
+                </ul>
+            </div> 
+        <% }); %>
+    </script>
+
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
@@ -119,6 +148,7 @@
     <script src="js/models/report.js"></script>
     <script src="js/collections/reports.js"></script>
     <script src="js/views/reportsTab.js"></script>
+    <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
     <script src="js/views/compass.js"></script>
     <script src="js/routers/router.js"></script>
