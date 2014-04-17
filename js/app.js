@@ -4,6 +4,6 @@ var app = app || {};
 var ENTER_KEY = 13;
 
 $(function() {
-    new app.MapView();
+    app.Map = new app.MapView();
     new app.Compass();
 });

@@ -2,13 +2,13 @@ Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7p
 
 var app = app || {};
 
-// Basic Model for a Report, defaults not really necessary because
+// Basic Model for a Conference, defaults not really necessary because
 // these models are initialized on the backend.
 // TODO: Talk to Didi about consolidating our data models.
-var Report = Parse.Object.extend ({
-    className: "Report",
+var Conference = Parse.Object.extend ({
+    className: "Conference",
     defaults: {
-        name: "report",
+        name: "conference",
         category: "",
         country: "World"
     },

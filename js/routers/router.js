@@ -1,12 +1,13 @@
+var app = app || {};
 var ArcticRouter = Parse.Router.extend({
   routes: {
     "about": "showAbout",
     "report/:id": "getReport",
     "one": "showOne",
 
-    "two": "showTwo",
+    "two": "showReports",
 
-    "three": "showThree",
+    "three": "showConferences",
 
     "four": "showFour"
   },
@@ -16,16 +17,22 @@ var ArcticRouter = Parse.Router.extend({
 
     // Display Information about Conference on Map
   },
-
-  showTwo: function() {
-    console.log("Pushed two");
-
-    //Go to Forum View
+  
+  // Switches the map's popup layer to reports
+  showReports: function() {
+    if (!app.Map) {
+        app.Map = new app.MapView();
+    }
+    app.Map.switchLayerTo("reports");   
 
   },
 
-  showThree: function() {
-      console.log("Pushed three");
+  // Switches the map's popup layer to conferences
+  showConferences: function() {
+    if (!app.Map) {
+        app.Map = new app.MapView();
+    }
+    app.Map.switchLayerTo("conferences");
   },
 
   showFour: function() {

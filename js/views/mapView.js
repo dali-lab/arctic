@@ -5,26 +5,29 @@ var app = app || {};
 
 app.MapView = Parse.View.extend({
     
+    // Bind this view to the div with id 'map' in the HTML
     el: $("#map"),
+    // Render our View when we initialize the map view
     initialize: function() {
         var root = this;
-        root.collection = new Reports();
-        root.collection.fetch();
+        root.reportsCollection = new Reports();
+        root.reportsCollection.fetch();
+        root.conferencesCollection = new Conferences();
+        root.conferencesCollection.fetch();
         root.render();
     },
     
+    // Render the map view. This function is small because most of the map work is being done in setupMap.
     render: function() {
         if (!this.el._leaflet) {
-
             var root = this;
-            var currentYear = new Date().getYear() + 1900;
-            root.setupMap(currentYear);
+            root.setupMap();
         }
 
         return this;
     },
     
-    setupMap: function(year) {
+    setupMap: function() {
         var root = this;
         root.el._leaflet = false;
         app.MapData.MapDiv = new L.map(this.el, {
@@ -32,7 +35,7 @@ app.MapView = Parse.View.extend({
             zoom: 1.5,
             maxZoom: 4
         });
-        
+        app.MapData.ActiveCollection = root.reportsCollection; 
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -50,9 +53,9 @@ app.MapView = Parse.View.extend({
                 weight: .75,
                 opacity: 1,
                 stroke: true,
-                color: "#0c1b31",
+                color: "#000000",
+                fillColor: "#FFFFFA",
                 fillOpacity: 1,
-                fillColor: getColor(feature)
             }
         }
 
@@ -82,7 +85,7 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
-            initPopup(layer, root.collection.filterByCountry(props.NAME), app.MapData.LayerType);
+            initPopup(layer, app.MapData.ActiveCollection.filterByCountry(props.NAME), app.MapData.LayerType);
         }
 
         var mouseOut = function(e) {
@@ -116,5 +119,21 @@ app.MapView = Parse.View.extend({
         return this;
 
         app.MapData.MapDiv.on('popupclose', removePopup);
+    },
+
+    // Changes our active layer to whatever type string specifies
+    // TODO: Possibly think of a more elegant way to track what type of tab / layer we
+    // are displaying.
+    switchLayerTo: function(type) {
+        var root = this;
+        app.MapData.LayerStyle = type;
+        if (type === "reports") {
+            app.MapData.ActiveCollection = root.reportsCollection;
+        } else {
+            app.MapData.ActiveCollection = root.conferencesCollection;
+        }
+        return app.MapData.ActiveCollection;
     }
+         
+
 });
