@@ -8,8 +8,8 @@
   color: #999;
 }
 
-/*MAIN CIRCLE*/
-.circle {
+/*COMPASS*/
+.compass {
   position: relative;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -21,43 +21,28 @@
   z-index: 999;
 }
 
-/*LITTLE CIRCLES*/
-.circle li {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: white;
-  list-style-type: none;
-  text-align: center;
-  font: 20px/50px Helvetica, Arial, sans-serif;
-  top: 0;
-  left: 0;
-  text-decoration:none;
-  background-color:#FFFFFF;
+.compass .icon {
+  width: 500px;
+  height: 500px;
 }
 
-.circle a:hover, a:link, a:active, a:visited {
-  text-decoration:none;
-  background-color:#FFFFFF;
-}
-
-.circle li:nth-child(1) {
+.compass #icon_conference {
   top: 15px;
   left: 125px;
+  position: absolute;
 }
 
-.circle li:nth-child(2) {
+.compass #icon_forum {
   top: 125px;
   left: 235px;
 }
 
-.circle li:nth-child(3) {
+.compass #icon_report {
   top: 235px;
   left: 125px;
 }
 
-.circle li:nth-child(4) {
+.compass #icon_website {
   top: 125px;
   left: 15px;
 }
@@ -102,7 +87,6 @@ body{
 #nav{
   float:right;
   padding-right: 5px;
-  z-index: 999;
 }
 .app_name{
   font-size: 20px;

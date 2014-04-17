@@ -2,34 +2,30 @@ var ArcticRouter = Parse.Router.extend({
   routes: {
     "about": "showAbout",
     "report/:id": "getReport",
-    "one": "showOne",
-
-    "two": "showTwo",
-
-    "three": "showThree",
-
-    "four": "showFour"
+    "icon_conference": "showConference",
+    "icon_forum": "showRorum",
+    "icon_report": "showReport",
+    "icon_website": "showWebsite"
   },
 
-  showOne: function() {
-    console.log("Pushed one");
+  showReport: function() {
+    console.log("Pushed report");
 
     // Display Information about Conference on Map
   },
 
-  showTwo: function() {
-    console.log("Pushed two");
-
+  showConference: function() {
+    console.log("Pushed conference");
     //Go to Forum View
 
   },
 
-  showThree: function() {
-      console.log("Pushed three");
+  showForum: function() {
+      console.log("Pushed forum");
   },
 
-  showFour: function() {
-      console.log("Pushed four");
+  showWebsite: function() {
+      console.log("Pushed website");
   },
   
   getReport: function(id) {
