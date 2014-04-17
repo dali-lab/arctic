@@ -8,7 +8,8 @@ var MapData = Parse.Object.extend({
     defaults: {
         MapDiv: null, 
         MapData: null,
-        OpenTab: null 
+        OpenTab: null,
+        LayerType: "reports"
     },
 
 });
