@@ -1,0 +1,423 @@
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Reports</title>
+	<style type="text/css">
+		* { margin: 0; padding: 0; }
+		body{
+			padding-left: 10%;
+			padding-right: 10%;
+			font-family:Arial,​Liberation Sans,​DejaVu Sans,​sans-serif;
+		}
+		#header{
+			background-color: black;
+		}
+		#header_name{
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			float:left;
+		}
+		#nav{
+			float:right;
+			padding-right: 5px;
+		}
+		.app_name{
+			font-size: 20px;
+			color: white;
+		}
+		#nav ul{
+			padding-top: 15px;
+		}
+		#nav ul li{
+			display: inline;
+			color:white;
+			font-size: 14px;
+			padding-left: 5px;
+		}
+		#nav ul li:hover{
+			cursor: pointer;
+			color:#eee;
+		}
+		.seperator{
+			clear:both;
+		}
+		#main{
+			background-color: #6699CC;
+			height:650px;
+			display: block;
+			/*margin-top: 30px;*/
+		}
+		#footer{
+			height:80px;
+			background-color: #003366;
+			padding-bottom: 20px;
+/*			border-style:solid;*/
+			border-top:solid white;
+		}
+		.textlayer{
+			position:absolute;
+			top: 30%;
+			left:70%;
+		}
+		#spin_navi{
+			float:left;
+			width:25%;
+			background-color: #CCCCFF;
+			height:inherit;
+			display: inline;
+			display: none;
+		}
+		#footer_text span{
+			color:white;
+			font-size: 15px;
+		}
+		#logos{
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		#footer_text{
+			
+		}
+		#searchbox{
+			float:right;
+			width:150px;
+		}
+		#filterbox{
+			float: right;
+			width:150px;
+		}
+		#wrapper{
+			margin-left:20px;
+			margin-right:20px;
+			margin-bottom: 60px;
+			background-color: #9999FF;
+			/*opacity: 0.5;*/
+			height: 90%;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		#seperator{
+			clear:both;
+		}
+		.place{
+			height:20px;
+		}
+		.website{
+			width:23%;
+			height:35%;
+			/*background-color: black;*/
+			float:left;
+			display: block;
+			margin-left:15px;
+			margin-top: 10px;
+			padding-top: 10px;
+			/*padding-left: 10px;*/
+		}
+		#content{
+			/*clear:both;*/
+			float:left;
+			margin-top: 20px;
+			width:100%;
+			height:80%;
+			margin-bottom: 60px;
+			padding-left: 10px;
+			padding-right: 10px;
+			/*margin-left:20px;*/
+		}
+
+
+		#detail{
+			margin-top: 20px;
+			width:100%;
+			height:100%;
+			margin-bottom: 60px;
+			background-color: white;
+		}
+		#reports{
+			float:left;
+			/*position:relative;*/
+			width: 100%;
+			height:100%;
+			overflow-y:scroll;
+			overflow-x:hidden;
+		}
+		.website_name{
+			font-size: 15px;
+			/*display: block;*/
+
+		}
+		.website_desc{
+			font-size:14px;
+			color:white;
+		}
+		.web_text{
+			padding-left: 15px;
+		}
+		#subheader{
+			width:auto;
+		}
+		.seperator2{
+			height:1px;
+			background-color: white;
+			width:100%;
+			margin-left:10px;
+			margin-right:10px;
+		}
+
+		/*css for reports.html */
+		.conf_logo{
+			width:50px;
+			height:50px;
+			border-radius: 50%;
+			/*padding-top: 30px;*/
+		}
+		.conf_img{
+			float:left;
+			margin-left:30px;
+			width:8%;
+			padding-top: 15px;
+			/*margin-top:30px;*/
+		}
+		.detail_img{
+			float:left;
+			margin-left:30px;
+			width:8%;
+			height:50px;
+			padding-top: 15px;
+		}
+		.conf_desc{
+			float:left;
+			width: 85%;
+		}
+		.report{
+			margin-top:20px;
+			height:150px;
+			background-color: white;
+			margin-left:30px;
+			margin-right: 30px;
+		}
+		.conf_header{
+			clear: both;
+			padding-top: 5px;
+		}
+		.conf_name{
+			float:left;
+		}
+		.conf_time{
+			float:right;
+		}
+		.conf_type{
+			float:right;
+		}
+		.conf_name_span{
+			color: #9966FF;
+			font-size:17px;
+		}
+		.conf_preview{
+			padding-top: 5px;
+		}
+		.conf_preview_author{
+			color: #9966FF;
+			font-size: 14px;	
+		}
+		.readMore{
+			color: #9966FF;
+			font-size: 15px;
+		}
+		.readMore:hover{
+			cursor: pointer;
+			color:black;
+		}
+
+		.conf_preview_desc{
+			display: block;
+			width:100%;
+			word-wrap:break-word;
+		}
+		.seperator3{
+			clear: both;
+			height:1px;
+			background-color: black;
+			width: 100%;
+		}
+		.conf_footer{
+			padding-right: 30px;
+			/*padding-top: 30px;*/
+		}
+		.report_detail{
+			width:50%;
+			display: block;
+			padding-left: 10px;
+			padding-right: 10px;
+			word-wrap:break-word;
+		}
+		#detail_body{
+			height:80%;
+			overflow-y:scroll;
+		}
+	</style>
+	<link href="imageslider/js-image-slider.css" rel="stylesheet" type="text/css" />
+	<link href="index.css" rel="stylesheet" type="text/css" />
+	<link href="Admin/bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="imageslider/js-image-slider.js" type="text/javascript"></script>
+    <script src="js/lib/jquery-1.9.1.js" type="text/javascript"></script>
+    <script type="Admin/text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
+    <script type="text/javascript">
+    	function show(){
+    		$("#spin_navi").show(300);
+    		$('#content').width('75%');
+    		$('.website').width('30%');
+    	}
+    	function hide(){
+    		$('.website').hide();
+    		$("#spin_navi").hide(300);
+    		$('.website').width('23%');
+    		$('#content').width('100%');
+    		$('.website').show(300);
+    		
+    	}
+    </script>
+</head>
+
+<body>
+	<div id='header'>
+		<div id='inner' style="overflow:hidden">
+			<div id='header_name'>
+				<span class='app_name'>Arctic Virtual Forum</span>
+			</div>
+			<div id='nav'>
+				<ul>
+					<li>About Us</li>
+					<li>Conferences</li>
+					<li>Forum</li>
+					<li>Reports</li>
+					<li>Websites</li>
+					<li>Parters</li>
+					<li>|</li>
+					<li>Login</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- image slider-->
+	<div id="sliderFrame">
+        <div id="slider">
+            <img src="website photos/Chris Polashenski 2.jpg" class='resized_img'/>
+            <!-- <img src="website photos/thumb-2.gif" class='resized_img'/> -->
+            <img src="website photos/Chris Polashenski.jpg" class='resized_img' />
+            <img src="website photos/Laura Levy.jpg" class='resized_img'/>
+            <img src="website photos/Lauren Culler (2).jpg" class='resized_img'/>
+            <img src="website photos/Lauren Culler 3.jpg" class='resized_img'/>
+        </div>
+        <span class='textlayer'>
+            	text on top of image
+        </span>
+        <div id="htmlcaption" style="display: none;">
+            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+        </div>
+    </div>
+    <div class='seperator'></div>
+    <div id='main'>
+    	<div class="place">
+    	</div>
+    	<div id='wrapper'>
+    		<!-- <div id='spin_navi'>
+	    		<div id='hideOrShow' align='right'>
+	    			<button onclick='hide()'>hide</button>
+	    		</div>
+	    		<span>place holder for spin_navi<span>
+	    	</div> -->
+	    	<div id='spin_navi'>place holder
+	    		<button onclick='hide()'>hide</button>
+	    	</div>
+	    	<!-- real websites content -->
+	    	<div id='content'>
+	    		<div id='subheader'>
+		    		<button onclick="show()">show</button>
+		    		<span>Report detail</span>
+		    		<div id='report_header'>
+		    		</div>
+		    	</div>
+	    		<div id='detail'>
+	    			<div id='detail_header'>
+	    				<div class='report'>
+							<div class='detail_img'>
+								<img class='conf_logo' src="website photos/thumb-2.gif" />
+							</div>
+							<div class='conf_desc'>
+								<div class='conf_header'>
+									<div class='conf_name'>
+										<span class='conf_name_span'>
+											<%= name%>
+										</span>
+									</div>
+									<div class='conf_time'>
+										<span class='conf_name_span'>
+											<%= posttime%>
+										</span>
+									</div>
+									<div class='conf_type'>
+
+									</div>
+								</div>
+								<div class='seperator3'></div>
+								<div class='conf_preview'>
+									<span class='conf_preview_author'>
+										<%= author%>
+									</span><br/>
+									<span class='conf_preview_desc'>
+										<%= description%>
+									</span>
+								</div>
+								<div class='conf_footer' align='right'>
+									<span class='readMore'>Read More</span>&nbsp;
+									<span class='readMore'>Comment</span>
+								</div>
+							</div>
+						</div>
+	    			</div>
+	    			<div id='detail_body' align='center'>
+	    				<span class='report_detail'>
+	    					The Arctic's climate is characterized by cold winters and cool summers. Precipitation mostly comes in the form of snow. The Arctic's annual precipitation is low, with most of the area receiving less than 50 cm (20 in). High winds often stir up snow, creating the illusion of continuous snowfall. Average winter temperatures can be as low as −40 °C (−40 °F), and the coldest recorded temperature is approximately −68 °C (−90 °F). Coastal Arctic climates are moderated by oceanic influences, having generally warmer temperatures and heavier snowfalls than the colder and drier interior areas. The Arctic is affected by current global warming, leading to Arctic sea ice shrinkage and Arctic methane release.
+
+Due to the poleward migration of the planet's isotherms (about 35 mi (56 km) per decade during the past 30 years as a consequence of global warming), the Arctic region (as defined by tree line and temperature) is currently shrinking.[9] Perhaps the most spectacular result of Arctic shrinkage is sea ice loss. There is a large variance in predictions of Arctic sea ice loss, with models showing near-complete to complete loss in September from 2040 to some time well beyond 2100. About half of the analyzed models show near-complete to complete sea ice loss in September by the year 2100.
+	    				</span>
+	    			</div>
+	    		</div>
+	    		
+	    	</div>
+    	</div>
+    	
+    </div>
+    <div class='seperator'>
+    </div>
+	<div id='footer'>
+		<div id='logos' align='center'>
+			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+		</div>
+		<div id='footer_text' align='center'>
+			<span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
+		</div>
+	</div>
+
+
+
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+
+
+
+	
+
+
+</body>
+</html>
