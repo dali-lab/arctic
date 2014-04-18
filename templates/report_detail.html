@@ -123,8 +123,7 @@
 			width:100%;
 			height:80%;
 			margin-bottom: 60px;
-			padding-left: 10px;
-			padding-right: 10px;
+			
 			/*margin-left:20px;*/
 		}
 
@@ -199,6 +198,16 @@
 			margin-left:30px;
 			margin-right: 30px;
 		}
+
+		.report_detail{
+			margin-top:20px;
+			height:100px;
+			background-color: white;
+			margin-left:30px;
+			margin-right: 30px;
+			font-size: 12px;
+		}
+
 		.conf_header{
 			clear: both;
 			padding-top: 5px;
@@ -248,16 +257,30 @@
 			/*padding-top: 30px;*/
 		}
 		.report_detail{
-			width:50%;
 			display: block;
 			padding-left: 10px;
 			padding-right: 10px;
 			word-wrap:break-word;
 		}
 		#detail_body{
-			height:80%;
+			height:75%;
+			margin-left:8%;
+			margin-right:8%;
+			padding-left:10%;
+			padding-right: 10%;
 			overflow-y:scroll;
+			border-style:solid;
+			border-width:1px; 
 		}
+		.intro_title{
+			margin-left:7%;
+			margin-right:7%;
+			display: block;
+			margin-top:20px;
+			font-size: 30px;
+			font-weight:900; 
+		}
+
 	</style>
 	<link href="imageslider/js-image-slider.css" rel="stylesheet" type="text/css" />
 	<link href="index.css" rel="stylesheet" type="text/css" />
@@ -343,50 +366,7 @@
 		    		</div>
 		    	</div>
 	    		<div id='detail'>
-	    			<div id='detail_header'>
-	    				<div class='report'>
-							<div class='detail_img'>
-								<img class='conf_logo' src="website photos/thumb-2.gif" />
-							</div>
-							<div class='conf_desc'>
-								<div class='conf_header'>
-									<div class='conf_name'>
-										<span class='conf_name_span'>
-											<%= name%>
-										</span>
-									</div>
-									<div class='conf_time'>
-										<span class='conf_name_span'>
-											<%= posttime%>
-										</span>
-									</div>
-									<div class='conf_type'>
 
-									</div>
-								</div>
-								<div class='seperator3'></div>
-								<div class='conf_preview'>
-									<span class='conf_preview_author'>
-										<%= author%>
-									</span><br/>
-									<span class='conf_preview_desc'>
-										<%= description%>
-									</span>
-								</div>
-								<div class='conf_footer' align='right'>
-									<span class='readMore'>Read More</span>&nbsp;
-									<span class='readMore'>Comment</span>
-								</div>
-							</div>
-						</div>
-	    			</div>
-	    			<div id='detail_body' align='center'>
-	    				<span class='report_detail'>
-	    					The Arctic's climate is characterized by cold winters and cool summers. Precipitation mostly comes in the form of snow. The Arctic's annual precipitation is low, with most of the area receiving less than 50 cm (20 in). High winds often stir up snow, creating the illusion of continuous snowfall. Average winter temperatures can be as low as −40 °C (−40 °F), and the coldest recorded temperature is approximately −68 °C (−90 °F). Coastal Arctic climates are moderated by oceanic influences, having generally warmer temperatures and heavier snowfalls than the colder and drier interior areas. The Arctic is affected by current global warming, leading to Arctic sea ice shrinkage and Arctic methane release.
-
-Due to the poleward migration of the planet's isotherms (about 35 mi (56 km) per decade during the past 30 years as a consequence of global warming), the Arctic region (as defined by tree line and temperature) is currently shrinking.[9] Perhaps the most spectacular result of Arctic shrinkage is sea ice loss. There is a large variance in predictions of Arctic sea ice loss, with models showing near-complete to complete loss in September from 2040 to some time well beyond 2100. About half of the analyzed models show near-complete to complete sea ice loss in September by the year 2100.
-	    				</span>
-	    			</div>
 	    		</div>
 	    		
 	    	</div>
@@ -413,7 +393,150 @@ Due to the poleward migration of the planet's isotherms (about 35 mi (56 km) per
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
 	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+	
+	<script type="text/template" id='detail_view'>
+		<div id='detail_header'>
+			<div class='report_detail'>
+				<div class='detail_img'>
+					<img class='conf_logo' src="website photos/thumb-2.gif" />
+				</div>
+				<div class='conf_desc'>
+					<div class='conf_header'>
+						<div class='conf_name'>
+							<span class='conf_name_span'>
+								<%= name%>
+							</span>
+						</div>
+						<div class='conf_time'>
+							<span class='conf_name_span'>
+								<%= posttime%>
+							</span>
+						</div>
+						<div class='conf_type'>
 
+						</div>
+					</div>
+					<div class='seperator3'></div>
+					<div class='conf_preview'>
+						<span>
+							<span class='conf_preview_author'>Published By:</span>&nbsp;<%= publishedBy%>
+						</span><br/>
+						<span>
+							<span class='conf_preview_author'>URL:</span>&nbsp;<%= URL%>
+						</span><br/>
+						<span>
+							<span class='conf_preview_author'>Issue:</span>&nbsp;<%= issue%>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='detail_body'>
+			<span class='intro_title'>Conference Summary</span>
+			<span class='report_detail'>
+				<%=introduction%>
+			</span>
+		</div>
+	</script>
+
+
+	<script type="text/javascript">	
+	Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
+    //model for Website
+    var Report = Parse.Object.extend("Report", {
+    // Default attributes for the Report.
+      defaults: {
+        name: "empty name",
+        url:"dali.cs.dartmouth.edu",
+        description:"empty",
+        posttime:"not known",
+        author:"not known",
+        objectId:"null",
+        introduction:"empty"
+      },
+    });
+
+    //Report Collection
+    var ReportCollection = Parse.Collection.extend({
+      model: Report,
+      //query: new Parse.Query(About)
+      filterbyid: function(rid){
+      	return this.model.id == rid;
+      }
+    });
+
+
+    //detail view
+    var detailView = Backbone.View.extend({
+    	el: $('#detail'),
+        initialize: function(id){
+        	this.rid = id;
+            // this.render();
+        },
+        render: function(){
+        	var self = this;
+          	// var template = _.template( $('#detail_view').html());
+         	// this.$el.html(template);
+          	this.collection.fetch({
+	          success: function(collection){
+	          	for(var i = 0; i < collection.length; i++){
+	          		if(collection.at(i).id === self.rid){
+	          			var model = collection.at(i);
+	          			self.$el.empty();
+				        var name = model.get('name');
+				        var posttime = model.get('posttime');
+				        var URL = model.get('url');
+				        var publishedBy = model.get('publishedBy');
+				        var issue = model.get('issue');
+				        var introduction = model.get('introduction');
+				        var template = _.template( $("#detail_view").html(), {
+				        	"name": name, 
+				        	"URL": URL,
+				        	"publishedBy":publishedBy,
+				        	"posttime":posttime,
+				        	"issue":issue,
+				        	"introduction":introduction
+				        });
+				        self.$el.html(template);
+	          			break;
+	          		}
+              		// var view = new ReportView();
+              		// view.model = collection.at(i);
+              		// self.subviews.push(view);
+              	}
+	          }
+	        });
+        }
+    });
+	//router
+	//define router
+    var AppRouter = Backbone.Router.extend({
+        routes: {
+            "report/:id": 'view'
+            // "view2": 'view2'
+        },
+        view: function(id){
+          // var view1 = new DynamicView();
+          var detail = new detailView(id);
+          detail.collection = new ReportCollection();
+          //detail.collection.filterbyid(id);
+          detail.render();
+          // alert(id);
+        },
+        // view2: function(){
+        //   var view2 = new View2();
+        // }
+    });
+    // Initiate the router
+    var app_router = new AppRouter();
+
+    // app_router.on('route:defaultRoute', function(actions) {
+    //     alert(actions);
+    // })
+
+    // // Start Backbone history a necessary step for bookmarkable URL's
+    Backbone.history.start();
+	</script>
 
 
 	

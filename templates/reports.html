@@ -387,8 +387,8 @@
 					</span>
 				</div>
 				<div class='conf_footer' align='right'>
-					<span class='readMore'>Read More</span>&nbsp;
-					<span class='readMore'>Comment</span>
+					<a class='readMore' href="<%= objectId%>">Read More</a>&nbsp;
+					<a class='readMore'>Comment</a>
 				</div>
 			</div>
 		</div>
@@ -404,7 +404,9 @@
 	        url:"dali.cs.dartmouth.edu",
 	        description:"empty",
 	        posttime:"not known",
-	        author:"not known"
+	        author:"not known",
+	        objectId:"null",
+	        published:""
 	      },
 	    });
 
@@ -430,12 +432,14 @@
 		        var url = this.model.get('url');
 		        var author = this.model.get('author');
 		        var posttime = this.model.get('posttime');
+		        var objectId = "report_detail.html#report/" + this.model.id;
 		        var template = _.template( $("#website_template").html(), {
 		        	"name": name, 
 		        	"description": desc,
 		        	"author":author,
 		        	"posttime":posttime,
-		        	"url":url
+		        	"url":url,
+		        	"objectId":objectId
 		        });
 		        this.$el.html(template);
 		        return this;
@@ -459,7 +463,7 @@
 	              		view.model = collection.at(i);
 	              		self.subviews.push(view);
 	              	}
-	                self.render()
+	                self.render();
 	              }
 	            });
 		    },
