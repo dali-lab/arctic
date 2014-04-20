@@ -9,7 +9,7 @@
 }
 
 /*COMPASS*/
-.compass {
+#compass {
   position: relative;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -19,14 +19,14 @@
   border-radius: 50%;
 }
 
-.compass #compass_base {
+#compass_base {
     position: relative;
     width: 220px;
     height: 220px;
     z-index: 998;
 }
 
-.compass .icon {
+#compass .icon {
   width: 60px;
   height: 60px;
   z-index: 999;
@@ -34,28 +34,30 @@
 }
 
 //Top
-.compass #icon_conference {
-  top: 50px;
-  left: 80px;
+#icon_conference {
+  top: 7%;
+  left: 40%;
 }
 
 //Right
-.compass #icon_forum {
-  top: 50%;
-  left: 80%;
+#icon_forum {
+  top: 40%;
+  left: 93%;
 }
 
-.compass #icon_report {
-  top: 235px;
-  left: 125px;
+//Bottom
+#icon_report {
+  top: 93%;
+  left: 40%;
 }
 
-.compass #icon_website {
-  top: 125px;
-  left: 15px;
+//Left
+#icon_website {
+  top: 40%;
+  left: 7%;
 }
 
-.compass #arrow {
+#arrow {
   width: 80px;
   height: 30px;
   margin-left auto;
@@ -76,16 +78,6 @@
     float: right;
     height: 100%;
     width: 100%;
-}
-
-#arrow {
-    width: 120px;
-    height: 120px;
-    position: absolute;
-    margin-left: auto;
-    margin-top: auto;
-    top: 30%;
-    left: 30%;
 }
 
 body{
