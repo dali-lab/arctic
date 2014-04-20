@@ -1,39 +1,42 @@
+var app = app || {};
 var ArcticRouter = Parse.Router.extend({
   routes: {
     "about": "showAbout",
     "report/:id": "getReport",
-    "icon_conference": "showConference",
-    "icon_forum": "showRorum",
-    "icon_report": "showReport",
+    "icon_conference": "showConferences",
+    "icon_forum": "showForum",
+    "icon_report": "showReports",
     "icon_website": "showWebsite"
-  },
-
-  showReport: function() {
-    console.log("Pushed report");
-
-    // Display Information about Conference on Map
-  },
-
-  showConference: function() {
-    console.log("Pushed conference");
-    //Go to Forum View
-
   },
 
   showForum: function() {
       console.log("Pushed forum");
   },
 
+  // Switches the map's popup layer to reports
+  showReports: function() {
+    if (!app.Map) {
+        app.Map = new app.MapView();
+    }
+    app.Map.switchLayerTo("reports");
+  },
+
+  // Switches the map's popup layer to conferences
+  showConferences: function() {
+    if (!app.Map) {
+        app.Map = new app.MapView();
+    }
+    app.Map.switchLayerTo("conferences");
+  },
+
   showWebsite: function() {
       console.log("Pushed website");
   },
-  
+
   getReport: function(id) {
       /* Show detailed view of a report */
       console.log("You are trying to reach report " + id);
-
   }
-
 });
 
 app.myArcticRouter = new ArcticRouter();

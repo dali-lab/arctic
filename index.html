@@ -109,21 +109,12 @@
     	<div id='content'>
             <div id='spin_navi'>
                 <div class="compass">
-                    <div class="conference">
-                      <a href="#icon_conference"><img src="imgs/conferenceicon.png" class='icon' id='icon_conference'</img></a>
-                    </div>
-                    <div>
-                      <a href="#icon_forum"><img src="imgs/forumicon.png" class='icon' id='icon_forum'</img></a>
-                    </div>
-                    <div>
-                      <a href="#icon_report"><img src="imgs/reporticon.png" class='icon' id='icon_report'</img></a>
-                    </div>
-                    <div>
-                      <a href="#icon_website"><img src="imgs/websiteicon.png" class='icon' id='icon_website'</img></a>
-                    </div>
-                    <div class="arrow">
-                        <img src="imgs/compass.png" id="arrow" />
-                    </div>
+                    <img src="imgs/compassbase.png" id='compass_base'>
+                      <a href="#icon_conference"><img src="imgs/conferenceicon.png" class='icon' id="icon_conference"></a>
+                      <a href="#icon_forum"><img src="imgs/forumicon.png" class='icon' id="icon_forum"></a>
+                      <a href="#icon_report"><img src="imgs/reporticon.png" class='icon' id="icon_report"></a>
+                      <a href="#icon_website"><img src="imgs/websiteicon.png" class='icon' id="icon_website"></a>
+                      <img src="imgs/compass.png" id="arrow">
                 </div>
     	    </div>
             <div id='map'>
@@ -151,7 +142,9 @@
     <script src="js/geoJson/countries.json"></script>
     <script src="js/models/mapData.js"></script>
     <script src="js/models/report.js"></script>
+    <script src="js/models/conference.js"></script>
     <script src="js/collections/reports.js"></script>
+    <script src="js/collections/conferences.js"></script>
     <script src="js/views/reportsTab.js"></script>
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>

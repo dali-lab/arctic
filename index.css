@@ -14,27 +14,35 @@
   margin-top: 30px;
   margin-bottom: 20px;
   margin-left: 25px;
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  background: #093b62;
-  z-index: 999;
+}
+
+.compass #compass_base {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    z-index: 998;
 }
 
 .compass .icon {
-  width: 500px;
-  height: 500px;
-}
-
-.compass #icon_conference {
-  top: 15px;
-  left: 125px;
+  width: 60px;
+  height: 60px;
+  z-index: 999;
   position: absolute;
 }
 
+//Top
+.compass #icon_conference {
+  top: 50px;
+  left: 80px;
+}
+
+//Right
 .compass #icon_forum {
-  top: 125px;
-  left: 235px;
+  top: 50%;
+  left: 80%;
 }
 
 .compass #icon_report {
@@ -45,6 +53,17 @@
 .compass #icon_website {
   top: 125px;
   left: 15px;
+}
+
+.compass #arrow {
+  width: 80px;
+  height: 30px;
+  margin-left auto;
+  margin-top auto;
+  left: 35%;
+  top: 45%;
+  position: absolute;
+  z-index: 999;
 }
 
 #map {
