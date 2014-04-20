@@ -1,0 +1,354 @@
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Arctic Template</title>
+	<style type="text/css">
+		* { margin: 0; padding: 0; }
+		body{
+			padding-left: 10%;
+			padding-right: 10%;
+			font-family:Arial,​Liberation Sans,​DejaVu Sans,​sans-serif;
+		}
+		#header{
+			background-color: black;
+		}
+		#header_name{
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			float:left;
+		}
+		#nav{
+			float:right;
+			padding-right: 5px;
+		}
+		.app_name{
+			font-size: 20px;
+			color: white;
+		}
+		#nav ul{
+			padding-top: 15px;
+		}
+		#nav ul li{
+			display: inline;
+			color:white;
+			font-size: 14px;
+			padding-left: 5px;
+		}
+		#nav ul li:hover{
+			cursor: pointer;
+			color:#eee;
+		}
+		.seperator{
+			clear:both;
+		}
+		#main{
+			background-color: #6699CC;
+			height:650px;
+			display: block;
+			/*margin-top: 30px;*/
+		}
+		#footer{
+			height:80px;
+			background-color: #003366;
+			padding-bottom: 20px;
+/*			border-style:solid;*/
+			border-top:solid white;
+		}
+		.textlayer{
+			position:absolute;
+			top: 30%;
+			left:70%;
+		}
+		#spin_navi{
+			float:left;
+			width:25%;
+			background-color: #CCCCFF;
+			height:inherit;
+			display: inline;
+			display: none;
+		}
+		#footer_text span{
+			color:white;
+			font-size: 15px;
+		}
+		#logos{
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		#footer_text{
+			
+		}
+		#searchbox{
+			float:right;
+			width:150px;
+		}
+		#filterbox{
+			float: right;
+		}
+		#wrapper{
+			margin-left:20px;
+			margin-right:20px;
+			margin-bottom: 60px;
+			background-color: #FFCC33;
+			/*opacity: 0.5;*/
+			height: 90%;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		#seperator{
+			clear:both;
+		}
+		.place{
+			height:20px;
+		}
+		.website{
+			width:23%;
+			height:40%;
+			/*background-color: black;*/
+			float:left;
+			display: block;
+			margin-left:15px;
+			margin-top: 10px;
+			padding-top: 10px;
+			/*padding-left: 10px;*/
+		}
+		#content{
+			/*clear:both;*/
+			float:left;
+			margin-top: 20px;
+			width:100%;
+			height:80%;
+			margin-bottom: 60px;
+			
+			/*margin-left:20px;*/
+		}
+		#websites{
+			float:left;
+			/*position:relative;*/
+			width: 100%;
+			height:100%;
+			overflow-y:scroll;
+		}
+		.website_name{
+			font-size: 15px;
+			/*display: block;*/
+
+		}
+		.website_desc{
+			font-size:14px;
+			color:white;
+		}
+		.web_text{
+			padding-left: 15px;
+		}
+		#subheader{
+			width:auto;
+		}
+	</style>
+	<link href="imageslider/js-image-slider.css" rel="stylesheet" type="text/css" />
+	<link href="index.css" rel="stylesheet" type="text/css" />
+	<link href="bootstrap.min.css" rel="stylesheet">
+    <script src="imageslider/js-image-slider.js" type="text/javascript"></script>
+    <script src="../js/lib/jquery-1.9.1.js" type="text/javascript"></script>
+    <script type="Admin/text/javascript" src="../js/lib/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    	function show(){
+    		$("#spin_navi").show(300);
+    		$('#content').width('75%');
+    		$('.website').width('30%');
+    	}
+    	function hide(){
+    		$('.website').hide();
+    		$("#spin_navi").hide(300);
+    		$('.website').width('23%');
+    		$('#content').width('100%');
+    		$('.website').show(300);
+    		
+    	}
+    </script>
+</head>
+
+<body>
+	<div id='header'>
+		<div id='inner' style="overflow:hidden">
+			<div id='header_name'>
+				<span class='app_name'>Arctic Virtual Forum</span>
+			</div>
+			<div id='nav'>
+				<ul>
+					<li>About Us</li>
+					<li>Conferences</li>
+					<li>Forum</li>
+					<li>Reports</li>
+					<li>Websites</li>
+					<li>Parters</li>
+					<li>|</li>
+					<li>Login</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- image slider-->
+	<div id="sliderFrame">
+        <div id="slider">
+            <img src="website photos/Chris Polashenski 2.jpg" class='resized_img'/>
+            <!-- <img src="website photos/thumb-2.gif" class='resized_img'/> -->
+            <img src="website photos/Chris Polashenski.jpg" class='resized_img' />
+            <img src="website photos/Laura Levy.jpg" class='resized_img'/>
+            <img src="website photos/Lauren Culler (2).jpg" class='resized_img'/>
+            <img src="website photos/Lauren Culler 3.jpg" class='resized_img'/>
+        </div>
+        <span class='textlayer'>
+            	text on top of image
+        </span>
+        <div id="htmlcaption" style="display: none;">
+            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+        </div>
+    </div>
+    <div class='seperator'></div>
+    <div id='main'>
+    	<div class="place">
+    	</div>
+    	<div id='wrapper'>
+    		<!-- <div id='spin_navi'>
+	    		<div id='hideOrShow' align='right'>
+	    			<button onclick='hide()'>hide</button>
+	    		</div>
+	    		<span>place holder for spin_navi<span>
+	    	</div> -->
+	    	<div id='spin_navi'>fdjdfkfd
+	    		<button onclick='hide()'>hide</button>
+	    	</div>
+	    	<!-- real websites content -->
+	    	<div id='content'>
+	    		<div id='subheader'>
+		    		<button onclick="show()">show</button>
+		    		<span>Websites</span>
+					<div id='filterbox' class="col-sm-2">
+	                  <select class="form-control">
+	                      <option value="one">Filter</option>
+	                      <option value="two">Filter</option>
+	                      <option value="three">Filter</option>
+	                  </select>
+	                </div>
+	                <div id="searchbox" class="form-group">
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+		    	</div>
+		    	<div class='seperator'></div>
+		    	<div id="websites">
+		    		
+		    	</div>
+	    		
+	    		
+	    	</div>
+    	</div>
+    	
+    </div>
+    <div class='seperator'>
+    </div>
+	<div id='footer'>
+		<div id='logos' align='center'>
+			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src='website photos/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+		</div>
+		<div id='footer_text' align='center'>
+			<span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
+		</div>
+	</div>
+
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js" type="text/javascript"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+
+
+
+	<script type="text/template" id='website_template'>
+		<div class='website' align='center'>
+			<img src="thumbnail.png" class="web_cache"/>
+			<div class='web_text' align='left'>
+				<span class='website_name'><%= name%></span><br/>
+			    <span class='website_desc'><%= description%></span>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/javascript">
+	    Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
+	    //model for Website
+	    var Website = Parse.Object.extend("Website", {
+	    // Default attributes for the Website.
+	      defaults: {
+	        name: "empty name",
+	        url:"dali.cs.dartmouth.edu",
+	        description:"empty"
+	      },
+	    });
+
+	    //Website Collection
+	    var WebsiteCollection = Parse.Collection.extend({
+	      model: Website,
+	      //query: new Parse.Query(About)
+	    });
+
+
+	    //define viewsd
+	    var WebsiteView = Backbone.View.extend({
+	    	initialize: function() {
+		        //this.model.bind("change", this.render, this);
+		        //this.render();
+		    },
+		    render: function() {
+		        // Just render my template
+		        //console.log("rendering subview...");
+		        this.$el.empty();
+		        var name = this.model.get('name');
+		        var desc = this.model.get('description');
+		        var url = this.model.get('url');
+		        var template = _.template( $("#website_template").html(), {"name": name, "description": desc} );
+		        this.$el.html(template);
+		        return this;
+		    }
+	    });
+
+	    var WebsiteListView = Backbone.View.extend({
+	        el: $('#websites'),
+	        //collection : (new WebsiteCollection()),
+	    	initialize: function() {
+		        //this.model.bind("change", this.render, this);
+		        var self = this;
+		        this.collection = new WebsiteCollection();
+		        this.subviews = [];
+	            this.collection.on('change', this.render);
+	            this.collection.fetch({
+	              success: function(collection){
+	              	//console.log("getting new item...");
+	              	for(var i = 0; i < collection.length; i++){
+	              		var view = new WebsiteView();
+	              		view.model = collection.at(i);
+	              		self.subviews.push(view);
+	              	}
+	                self.render()
+	              }
+	            });
+		    },
+		    render: function() {
+		        // Just render my template
+		        //console.log("rendering...");
+		        this.$el.empty();
+		        for(var i = 0; i < this.subviews.length; i++){
+		        	this.$el.append(this.subviews[i].render().$el);
+		        }
+		    }
+	    });
+	    var about_view = new WebsiteListView();
+	</script>
+</body>
+</html>
