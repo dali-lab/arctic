@@ -9,10 +9,11 @@ var ArcticRouter = Parse.Router.extend({
 
     "three": "showConferences",
 
-    "four": "showFour"
+    "four": "showFour",
+
   },
 
-  showOne: function() {
+   showOne: function() {
     console.log("Pushed one");
 
     // Display Information about Conference on Map
