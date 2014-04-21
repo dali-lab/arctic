@@ -9,11 +9,7 @@ var ArcticRouter = Parse.Router.extend({
     "icon_website": "showWebsite"
   },
 
-  showForum: function() {
-      console.log("Pushed forum");
-  },
-
-  // Switches the map's popup layer to reports
+    // Switches the map's popup layer to reports
   showReports: function() {
     if (!app.Map) {
         app.Map = new app.MapView();

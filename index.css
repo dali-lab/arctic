@@ -78,13 +78,37 @@
     float: right;
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
+<<<<<<< HEAD
+=======
+#arrow {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    margin-left: auto;
+    margin-top: auto;
+    top: 30%;
+    left: 30%;
+}
+
+#filter {
+    right: 2%;
+    top: 20%;
+    width: 80px;
+    height: 100px;
+    background-color:white;
+    position:absolute;
+}
+
+>>>>>>> 6dd20fa57c93bce8adb9d781e9a84e90ae078f00
 body{
   padding-left: 10%;
   padding-right: 10%;
   font-family:Arial,​Liberation Sans,​DejaVu Sans,​sans-serif;
 }
+
 #header{
   background-color: black;
 }
@@ -95,6 +119,7 @@ body{
   padding-left: 20px;
   float:left;
 }
+
 #nav{
   float:right;
   padding-right: 5px;

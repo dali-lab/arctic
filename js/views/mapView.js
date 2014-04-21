@@ -9,21 +9,35 @@ app.MapView = Parse.View.extend({
     el: $("#map"),
     // Render our View when we initialize the map view
     initialize: function() {
+        app.pubSub = _.extend({}, Parse.Events);
+        app.pubSub.on("filter", this.filterCollection, this);
+        app.MapData.reportsCollection = new Reports();
+        app.MapData.reportsCollection.fetch();
+        app.MapData.conferencesCollection = new Conferences();
+        app.MapData.conferencesCollection.fetch();
         var root = this;
-        root.reportsCollection = new Reports();
-        root.reportsCollection.fetch();
-        root.conferencesCollection = new Conferences();
-        root.conferencesCollection.fetch();
         root.render();
     },
     
+
+    // Filter a collection.  Triggered by the filter model
+    filterCollection: function(category) {
+        console.log("Filtering collection for #" + category + "#");
+        if (app.MapData.LayerType == "report") {
+            console.log("filtering the reports collection");
+            app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(category);
+        } else {
+            console.log("filtering the conferences collection");
+            app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(category);
+        }
+    },
+
     // Render the map view. This function is small because most of the map work is being done in setupMap.
     render: function() {
         if (!this.el._leaflet) {
             var root = this;
             root.setupMap();
         }
-
         return this;
     },
     
@@ -35,7 +49,8 @@ app.MapView = Parse.View.extend({
             zoom: 1.5,
             maxZoom: 4
         });
-        app.MapData.ActiveCollection = root.reportsCollection; 
+        app.MapData.activeCollection = app.MapData.reportsCollection;
+        app.MapData.LayerType = "report";
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -85,7 +100,7 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
-            initPopup(layer, app.MapData.ActiveCollection.filterByCountry(props.NAME), app.MapData.LayerType);
+            initPopup(layer, app.MapData.activeCollection.filterByCountry(props.NAME), app.MapData.LayerType);
         }
 
         var mouseOut = function(e) {
@@ -128,11 +143,11 @@ app.MapView = Parse.View.extend({
         var root = this;
         app.MapData.LayerStyle = type;
         if (type === "reports") {
-            app.MapData.ActiveCollection = root.reportsCollection;
+            app.MapData.activeCollection = app.MapData.reportsCollection;
         } else {
-            app.MapData.ActiveCollection = root.conferencesCollection;
+            app.MapData.activeCollection = app.MapData.conferencesCollection;
         }
-        return app.MapData.ActiveCollection;
+        return app.MapData.activeCollection;
     }
          
 

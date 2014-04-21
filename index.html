@@ -11,6 +11,14 @@
 </head>
 
 <body>
+
+    <script type="text/template" id="filter-template">
+            <form action="">
+            <% _.each(categories, function(category) { %>
+                <input class="filter_option" type="checkbox" value="<%= category %>"> <%= category %><br>
+            <% }); %>
+            </form>
+    </script>
     <script type="text/template" id='reports-tab-template'>
         <% _.each(reports, function(report) { %> 
             <div id="<%= report.get("name") %>" class="reports-tab">
@@ -119,6 +127,8 @@
     	    </div>
             <div id='map'>
             </div>
+            <div id='filter'>
+            </div>
         </div>
     </div>
     <div class='separator'>
@@ -149,6 +159,7 @@
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
     <script src="js/views/compass.js"></script>
+    <script src="js/views/filter.js"></script>
     <script src="js/routers/router.js"></script>
     <script src="js/app.js"></script>
 </body>
