@@ -13,6 +13,7 @@ var Reports = Parse.Collection.extend({
     query: (new Parse.Query(Report)),
     
     filterByCategory: function(category) {
+        console.log("filterByCategory: filtering with #" + category + "#");
         return new Reports(this.filter(function(report) {
             if (report.has("category")) {
                 return report.get("category").toLowerCase() === category.toLowerCase();

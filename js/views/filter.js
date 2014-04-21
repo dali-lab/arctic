@@ -20,6 +20,8 @@ app.Filter = Parse.View.extend({
 
     filterCategories: function(e) {
         var category = $(e.currentTarget).attr('value');
+        console.log("Filter for " + category + " was chosen");
         app.pubSub.trigger("filter", category);
+        console.log("Triggered event.");
     }
 });

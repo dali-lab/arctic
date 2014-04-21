@@ -9,8 +9,8 @@ app.MapView = Parse.View.extend({
     el: $("#map"),
     // Render our View when we initialize the map view
     initialize: function() {
+        app.pubSub = _.extend({}, Parse.Events);
         app.pubSub.on("filter", this.filterCollection, this);
-
         app.MapData.reportsCollection = new Reports();
         app.MapData.reportsCollection.fetch();
         app.MapData.conferencesCollection = new Conferences();
@@ -22,13 +22,14 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(category) {
+        console.log("Filtering collection for #" + category + "#");
         if (app.MapData.LayerType == "report") {
-            filteredCategory = app.MapData.reportsCollection.filterByCategory(category);
+            console.log("filtering the reports collection");
+            app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(category);
         } else {
-            filteredCategory = app.MapData.conferencesCollection.filterByCategory(category);
+            console.log("filtering the conferences collection");
+            app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(category);
         }
-
-
     },
 
     // Render the map view. This function is small because most of the map work is being done in setupMap.
@@ -49,6 +50,7 @@ app.MapView = Parse.View.extend({
             maxZoom: 4
         });
         app.MapData.activeCollection = app.MapData.reportsCollection;
+        app.MapData.LayerType = "report";
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
