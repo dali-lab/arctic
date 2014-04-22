@@ -13,10 +13,10 @@ app.Compass = Parse.View.extend({
   },
 
   events: {
-    "click li#one": "moveArrow",
-    "click li#two": "moveArrow",
-    "click li#three": "moveArrow",
-    "click li#four": "moveArrow"
+    "click #icon_conference": "moveArrow",
+    "click #icon_forum": "moveArrow",
+    "click #icon_website": "moveArrow",
+    "click #icon_report": "moveArrow"
   },
 
   moveArrow: function(e) {
@@ -24,13 +24,13 @@ app.Compass = Parse.View.extend({
     var id = clickedEl.attr("id");
 
     //Top
-    if (id == "one") {
+    if (id == "icon_conference") {
        this.$el.children().find("#arrow").rotate(270);
     //Right
-    } else if (id == "two") {
+    } else if (id == "icon_forum") {
        this.$el.children().find("#arrow").rotate(0);
     //Down
-    } else if (id == "three") {
+    } else if (id == "icon_report") {
        this.$el.children().find("#arrow").rotate(90);
     //Left
     } else {
