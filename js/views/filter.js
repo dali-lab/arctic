@@ -3,7 +3,7 @@ var app = app || {};
 app.Filter = Parse.View.extend({
     template: _.template( $("#filter-template").html() ),
     events: {
-       'change .filter_option' : 'filterCategories'
+       'change #filter_box' : 'filterCategories'
     },
 
     el: $("#filter"),
@@ -19,9 +19,12 @@ app.Filter = Parse.View.extend({
     },
 
     filterCategories: function(e) {
-        var category = $(e.currentTarget).attr('value');
-        console.log("Filter for " + category + " was chosen");
-        app.pubSub.trigger("filter", category);
-        console.log("Triggered event.");
+        var boxes = $("[type=checkbox]:checked");
+        var i;
+        var boxValues = new Array();
+        for (i = 0; i < boxes.length; i++) {
+            boxValues[i] = $(boxes[i]).attr("value");
+        }
+        app.pubSub.trigger("filter", boxValues);
     }
 });

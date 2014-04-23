@@ -11,15 +11,19 @@ var Reports = Parse.Collection.extend({
 
     model: Report,
     query: (new Parse.Query(Report)),
-    
-    filterByCategory: function(category) {
-        console.log("filterByCategory: filtering with #" + category + "#");
+
+    filterByCategory: function(categories) {
         return new Reports(this.filter(function(report) {
             if (report.has("category")) {
-                return report.get("category").toLowerCase() === category.toLowerCase();
-            } else {
-                return false;
+                var l = categories.length;
+                var i;
+                for (i = 0; i < l; i++) {
+                    if (report.get("category").toLowerCase() == categories[i].toLowerCase()) {
+                        return true;
+                    }
+                }
             }
+            return false;
         }));
     },
 

@@ -21,14 +21,19 @@ app.MapView = Parse.View.extend({
     
 
     // Filter a collection.  Triggered by the filter model
-    filterCollection: function(category) {
-        console.log("Filtering collection for #" + category + "#");
+    filterCollection: function(boxValues) {
         if (app.MapData.LayerType == "report") {
-            console.log("filtering the reports collection");
-            app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(category);
+            if (boxValues.length === 0) {
+                app.MapData.activeCollection = app.MapData.reportsCollection;
+            } else {
+                app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(boxValues);
+            }
         } else {
-            console.log("filtering the conferences collection");
-            app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(category);
+            if (boxValues.length === 0) {
+                app.MapData.activeCollection = app.MapData.conferencesCollection;
+            } else {
+                app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
+            }
         }
     },
 

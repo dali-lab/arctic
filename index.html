@@ -13,7 +13,7 @@
 <body>
 
     <script type="text/template" id="filter-template">
-            <form action="">
+            <form action="" id="filter_box">
             <% _.each(categories, function(category) { %>
                 <input class="filter_option" type="checkbox" value="<%= category %>"> <%= category %><br>
             <% }); %>
