@@ -16,6 +16,11 @@ var ArcticRouter = Parse.Router.extend({
     "reports": "showAllReports",
     "report/:id": "getReport",
     "websites": "showAllWebsites"
+    "report/:id": "getReport",
+    "icon_conference": "showConferences",
+    "icon_forum": "showForum",
+    "icon_report": "showReports",
+    "icon_website": "showWebsite"
   },
 
   showAllWebsites: function(){
@@ -34,19 +39,12 @@ var ArcticRouter = Parse.Router.extend({
     var detail = new ReportDetailView(id);
   },
 
-  showOne: function() {
-    console.log("Pushed one");
-
-    // Display Information about Conference on Map
-  },
-  
-  // Switches the map's popup layer to reports
+    // Switches the map's popup layer to reports
   showReports: function() {
     if (!app.Map) {
         app.Map = new app.MapView();
     }
-    app.Map.switchLayerTo("reports");   
-
+    app.Map.switchLayerTo("reports");
   },
 
   // Switches the map's popup layer to conferences
@@ -60,7 +58,16 @@ var ArcticRouter = Parse.Router.extend({
   showFour: function() {
       console.log("Pushed four");
   }
-  
+
+  showWebsite: function() {
+      console.log("Pushed website");
+  },
+
+  getReport: function(id) {
+      /* Show detailed view of a report */
+      console.log("You are trying to reach report " + id);
+  }
+
 });
 
 app.myArcticRouter = new ArcticRouter();
