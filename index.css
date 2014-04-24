@@ -69,9 +69,11 @@
 }
 
 #content {
-    float: right;
-    height: 100%;
-    width: 100%;
+    float:left;
+    margin-top: 20px;
+    width:100%;
+    height:75%;
+    margin-bottom: 60px;
 }
 
 #arrow {
@@ -117,7 +119,14 @@ body{
   font-size: 14px;
   padding-left: 5px;
 }
-#nav ul li:hover{
+#nav ul li a{
+  text-decoration: none;
+  background-color: black;
+}
+#nav ul li a:visited{
+  color:white;
+}
+#nav ul li a:hover{
   cursor: pointer;
   color:#eee;
 }
@@ -130,7 +139,7 @@ body{
   /*margin-top: 30px;*/
 }
 #footer{
-  height:100%;
+  height:100px;
   background-color: #172531;
   padding-bottom: 20px;
 /*      border-style:solid;*/
@@ -143,9 +152,11 @@ body{
 }
 #spin_navi{
   float:left;
-  width: 0%;
-  height: 0%;
-  z-index: 999;
+  width:25%;
+  background-color: #CCCCFF;
+  height:inherit;
+  display: inline;
+  display: none;
 }
 #footer_text span{
   color:white;
@@ -157,4 +168,210 @@ body{
 }
 .reports-tab li {
     list-style-type: none;    
+}
+
+/* CSS from website template */
+#searchbox{
+  float:right;
+  width:150px;
+}
+#filterbox{
+  float: right;
+}
+
+.seperator{
+  clear:both;
+}
+.place{
+  height:20px;
+}
+.website{
+  width:23%;
+  height:40%;
+  /*background-color: black;*/
+  float:left;
+  display: block;
+  margin-left:15px;
+  margin-top: 10px;
+  padding-top: 10px;
+  /*padding-left: 10px;*/
+}
+#content{
+  /*clear:both;*/
+  float:left;
+  margin-top: 20px;
+  width:100%;
+  height:80%;
+  margin-bottom: 60px;
+  /*margin-left:20px;*/
+}
+#websites{
+  /*position:relative;*/
+  height:100%;
+  margin-left:10px;
+  margin-right:10px;
+  overflow-y:scroll;
+  background-color: #FFCC33;
+}
+.website_name{
+  font-size: 15px;
+  /*display: block;*/
+
+}
+.website_desc{
+  font-size:14px;
+  color:white;
+}
+.web_text{
+  padding-left: 20px;
+}
+#subheader{
+  width:auto;
+}
+
+.about{
+  color:white;
+  font-size: 16px;
+}
+
+#aboutDiv{
+  background-color: #9999FF;
+  /*opacity: 0.5;*/
+  height: 100%;
+  padding-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-y:scroll;
+}
+
+
+/* CSS from reports page*/
+.seperator2{
+  height:1px;
+  background-color: white;
+  width:100%;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.conf_logo{
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  /*padding-top: 30px;*/
+}
+.conf_img{
+  float:left;
+  margin-left:30px;
+  width:8%;
+  padding-top: 15px;
+  /*margin-top:30px;*/
+}
+.detail_img{
+  float:left;
+  margin-left:30px;
+  width:8%;
+  height:50px;
+  padding-top: 15px;
+}
+.conf_desc{
+  float:left;
+  width: 85%;
+}
+.report{
+  margin-top:20px;
+  height:150px;
+  background-color: white;
+  margin-left:30px;
+  margin-right: 30px;
+}
+.conf_header{
+  clear: both;
+  padding-top: 5px;
+}
+.conf_name{
+  float:left;
+}
+.conf_time{
+  float:right;
+}
+.conf_type{
+  float:right;
+}
+.conf_name_span{
+  color: #9966FF;
+  font-size:17px;
+}
+.conf_preview{
+  padding-top: 5px;
+}
+.conf_preview_author{
+  color: #9966FF;
+  font-size: 14px;  
+}
+.readMore{
+  color: #9966FF;
+  font-size: 15px;
+}
+.readMore:hover{
+  cursor: pointer;
+  color:black;
+}
+
+.conf_preview_desc{
+  display: block;
+  width:100%;
+  word-wrap:break-word;
+}
+.seperator3{
+  clear: both;
+  height:1px;
+  background-color: black;
+  width: 100%;
+}
+.conf_footer{
+  padding-right: 30px;
+  /*padding-top: 30px;*/
+}
+#reports{
+  float:left;
+  /*position:relative;*/
+  width: 100%;
+  height:100%;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+.report_detail{
+  font-size: 12px;
+  display: block;
+  padding-left: 10px;
+  padding-right: 10px;
+  word-wrap:break-word;
+}
+#detail_body{
+  height:75%;
+  margin-top:10px;
+  margin-left:8%;
+  margin-right:8%;
+  padding-left:10%;
+  padding-right: 10%;
+  overflow-y:scroll;
+  border-style:solid;
+  border-width:1px; 
+}
+.intro_title{
+  margin-left:7%;
+  margin-right:7%;
+  display: block;
+  margin-top:20px;
+  font-size: 30px;
+  font-weight:900; 
+}
+#detail{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  background-color: white;
 }

@@ -10,7 +10,13 @@ var Report = Parse.Object.extend ({
     defaults: {
         name: "report",
         category: "",
-        country: "World"
+        country: "World",
+        url:"dali.cs.dartmouth.edu",
+        description:"empty",
+        posttime:"not known",
+        author:"not known",
+        objectId:"null",
+        published:""
     },
 });
 

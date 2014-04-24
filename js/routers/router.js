@@ -2,14 +2,36 @@ var app = app || {};
 var ArcticRouter = Parse.Router.extend({
   routes: {
     "about": "showAbout",
-    "report/:id": "getReport",
+    
     "one": "showOne",
 
     "two": "showReports",
 
     "three": "showConferences",
 
-    "four": "showFour"
+    "four": "showFour",
+
+    "conferences": "showAllConferences",
+    "conference/:id": "getConference",
+    "reports": "showAllReports",
+    "report/:id": "getReport",
+    "websites": "showAllWebsites"
+  },
+
+  showAllWebsites: function(){
+    var websiteListview = new WebsiteListView();
+  },
+
+  showAbout: function(){
+    var aboutView = new AboutView();
+  },
+
+  showAllReports: function(){
+    var reports = new ReportListView();
+  },
+
+  getReport: function(id) {
+    var detail = new ReportDetailView(id);
   },
 
   showOne: function() {
@@ -37,14 +59,8 @@ var ArcticRouter = Parse.Router.extend({
 
   showFour: function() {
       console.log("Pushed four");
-  },
-  
-  getReport: function(id) {
-      /* Show detailed view of a report */
-      console.log("You are trying to reach report " + id);
-
   }
-
+  
 });
 
 app.myArcticRouter = new ArcticRouter();
