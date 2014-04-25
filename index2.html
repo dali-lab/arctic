@@ -1,0 +1,246 @@
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Arctic Template</title>
+	<link href="js/lib/imageslider/js-image-slider.css" rel="stylesheet" type="text/css" />
+	<link href="index.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="js/lib/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="js/lib/imageslider/js-image-slider.js" type="text/javascript"></script>
+</head>
+
+<body>
+    
+    <!-- templates -->
+    <script type="text/template" id='website_template'>
+        <div class='website' align='center'>
+            <img src="imgs/thumbnail.png" class="web_cache"/>
+            <div class='web_text' align='left'>
+                <span class='website_name'><%= name%></span><br/>
+                <span class='website_desc'><%= description%></span>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id='about_template'>
+        <div id='aboutDiv'>
+            <span class='about'><%= content %></span>
+        </div>
+    </script>
+
+    <script type="text/template" id='report_template'>
+        <div class='report'>
+            <div class='conf_img'>
+                <img class='conf_logo' src="imgs/placeholder.gif" />
+            </div>
+            <div class='conf_desc'>
+                <div class='conf_header'>
+                    <div class='conf_name'>
+                        <span class='conf_name_span'>
+                            <%= name%>
+                        </span>
+                    </div>
+                    <div class='conf_time'>
+                        <span class='conf_name_span'>
+                            <%= posttime%>
+                        </span>
+                    </div>
+                    <div class='conf_type'>
+
+                    </div>
+                </div>
+                <div class='seperator3'></div>
+                <div class='conf_preview'>
+                    <span class='conf_preview_author'>
+                        <%= author%>
+                    </span><br/>
+                    <span class='conf_preview_desc'>
+                        <%= description%>
+                    </span>
+                </div>
+                <div class='conf_footer' align='right'>
+                    <a class='readMore' href="<%= objectId%>">Read More</a>&nbsp;
+                    <a class='readMore'>Comment</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id='detail_view'>
+        <div class='report_detail'>
+            <div class='detail_img'>
+                <img class='conf_logo' src="imgs/placeholder.gif" />
+            </div>
+            <div class='conf_desc'>
+                <div class='conf_header'>
+                    <div class='conf_name'>
+                        <span class='conf_name_span'>
+                            <%= name%>
+                        </span>
+                    </div>
+                    <div class='conf_time'>
+                        <span class='conf_name_span'>
+                            <%= posttime%>
+                        </span>
+                    </div>
+                    <div class='conf_type'>
+
+                    </div>
+                </div>
+                <div class='seperator3'></div>
+                <div class='conf_preview'>
+                    <span>
+                        <span class='conf_preview_author'>Published By:</span>&nbsp;<%= publishedBy%>
+                    </span><br/>
+                    <span>
+                        <span class='conf_preview_author'>URL:</span>&nbsp;<%= URL%>
+                    </span><br/>
+                    <span>
+                        <span class='conf_preview_author'>Issue:</span>&nbsp;<%= issue%>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="seperator"></div>
+        <div id='detail_body'>
+            <span class='intro_title'>Conference Summary</span>
+            <span class='report_detail'>
+                <%=introduction%>
+            </span>
+        </div>
+    </script>
+
+    <!-- this is not a template, have not finished filter and search-->
+    <script type="text/template" id="fliternsearch">
+        <div id='subheader'>
+            <span>Websites</span>
+            <div id='filterbox' class="col-sm-2">
+              <select class="form-control">
+                  <option value="one">Filter</option>
+                  <option value="two">Filter</option>
+                  <option value="three">Filter</option>
+              </select>
+            </div>
+            <div id="searchbox" class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class='seperator'></div>
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div id='header'>
+		<div id='inner' style="overflow:hidden">
+			<div id='header_name'>
+				<span class='app_name'>Arctic Virtual Forum</span>
+			</div>
+			<div id='nav'>
+				<ul>
+					<li><a href="#about">About Us</a></li>
+					<li>Conferences</li>
+					<li>Forum</li>
+					<li><a href="#reports">Reports</a></li>
+					<li><a href="#websites">Websites</a></li>
+					<li>Parters</li>
+					<li>|</li>
+					<li>Login</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- image slider-->
+	<div id="sliderFrame">
+        <div id="slider">
+            <img src="imgs/Chris2.jpg" class='resized_img'/>
+            <!-- <img src="imgs/thumb-2.gif" class='resized_img'/> -->
+            <img src="imgs/Chris.jpg" class='resized_img' />
+            <img src="imgs/Laura.jpg" class='resized_img'/>
+            <img src="imgs/Lauren2.jpg" class='resized_img'/>
+            <img src="imgs/Lauren3.jpg" class='resized_img'/>
+        </div>
+        <span class='textlayer'>
+            	text on top of image
+        </span>
+        <div id="htmlcaption" style="display: none;">
+            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+        </div>
+    </div>
+    <div id='main'>
+        <button id='btn_show' onclick='show()'>show</button>
+        <div id='spin_navi'>place holder
+            <button onclick='hide()'>hide</button>
+        </div>
+    	<div id='content'>
+            
+                        
+        </div>
+    </div>
+    <div class='separator'>
+    </div>
+	<div id='footer'>
+		<div id='logos' align='center'>
+			<img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/>
+		</div>
+		<div id='footer_text' align='center'>
+			<span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
+		</div>
+	</div>
+    <script src="js/lib/jquery-2.1.0.min.js"></script>
+    <script src="js/lib/jquery-1.9.1.js"></script>
+    <script src="js/lib/jQueryRotateCompressed.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/parse-1.2.18.min.js"></script>
+    <script src="js/lib/leaflet/leaflet.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/geoJson/countries.json"></script>
+    <script src="js/models/mapData.js"></script>
+    <script src="js/models/report.js"></script>
+    <script src="js/models/conference.js"></script>
+    <script src="js/models/website.js"></script>
+    <script src="js/models/about.js"></script>
+    <script src="js/collections/reports.js"></script>
+    <script src="js/collections/conferences.js"></script>
+    <script src="js/collections/websites.js"></script>
+    <script src="js/collections/abouts.js"></script>
+    <script src="js/views/reportsTab.js"></script>
+    <script src="js/views/conferencesTab.js"></script>
+    <script src="js/views/mapView.js"></script>
+    <script src="js/views/compass.js"></script>
+    <script src="js/views/websiteList.js"></script>
+    <script src="js/views/aboutView.js"></script>
+    <script src="js/views/reportsView.js"></script>
+    <script src="js/views/reportDetailView.js"></script>
+    <script src="js/routers/router.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript">
+        function show(){
+            $("#spin_navi").show(300);
+            $('#content').width('75%');
+            $('.website').width('30%');
+        }
+        function hide(){
+            $('.website').hide();
+            $("#spin_navi").hide(300);
+            $('.website').width('23%');
+            $('#content').width('100%');
+            $('.website').show(300);
+            
+        }
+    </script>
+</body>
+</html>

@@ -76,6 +76,21 @@
         <% }); %>
     </script>
 
+    <!-- templates -->
+    <script type="text/template">
+        <script type="text/template" id='website_template'>
+        <div class='website' align='center'>
+            <img src="thumbnail.png" class="web_cache"/>
+            <div class='web_text' align='left'>
+                <span class='website_name'><%= name%></span><br/>
+                <span class='website_desc'><%= description%></span>
+            </div>
+        </div>
+    </script>
+
+
+
+
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
@@ -87,7 +102,7 @@
 					<li>Conferences</li>
 					<li>Forum</li>
 					<li>Reports</li>
-					<li>Websites</li>
+					<li>Websites</a></li>
 					<li>Parters</li>
 					<li>|</li>
 					<li>Login</li>
@@ -115,6 +130,17 @@
     </div>
     <div id='main'>
     	<div id='content'>
+            <!-- <div id='spin_navi'>
+                <div class="circle">
+                    <ul>
+                        <li id="one"><a href="#one">1</a></li>
+                        <li id="two"><a href="#two">2</a></li>
+                        <li id="three"><a href="#three">3</a></li>
+                        <li id="four"><a href="#four">4</a></li>
+                    </ul>
+                    <div class="arrow">
+                        <img src="imgs/arrow.png" id="arrow" />
+                    </div>
             <div id='spin_navi'>
                 <div id="compass">
                     <img src="imgs/compassbase.png" id='compass_base'>
@@ -124,7 +150,10 @@
                     <div id="icon_website" class="icon"><a href="#icon_website!"><img src="imgs/websiteicon.png"></a></div>
                     <img src="imgs/compass.png" id="arrow">
                 </div>
-    	    </div>
+    	    </div> -->
+            <div id='spin_navi'>place holder
+                <button onclick='hide()'>hide</button>
+            </div>
             <div id='map'>
             </div>
             <div id='filter'>
@@ -153,14 +182,32 @@
     <script src="js/models/mapData.js"></script>
     <script src="js/models/report.js"></script>
     <script src="js/models/conference.js"></script>
+    <script src="js/models/website.js"></script>
     <script src="js/collections/reports.js"></script>
     <script src="js/collections/conferences.js"></script>
+    <script src="js/collections/websites.js"></script>
     <script src="js/views/reportsTab.js"></script>
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
     <script src="js/views/compass.js"></script>
+    <script src="js/views/websiteList.js"></script>
     <script src="js/views/filter.js"></script>
     <script src="js/routers/router.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/javascript">
+        function show(){
+            $("#spin_navi").show(300);
+            $('#content').width('75%');
+            $('.website').width('30%');
+        }
+        function hide(){
+            $('.website').hide();
+            $("#spin_navi").hide(300);
+            $('.website').width('23%');
+            $('#content').width('100%');
+            $('.website').show(300);
+            
+        }
+    </script>
 </body>
 </html>
