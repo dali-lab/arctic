@@ -15,7 +15,7 @@ var ArcticRouter = Parse.Router.extend({
     "conference/:id": "getConference",
     "reports": "showAllReports",
     "report/:id": "getReport",
-    "websites": "showAllWebsites"
+    "websites": "showAllWebsites",
     "report/:id": "getReport",
     "icon_conference": "showConferences",
     "icon_forum": "showForum",
@@ -57,7 +57,7 @@ var ArcticRouter = Parse.Router.extend({
 
   showFour: function() {
       console.log("Pushed four");
-  }
+  },
 
   showWebsite: function() {
       console.log("Pushed website");
