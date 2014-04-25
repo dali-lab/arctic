@@ -76,6 +76,21 @@
         <% }); %>
     </script>
 
+    <!-- templates -->
+    <script type="text/template">
+        <script type="text/template" id='website_template'>
+        <div class='website' align='center'>
+            <img src="thumbnail.png" class="web_cache"/>
+            <div class='web_text' align='left'>
+                <span class='website_name'><%= name%></span><br/>
+                <span class='website_desc'><%= description%></span>
+            </div>
+        </div>
+    </script>
+
+
+
+
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
@@ -87,7 +102,7 @@
 					<li>Conferences</li>
 					<li>Forum</li>
 					<li>Reports</li>
-					<li>Websites</li>
+					<li>Websites</a></li>
 					<li>Parters</li>
 					<li>|</li>
 					<li>Login</li>
@@ -114,18 +129,20 @@
         </div>
     </div>
     <div id='main'>
-    	<div id='content'>
+        <button id='btn_show' onclick='show()'>show</button>
             <div id='spin_navi'>
+                <button onclick='hide()'>hide</button>
                 <div id="compass">
                     <img src="imgs/compassbase.png" id='compass_base'>
-                    <div id="icon_conference" class="icon"><a href="#icon_conference"><img src="imgs/conferenceicon.png"></a></div>
-                    <div id="icon_forum" class="icon"><a href="#icon_forum"><img src="imgs/forumicon.png"></a></div>
-                    <div id="icon_report" class="icon"><a href="#icon_report"><img src="imgs/reporticon.png"></a></div>
-                    <div id="icon_website" class="icon"><a href="#icon_website"><img src="imgs/websiteicon.png"></a></div>
+                    <div id="icon_conference" class="icon"><a href="#icon_conference!"><img src="imgs/conferenceicon.png"></a></div>
+                    <div id="icon_forum" class="icon"><a href="#icon_forum!"><img src="imgs/forumicon.png"></a></div>
+                    <div id="icon_report" class="icon"><a href="#icon_report!"><img src="imgs/reporticon.png"></a></div>
+                    <div id="icon_website" class="icon"><a href="#icon_website!"><img src="imgs/websiteicon.png"></a></div>
                     <img src="imgs/compass.png" id="arrow">
                 </div>
     	    </div>
-            <div id='map'>
+    	<div id='content'>
+           <div id='map'>
             </div>
             <div id='filter'>
             </div>
@@ -153,14 +170,32 @@
     <script src="js/models/mapData.js"></script>
     <script src="js/models/report.js"></script>
     <script src="js/models/conference.js"></script>
+    <script src="js/models/website.js"></script>
     <script src="js/collections/reports.js"></script>
     <script src="js/collections/conferences.js"></script>
+    <script src="js/collections/websites.js"></script>
     <script src="js/views/reportsTab.js"></script>
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
     <script src="js/views/compass.js"></script>
+    <script src="js/views/websiteList.js"></script>
     <script src="js/views/filter.js"></script>
     <script src="js/routers/router.js"></script>
     <script src="js/app.js"></script>
+    <script type="text/javascript">
+        function show(){
+            $("#spin_navi").show(300);
+            $('#content').width('75%');
+            $('.website').width('30%');
+        }
+        function hide(){
+            $('.website').hide();
+            $("#spin_navi").hide(300);
+            $('.website').width('23%');
+            $('#content').width('100%');
+            $('.website').show(300);
+            
+        }
+    </script>
 </body>
 </html>
