@@ -15,6 +15,8 @@ app.MapView = Parse.View.extend({
         app.MapData.reportsCollection.fetch();
         app.MapData.conferencesCollection = new Conferences();
         app.MapData.conferencesCollection.fetch();
+
+        app.MapData.reportsCategories = app.MapData.reportsCollection.getCategories();
         var root = this;
         root.render();
     },

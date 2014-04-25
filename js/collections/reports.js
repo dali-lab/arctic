@@ -12,6 +12,27 @@ var Reports = Parse.Collection.extend({
     model: Report,
     query: (new Parse.Query(Report)),
 
+    getCategories: function() {
+        var query = new Parse.Query(Report);
+        var categoryList = [];
+        query.find({
+            success: function(results) {
+                console.log("Success!");
+                results.forEach(function(report) {
+                   var category = report.get("category");
+                   console.log(category);
+                   console.log(jQuery.inArray(category, categoryList));
+                   if (jQuery.inArray(category, categoryList) < 0) {
+                        categoryList.push(category);
+                   }
+                 });
+            },
+            error: function(error) {
+            }
+        });
+        return categoryList;
+    },
+
     filterByCategory: function(categories) {
         return new Reports(this.filter(function(report) {
             if (report.has("category")) {
@@ -45,7 +66,4 @@ var Reports = Parse.Collection.extend({
             return false;
         }));
     }
-
 });
-
-
