@@ -54,6 +54,7 @@ var ReportListView = Parse.View.extend({
         });
     },
     render: function() {
+        $("#spin_navi").hide();
         // Just render my template
         //console.log("rendering...");
         this.$el.empty();
@@ -62,8 +63,6 @@ var ReportListView = Parse.View.extend({
         }
     }
 });
-
-
 
 var ReportDetailView = Parse.View.extend({
 	el: $('#detail'),

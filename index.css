@@ -371,3 +371,11 @@ body{
   padding-bottom: 10px;
   background-color: white;
 }
+
+.reports-popup {
+    background: rgba(232, 141, 141, .8);
+}
+
+.conferences-popup {
+    background: rgba(76, 141, 90, .8);
+}

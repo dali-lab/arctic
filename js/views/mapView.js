@@ -59,7 +59,7 @@ app.MapView = Parse.View.extend({
         root.el._leaflet = false;
         app.MapData.MapDiv = new L.map(this.el, {
             center: [10, -110],
-            zoom: 1.5,
+            zoom: 2,
             maxZoom: 4
         });
         app.MapData.activeCollection = app.MapData.reportsCollection;
@@ -89,21 +89,17 @@ app.MapView = Parse.View.extend({
 
         // Create a modal on a country, using either a collection
         // passed to the function or this collection.
-        var initPopup = function(country, filtered, type) {
+        var initPopup = function(country, filtered) {
             var marker = new L.Marker(new L.LatLng(90, 90));
-            if (type === "report") {
+            if (app.MapData.LayerStyle === "report") {
                 app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             } else {
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
             }
-            country.bindPopup(app.MapData.OpenTab.render().el);
-           
+            country.bindPopup(app.MapData.OpenTab.render().el, {className: app.MapData.LayerStyle.concat("-popup")});
         }
 
-        var removePopup = function() {
-            console.log('removed ' + app.MapData.OpenTab);
-            app.MapData.OpenTab.close();
-        }
+        
 
         var mouseOver = function(e) {
             var layer = e.target; 
@@ -113,7 +109,7 @@ app.MapView = Parse.View.extend({
                 color: '#85dbf8',
                 dashArray: ''
             });
-            initPopup(layer, app.MapData.activeCollection.filterByCountry(props.NAME), app.MapData.LayerType);
+            initPopup(layer, app.MapData.activeCollection.filterByCountry(props.NAME));
         }
 
         var mouseOut = function(e) {
@@ -144,9 +140,9 @@ app.MapView = Parse.View.extend({
             },
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
-        return this;
+        app.MapData.MapDiv.on('popupclose', this.removePopup);
 
-        app.MapData.MapDiv.on('popupclose', removePopup);
+        return this;
     },
 
     // Changes our active layer to whatever type string specifies
@@ -161,7 +157,10 @@ app.MapView = Parse.View.extend({
             app.MapData.activeCollection = app.MapData.conferencesCollection;
         }
         return app.MapData.activeCollection;
-    }
-         
+    },
 
+    removePopup : function() {
+        console.log('removed ' + app.MapData.OpenTab);
+        app.MapData.OpenTab.close();
+    }  
 });
