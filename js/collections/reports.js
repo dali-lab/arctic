@@ -12,25 +12,23 @@ var Reports = Parse.Collection.extend({
     model: Report,
     query: (new Parse.Query(Report)),
 
-    getCategories: function() {
+    getCategoriesList: function() {
         var query = new Parse.Query(Report);
-        var categoryList = [];
         query.find({
             success: function(results) {
-                console.log("Success!");
+                reportCategories = [];
                 results.forEach(function(report) {
                    var category = report.get("category");
-                   console.log(category);
-                   console.log(jQuery.inArray(category, categoryList));
-                   if (jQuery.inArray(category, categoryList) < 0) {
-                        categoryList.push(category);
+                   if (jQuery.inArray(category, reportCategories) < 0) {
+                        reportCategories.push(category);
                    }
                  });
+                 app.pubSub.trigger("reportCategories", reportCategories);
             },
             error: function(error) {
+                console.log("Failure");
             }
         });
-        return categoryList;
     },
 
     filterByCategory: function(categories) {

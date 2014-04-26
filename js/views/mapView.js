@@ -16,11 +16,19 @@ app.MapView = Parse.View.extend({
         app.MapData.conferencesCollection = new Conferences();
         app.MapData.conferencesCollection.fetch();
 
-        app.MapData.reportsCategories = app.MapData.reportsCollection.getCategories();
+        app.MapData.reportsCollection.getCategoriesList();
+        app.pubSub.on("reportCategories", this.initReportFilter, this);
+
+        //app.MapData.conferencesCollection.getCategoriesList();
+        //app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
         var root = this;
         root.render();
     },
     
+    // Initialize the reports filter.  Triggered by the reports collection
+    initReportFilter: function(reportCategories) {
+        app.reportFilter = new app.Filter();
+    },
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {
