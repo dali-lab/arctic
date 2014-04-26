@@ -17,10 +17,10 @@ var ArcticRouter = Parse.Router.extend({
     "report/:id": "getReport",
     "websites": "showAllWebsites",
     "report/:id": "getReport",
-    "icon_conference": "showConferences",
-    "icon_forum": "showForum",
-    "icon_report": "showReports",
-    "icon_website": "showWebsite"
+    "icon_conference!": "showConferences",
+    "icon_forum!": "showForum",
+    "icon_report!": "showReports",
+    "icon_website!": "showWebsite"
   },
 
   showAllWebsites: function(){
