@@ -11,6 +11,7 @@ app.MapView = Parse.View.extend({
     initialize: function() {
         app.pubSub = _.extend({}, Parse.Events);
         app.pubSub.on("filter", this.filterCollection, this);
+
         app.MapData.reportsCollection = new Reports();
         app.MapData.reportsCollection.fetch();
         app.MapData.conferencesCollection = new Conferences();
@@ -19,6 +20,13 @@ app.MapView = Parse.View.extend({
         root.render();
     },
     
+    hide: function() {
+        this.$el.hide();
+    },
+
+    toggle: function() {
+        this.$el.toggle();
+    },
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {

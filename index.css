@@ -207,6 +207,7 @@ body{
   margin-right:10px;
   overflow-y:scroll;
   background-color: #FFCC33;
+  display: none;
 }
 .website_name{
   font-size: 15px;

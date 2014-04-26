@@ -21,7 +21,7 @@ app.Filter = Parse.View.extend({
     filterCategories: function(e) {
         var boxes = $("[type=checkbox]:checked");
         var i;
-        var boxValues = new Array();
+        var boxValues = [];
         for (i = 0; i < boxes.length; i++) {
             boxValues[i] = $(boxes[i]).attr("value");
         }

@@ -25,11 +25,6 @@ var WebsiteListView = Parse.View.extend({
     el: $('#websites'),
     //collection : (new WebsiteCollection()),
 	initialize: function() {
-        console.log("rendering list");
-        $("#content").empty();
-        $("#content").append($("#fliternsearch").html());
-        $("#content").append("<div id='websites'></div>");
-        //this.model.bind("change", this.render, this);
         this.$el = $('#websites');
         var self = this;
         this.collection = new WebsiteCollection();
@@ -43,16 +38,22 @@ var WebsiteListView = Parse.View.extend({
           		view.model = collection.at(i);
           		self.subviews.push(view);
           	}
-            self.render()
+            self.render();
           }
         });
     },
     render: function() {
-        // Just render my template
-        //console.log("rendering...");
+        this.resetCurrentView();
         this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
         	this.$el.append(this.subviews[i].render().$el);
         }
+    },
+
+    resetCurrentView: function() {
+        app.currentView.$el.hide();
+        $("#spin_navi").hide();
+        app.currentView = this;
+        app.currentView.$el.show();
     }
 });
