@@ -130,7 +130,7 @@
 
 
     <script type="text/template" id="filter-template">
-            <form action="" id="filter_box">
+            <form action="" class="filter_box">
             <% _.each(categories, function(category) { %>
                 <input class="filter_option" type="checkbox" value="<%= category %>"> <%= category %><br>
             <% }); %>
@@ -260,7 +260,9 @@
     	<div id='content'>
            <div id='map'></div>
            <div id='websites'></div>
-          <div id='filter'></div>
+           <div id='reports'></div>
+          <div id="reportFilter" class='filter'></div>
+          <div id="conferenceFilter" class='filter'></div>
         </div>
     </div>
     <div class='separator'>

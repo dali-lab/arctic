@@ -76,7 +76,7 @@
     float: left;
 }
 
-#filter {
+.filter {
     right: 2%;
     top: 20%;
     width: 80px;

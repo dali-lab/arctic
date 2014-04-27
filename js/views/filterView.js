@@ -6,9 +6,10 @@ app.FilterView = Parse.View.extend({
        'change #filter_box' : 'filterCategories'
     },
 
-    el: $("#filter"),
-    initialize: function() {
-        this.categories = [];
+    initialize: function(options) {
+        this.setElement(options.el);
+        this.categories = options.categories;
+        _.extend(this, _.pick(options));
         var root = this;
         root.render();
     },

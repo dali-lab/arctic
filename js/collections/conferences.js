@@ -11,6 +11,25 @@ var Conferences = Parse.Collection.extend({
     model: Conference,
     query: (new Parse.Query(Conference)),
 
+    getCategoriesList: function() {
+        var query = new Parse.Query(Conference);
+        query.find({
+            success: function(results) {
+                conferenceCategories = [];
+                results.forEach(function(conference) {
+                    var category = conference.get("category");
+                    if (jQuery.inArray(category, conferenceCategories) < 0) {
+                        conferenceCategories.push(category);
+                    }
+                });
+                app.pubSub.trigger("conferenceCategories", conferenceCategories);
+            },
+            error: function(error) {
+                console.log("Failure");
+            }
+        });
+    },
+
     filterByCategory: function(category) {
         return new Conferences(this.filter(function(conference) {
             if (conference.has("category")) {

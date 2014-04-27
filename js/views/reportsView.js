@@ -31,54 +31,50 @@ var ReportView = Parse.View.extend({
 var ReportListView = Parse.View.extend({
     el: $('#reports'),
     //collection : (new WebsiteCollection()),
-	initialize: function() {
-        //this.model.bind("change", this.render, this);
+    initialize: function() {
         var self = this;
-        $("#content").empty();
-        $("#content").append($("#fliternsearch").html());
-        $("#content").append("<div id='reports'></div>");
         this.$el = $('#reports');
         this.collection = new Reports();
         this.subviews = [];
         this.collection.on('change', this.render);
         this.collection.fetch({
           success: function(collection){
-          	//console.log("getting new item...");
-          	for(var i = 0; i < collection.length; i++){
-          		var view = new ReportView();
-          		view.model = collection.at(i);
-          		self.subviews.push(view);
-          	}
+            for(var i = 0; i < collection.length; i++){
+                var view = new ReportView();
+                view.model = collection.at(i);
+                self.subviews.push(view);
+            }
             self.render();
           }
         });
     },
     render: function() {
-        $("#spin_navi").hide();
-        // Just render my template
-        //console.log("rendering...");
+        this.resetCurrentView();
         this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
-        	this.$el.append(this.subviews[i].render().$el);
+            this.$el.append(this.subviews[i].render().$el);
         }
+    },
+
+    resetCurrentView: function() {
+        app.currentView.$el.hide();
+        $("#spin_navi").hide();
+        app.currentView = this;
+        app.currentView.$el.show();
     }
 });
 
 var ReportDetailView = Parse.View.extend({
-	el: $('#detail'),
-	initialize: function(id){
-		this.rid = id;
-	    // this.render();
-	    this.collection = new Reports();
-	    this.render();
-	},
-	render: function(){
-		var self = this;
-		$("#content").empty();
-		console.log("clear content");
-        //$("#content").append($("#fliternsearch").html());
-        $("#content").append("<div id='detail'></div>");
-	  	// var template = _.template( $('#detail_view').html());
+        el: $('#detail'),
+        initialize: function(id){
+            this.rid = id;
+            this.collection = new Reports();
+            this.render();
+        },
+
+        render: function(){
+            var self = this;
+            $("#content").append("<div id='detail'></div>");
 	 	this.$el = $("#detail");
 	  	this.collection.fetch({
 	      success: function(collection){

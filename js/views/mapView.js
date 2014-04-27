@@ -20,16 +20,30 @@ app.MapView = Parse.View.extend({
         app.MapData.reportsCollection.getCategoriesList();
         app.pubSub.on("reportCategories", this.initReportFilter, this);
 
-        //app.MapData.conferencesCollection.getCategoriesList();
-        //app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
+        app.MapData.conferencesCollection.getCategoriesList();
+        app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
         var root = this;
         root.render();
     },
 
+    setActiveFilter: function(div) {
+        if (div == "report") {
+            $("#conferenceFilter").hide();
+            $("#reportFilter").show();
+        } else {
+            $("#reportFilter").hide();
+            $("#conferenceFilter").show();
+        }
+    },
+
     // Initialize the reports filter.  Triggered by the reports collection
     initReportFilter: function(reportCategories) {
-        debugger;
-        app.reportFilter = new app.FilterView();
+        app.reportFilter = new app.FilterView({categories: reportCategories, el: $('#reportFilter')});
+    },
+
+    // Initialize the conferences filter.  Triggered by the conferences collection
+    initConferenceFilter: function(conferenceCategories) {
+        app.conferenceFilter = new app.FilterView({categories: conferenceCategories, el: $('#conferenceFilter')});
     },
 
     hide: function() {
@@ -42,7 +56,7 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {
-        if (app.MapData.LayerType == "report") {
+        if (app.MapData.LayerStyle == "report") {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.reportsCollection;
             } else {
@@ -75,7 +89,8 @@ app.MapView = Parse.View.extend({
             maxZoom: 4
         });
         app.MapData.activeCollection = app.MapData.reportsCollection;
-        app.MapData.LayerType = "report";
+        app.MapData.LayerStyle = "report";
+        app.MapData.ActiveFilter = this.setActiveFilter("report");
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -161,12 +176,15 @@ app.MapView = Parse.View.extend({
     // TODO: Possibly think of a more elegant way to track what type of tab / layer we
     // are displaying.
     switchLayerTo: function(type) {
+        debugger;
         var root = this;
         app.MapData.LayerStyle = type;
         if (type === "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
+            app.MapData.activeFilter = this.setActiveFilter("report");
         } else {
             app.MapData.activeCollection = app.MapData.conferencesCollection;
+            app.MapData.activeFilter = this.setActiveFilter("conference");
         }
         return app.MapData.activeCollection;
     },
