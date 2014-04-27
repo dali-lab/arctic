@@ -11,6 +11,123 @@
 </head>
 
 <body>
+    <!-- templates -->
+    <script type="text/template" id='website_template'>
+        <div class='website' align='center'>
+            <img src="imgs/thumbnail.png" class="web_cache"/>
+            <div class='web_text' align='left'>
+                <span class='website_name'><%= name%></span><br/>
+                <span class='website_desc'><%= description%></span>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id='about_template'>
+        <div id='aboutDiv'>
+            <span class='about'><%= content %></span>
+        </div>
+    </script>
+
+    <script type="text/template" id='report_template'>
+        <div class='report'>
+            <div class='conf_img'>
+                <img class='conf_logo' src="imgs/placeholder.gif" />
+            </div>
+            <div class='conf_desc'>
+                <div class='conf_header'>
+                    <div class='conf_name'>
+                        <span class='conf_name_span'>
+                            <%= name%>
+                        </span>
+                    </div>
+                    <div class='conf_time'>
+                        <span class='conf_name_span'>
+                            <%= posttime%>
+                        </span>
+                    </div>
+                    <div class='conf_type'>
+
+                    </div>
+                </div>
+                <div class='seperator3'></div>
+                <div class='conf_preview'>
+                    <span class='conf_preview_author'>
+                        <%= author%>
+                    </span><br/>
+                    <span class='conf_preview_desc'>
+                        <%= description%>
+                    </span>
+                </div>
+                <div class='conf_footer' align='right'>
+                    <a class='readMore' href="<%= objectId%>">Read More</a>&nbsp;
+                    <a class='readMore'>Comment</a>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id='detail_view'>
+        <div class='report_detail'>
+            <div class='detail_img'>
+                <img class='conf_logo' src="imgs/placeholder.gif" />
+            </div>
+            <div class='conf_desc'>
+                <div class='conf_header'>
+                    <div class='conf_name'>
+                        <span class='conf_name_span'>
+                            <%= name%>
+                        </span>
+                    </div>
+                    <div class='conf_time'>
+                        <span class='conf_name_span'>
+                            <%= posttime%>
+                        </span>
+                    </div>
+                    <div class='conf_type'>
+
+                    </div>
+                </div>
+                <div class='seperator3'></div>
+                <div class='conf_preview'>
+                    <span>
+                        <span class='conf_preview_author'>Published By:</span>&nbsp;<%= publishedBy%>
+                    </span><br/>
+                    <span>
+                        <span class='conf_preview_author'>URL:</span>&nbsp;<%= URL%>
+                    </span><br/>
+                    <span>
+                        <span class='conf_preview_author'>Issue:</span>&nbsp;<%= issue%>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="seperator"></div>
+        <div id='detail_body'>
+            <span class='intro_title'>Conference Summary</span>
+            <span class='report_detail'>
+                <%=introduction%>
+            </span>
+        </div>
+    </script>
+
+    <!-- this is not a template, have not finished filter and search-->
+    <script type="text/template" id="fliternsearch">
+        <div id='subheader'>
+            <span>Websites</span>
+            <div id='filterbox' class="col-sm-2">
+              <select class="form-control">
+                  <option value="one">Filter</option>
+                  <option value="two">Filter</option>
+                  <option value="three">Filter</option>
+              </select>
+            </div>
+            <div id="searchbox" class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+        </div>
+        <div class='seperator'></div>
+    </script>
+
 
     <script type="text/template" id="filter-template">
             <form action="" id="filter_box">
@@ -101,8 +218,8 @@
 					<li>About Us</li>
 					<li>Conferences</li>
 					<li>Forum</li>
-					<li>Reports</li>
-					<li>Websites</a></li>
+                                        <li><a href="#reports">Reports</a></li>
+                                        <li><a href="#websites">Websites</a></li>
 					<li>Parters</li>
 					<li>|</li>
 					<li>Login</li>
@@ -129,9 +246,8 @@
         </div>
     </div>
     <div id='main'>
-        <button id='btn_show' onclick='show()'>show</button>
+        <button id='compass_toggle'>Toggle</button>
             <div id='spin_navi'>
-                <button onclick='hide()'>hide</button>
                 <div id="compass">
                     <img src="imgs/compassbase.png" id='compass_base'>
                     <div id="icon_conference" class="icon"><a href="#icon_conference!"><img src="imgs/conferenceicon.png"></a></div>
@@ -142,10 +258,9 @@
                 </div>
     	    </div>
     	<div id='content'>
-           <div id='map'>
-            </div>
-            <div id='filter'>
-            </div>
+           <div id='map'></div>
+           <div id='websites'></div>
+          <div id='filter'></div>
         </div>
     </div>
     <div class='separator'>
@@ -171,31 +286,52 @@
     <script src="js/models/report.js"></script>
     <script src="js/models/conference.js"></script>
     <script src="js/models/website.js"></script>
+    <script src="js/models/about.js"></script>
     <script src="js/collections/reports.js"></script>
     <script src="js/collections/conferences.js"></script>
     <script src="js/collections/websites.js"></script>
+    <script src="js/collections/abouts.js"></script>
     <script src="js/views/reportsTab.js"></script>
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
-    <script src="js/views/compass.js"></script>
+    <script src="js/views/compassView.js"></script>
     <script src="js/views/websiteList.js"></script>
-    <script src="js/views/filter.js"></script>
+    <script src="js/views/aboutView.js"></script>
+    <script src="js/views/reportsView.js"></script>
+    <script src="js/views/filterView.js"></script>
     <script src="js/routers/router.js"></script>
     <script src="js/app.js"></script>
     <script type="text/javascript">
-        function show(){
-            $("#spin_navi").show(300);
-            $('#content').width('75%');
-            $('.website').width('30%');
-        }
-        function hide(){
-            $('.website').hide();
-            $("#spin_navi").hide(300);
-            $('.website').width('23%');
-            $('#content').width('100%');
-            $('.website').show(300);
-            
-        }
+        $("#compass_toggle").click(function() {
+                if ($("#map").is(":visible")) {
+                    $("#spin_navi").toggle();
+                } else {
+                    if ($("#compass").is(":visible")) {
+                        $('.website').hide();
+                        $("#spin_navi").hide(300);
+                        $('.website').width('23%');
+                        $('#content').width('100%');
+                        $('.website').show(300);
+                    } else {
+                        $("#spin_navi").show(300);
+                        $('#content').width('75%');
+                        $('.website').width('30%');
+                    }
+                }
+                //app.Map.toggle();
+        });
+        //function show(){
+        //    $("#spin_navi").show(300);
+        //    $('#content').width('75%');
+        //    $('.website').width('30%');
+        //}
+        //function hide(){
+        //    $('.website').hide();
+        //    $("#spin_navi").hide(300);
+        //    $('.website').width('23%');
+        //    $('#content').width('100%');
+        //    $('.website').show(300);
+        //}
     </script>
 </body>
 </html>

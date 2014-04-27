@@ -207,6 +207,7 @@ body{
   margin-right:10px;
   overflow-y:scroll;
   background-color: #FFCC33;
+  display: none;
 }
 .website_name{
   font-size: 15px;
@@ -369,4 +370,12 @@ body{
   margin-bottom: 20px;
   padding-bottom: 10px;
   background-color: white;
+}
+
+.reports-popup {
+    background: rgba(232, 141, 141, .8);
+}
+
+.conferences-popup {
+    background: rgba(76, 141, 90, .8);
 }

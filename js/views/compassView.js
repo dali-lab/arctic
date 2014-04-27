@@ -1,6 +1,6 @@
 var app = app || {};
 
-app.Compass = Parse.View.extend({
+app.CompassView = Parse.View.extend({
 
   el: $("#spin_navi"),
   initialize: function() {
