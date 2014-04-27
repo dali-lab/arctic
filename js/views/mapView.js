@@ -176,7 +176,6 @@ app.MapView = Parse.View.extend({
     // TODO: Possibly think of a more elegant way to track what type of tab / layer we
     // are displaying.
     switchLayerTo: function(type) {
-        debugger;
         var root = this;
         app.MapData.LayerStyle = type;
         if (type === "reports") {
