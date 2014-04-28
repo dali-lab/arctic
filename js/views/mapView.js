@@ -27,7 +27,7 @@ app.MapView = Parse.View.extend({
     },
 
     setActiveFilter: function(div) {
-        if (div == "report") {
+        if (div == "reports") {
             $("#conferenceFilter").hide();
             $("#reportFilter").show();
         } else {
@@ -56,7 +56,8 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {
-        if (app.MapData.LayerStyle == "report") {
+        debugger;
+        if (app.MapData.LayerStyle == "reports") {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.reportsCollection;
             } else {
@@ -89,8 +90,8 @@ app.MapView = Parse.View.extend({
             maxZoom: 4
         });
         app.MapData.activeCollection = app.MapData.reportsCollection;
-        app.MapData.LayerStyle = "report";
-        app.MapData.ActiveFilter = this.setActiveFilter("report");
+        app.MapData.LayerStyle = "reports";
+        app.MapData.ActiveFilter = this.setActiveFilter("reports");
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -118,7 +119,7 @@ app.MapView = Parse.View.extend({
         // passed to the function or this collection.
         var initPopup = function(country, filtered) {
             var marker = new L.Marker(new L.LatLng(90, 90));
-            if (app.MapData.LayerStyle === "report") {
+            if (app.MapData.LayerStyle === "reports") {
                 app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             } else {
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
@@ -180,10 +181,10 @@ app.MapView = Parse.View.extend({
         app.MapData.LayerStyle = type;
         if (type === "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
-            app.MapData.activeFilter = this.setActiveFilter("report");
+            app.MapData.activeFilter = this.setActiveFilter("reports");
         } else {
             app.MapData.activeCollection = app.MapData.conferencesCollection;
-            app.MapData.activeFilter = this.setActiveFilter("conference");
+            app.MapData.activeFilter = this.setActiveFilter("conferences");
         }
         return app.MapData.activeCollection;
     },

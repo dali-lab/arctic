@@ -3,7 +3,7 @@ var app = app || {};
 app.FilterView = Parse.View.extend({
     template: _.template( $("#filter-template").html() ),
     events: {
-       'change #filter_box' : 'filterCategories'
+       'change .filter_box' : 'filterCategories'
     },
 
     initialize: function(options) {
@@ -20,7 +20,7 @@ app.FilterView = Parse.View.extend({
     },
 
     filterCategories: function(e) {
-        var boxes = $("[type=checkbox]:checked");
+        var boxes = this.$el.children().children("input:checked");
         var i;
         var boxValues = [];
         for (i = 0; i < boxes.length; i++) {

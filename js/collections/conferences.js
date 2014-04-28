@@ -30,17 +30,21 @@ var Conferences = Parse.Collection.extend({
         });
     },
 
-    filterByCategory: function(category) {
+    filterByCategory: function(categories) {
         return new Conferences(this.filter(function(conference) {
             if (conference.has("category")) {
-                return conference.get("category").toLowerCase() === category.toLowerCase();
-            } else {
-                return false;
+                var l = categories.length;
+                var i;
+                for (i = 0; i < l; i++) {
+                    if (conference.get("category").toLowerCase() == categories[i].toLowerCase()) {
+                        return true;
+                    }
+                }
             }
+            return false;
         }));
     },
 
-    
     filterByCountry: function(country) {
         return new Conferences(this.filter(function(conference){
             if (conference.has("country")) {

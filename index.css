@@ -83,6 +83,7 @@
     height: 100px;
     background-color:white;
     position:absolute;
+    z-index: 999;
 }
 
 body{
