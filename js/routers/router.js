@@ -34,6 +34,7 @@ var ArcticRouter = Parse.Router.extend({
     if (!app.Map) {
         app.Map = new app.MapView();
     }
+    app.Map.render();
     app.Map.switchLayerTo("reports");
   },
 
@@ -42,6 +43,7 @@ var ArcticRouter = Parse.Router.extend({
     if (!app.Map) {
         app.Map = new app.MapView();
     }
+    app.Map.render();
     app.Map.switchLayerTo("conferences");
   },
 });

@@ -51,6 +51,7 @@ var WebsiteListView = Parse.View.extend({
     resetCurrentView: function() {
         app.currentView.$el.hide();
         $("#spin_navi").hide();
+        $("#content").width("100%");
         app.currentView = this;
         app.currentView.$el.show();
     }
