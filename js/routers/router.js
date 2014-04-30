@@ -13,8 +13,12 @@ var ArcticRouter = Parse.Router.extend({
     "icon_website!": "showAllWebsites"
   },
 
-  showAllWebsites: function(){
-    var websiteListview = new WebsiteListView();
+  showAllWebsites: function() {
+    if (!app.Websites) {
+      app.Websites = new WebsiteListView();
+    }
+    app.Websites.render();
+    //var websiteListview = new WebsiteListView();
   },
 
   showAbout: function(){
@@ -22,7 +26,11 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showAllReports: function(){
-    var reports = new ReportListView();
+    if (!app.Reports) {
+      app.Reports = new ReportListView();
+    }
+    app.Reports.render();
+    //var reports = new ReportListView();
   },
 
   getReport: function(id) {
