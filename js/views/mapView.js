@@ -26,6 +26,16 @@ app.MapView = Parse.View.extend({
         root.render();
     },
 
+    resetCurrentView: function() {
+        $("#reports").hide();
+        $("#websites").hide();
+        $("#spin_navi").show();
+        if (app.currentView && app.currentView != app.Map) {
+            app.currentView = this;
+            app.currentView.$el.show();
+        }
+    },
+
     setActiveFilter: function(div) {
         if (div == "reports") {
             $("#conferenceFilter").hide();
@@ -77,6 +87,7 @@ app.MapView = Parse.View.extend({
             var root = this;
             root.setupMap();
         }
+        this.resetCurrentView();
         return this;
     },
     
