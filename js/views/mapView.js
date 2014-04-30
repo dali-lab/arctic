@@ -86,8 +86,10 @@ app.MapView = Parse.View.extend({
         app.MapData.MapDiv = new L.map(this.el, {
             center: [10, -110],
             zoom: 2,
-            maxZoom: 4
+            maxZoom: 4,
+            zoomControl: false
         });
+        (new L.control.zoom({position: "topright"})).addTo(app.MapData.MapDiv);
         app.MapData.activeCollection = app.MapData.reportsCollection;
         app.MapData.LayerStyle = "reports";
         app.MapData.ActiveFilter = this.setActiveFilter("reports");
