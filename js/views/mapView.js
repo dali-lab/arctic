@@ -126,8 +126,6 @@ app.MapView = Parse.View.extend({
             country.bindPopup(app.MapData.OpenTab.render().el, {className: app.MapData.LayerStyle.concat("-popup")});
         }
 
-        
-
         var mouseOver = function(e) {
             var layer = e.target; 
             var props = layer.feature.properties;
@@ -143,14 +141,10 @@ app.MapView = Parse.View.extend({
             app.MapData.MapLayer.resetStyle(e.target);
         }
 
-        
-
         var click = function(e) {
             var layer = e.target;
             var props = layer.feature.properties;
         }
-
-        
 
         var onEachFeature = function(feature, layer) {
             layer.on({
@@ -163,7 +157,7 @@ app.MapView = Parse.View.extend({
         app.MapData.MapLayer = L.geoJson(countryData, {
             style: getStyle,
             filter: function(feature, layer) {
-                return (feature.properties.name != 'Antarctica')
+                return (feature.properties.name != 'Antarctica');
             },
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
@@ -180,10 +174,12 @@ app.MapView = Parse.View.extend({
         app.MapData.LayerStyle = type;
         if (type === "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
-            app.MapData.activeFilter = this.setActiveFilter("reports");
+            this.setActiveFilter("reports");
+            app.reportFilter.filterCategories();
         } else {
             app.MapData.activeCollection = app.MapData.conferencesCollection;
-            app.MapData.activeFilter = this.setActiveFilter("conferences");
+            this.setActiveFilter("conferences");
+            app.conferenceFilter.filterCategories();
         }
         return app.MapData.activeCollection;
     },

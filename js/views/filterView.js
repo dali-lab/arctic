@@ -3,7 +3,9 @@ var app = app || {};
 app.FilterView = Parse.View.extend({
     template: _.template( $("#filter-template").html() ),
     events: {
-       'change .filter_box' : 'filterCategories'
+       'change .filter_box' : 'filterCategories',
+       'click #icon_report' : 'filterCategories',
+       'click #icon_conference' : 'filterCategories'
     },
 
     initialize: function(options) {

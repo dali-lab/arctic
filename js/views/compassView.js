@@ -6,6 +6,7 @@ app.CompassView = Parse.View.extend({
   initialize: function() {
     var root = this;
     root.render();
+    this.$el.children().find("#arrow").rotate(90);
   },
 
   render: function() {
