@@ -7,9 +7,7 @@ var AboutView = Parse.View.extend({
 	collection : (new AboutCollection()),
 	initialize: function(){
 	    var self = this;
-	    $("#content").empty();
         // $("#content").append($("#fliternsearch").html());
-        $("#content").append("<div id='aboutDiv'></div>");
         this.$el = $('#aboutDiv');
 	    self.collection.on('change', this.render);
 	    self.collection.fetch({
@@ -20,10 +18,19 @@ var AboutView = Parse.View.extend({
 	    });
 	},
 	render: function(){
+		this.resetCurrentView();
 	    var content = this.about.get('content');
 	    //var template = _.template( $("#search_template").html(), {"content": content} );
 	    var template = _.template( $("#about_template").html(), {"content": content} );
 	    // Load the compiled HTML into the Backbone "el"
 	    this.$el.html( template );
-	}
+	},
+
+	resetCurrentView: function() {
+        app.currentView.$el.hide();
+        $("#spin_navi").hide();
+        $("#content").width("100%");
+        app.currentView = this;
+        app.currentView.$el.show();
+    }
 });
