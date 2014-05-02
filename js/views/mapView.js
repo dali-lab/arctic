@@ -190,14 +190,16 @@ app.MapView = Parse.View.extend({
             app.currentView = root;
             app.currentView.$el.show();
         }
-        if (type === "reports") {
-            app.MapData.activeCollection = app.MapData.reportsCollection;
-            this.setActiveFilter("reports");
-            app.reportFilter.filterCategories();
-        } else {
-            app.MapData.activeCollection = app.MapData.conferencesCollection;
-            this.setActiveFilter("conferences");
-            app.conferenceFilter.filterCategories();
+        if (app.reportFilter) {
+            if (type === "reports") {
+                app.MapData.activeCollection = app.MapData.reportsCollection;
+                this.setActiveFilter("reports");
+                app.reportFilter.filterCategories();
+            } else {
+                app.MapData.activeCollection = app.MapData.conferencesCollection;
+                this.setActiveFilter("conferences");
+                app.conferenceFilter.filterCategories();
+            }
         }
         return app.MapData.activeCollection;
     },
