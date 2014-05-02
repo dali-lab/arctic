@@ -25,7 +25,6 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showAllReports: function() {
-    app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Reports) {
       app.Reports = new ReportListView();
     }
@@ -39,6 +38,7 @@ var ArcticRouter = Parse.Router.extend({
 
     // Switches the map's popup layer to reports
   showReports: function() {
+    app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Map) {
         app.Map = new app.MapView();
     }
