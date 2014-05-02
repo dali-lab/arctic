@@ -185,7 +185,7 @@ app.MapView = Parse.View.extend({
     switchLayerTo: function(type) {
         var root = this;
         app.MapData.LayerStyle = type;
-        if (app.currentView != app.Map) {
+        if (app.currentView && app.currentView != app.Map) {
             app.currentView.$el.hide();
             app.currentView = root;
             app.currentView.$el.show();

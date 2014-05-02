@@ -12,6 +12,7 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showAllWebsites: function() {
+    app.Compass.$el.children().find("#arrow").rotate(180);
     if (!app.Websites) {
       app.Websites = new WebsiteListView();
     }
@@ -23,7 +24,8 @@ var ArcticRouter = Parse.Router.extend({
     var aboutView = new AboutView();
   },
 
-  showAllReports: function(){
+  showAllReports: function() {
+    app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Reports) {
       app.Reports = new ReportListView();
     }
@@ -46,6 +48,7 @@ var ArcticRouter = Parse.Router.extend({
 
   // Switches the map's popup layer to conferences
   showConferences: function() {
+    app.Compass.$el.children().find("#arrow").rotate(270);
     if (!app.Map) {
         app.Map = new app.MapView();
     }
