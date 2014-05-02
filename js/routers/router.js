@@ -2,9 +2,7 @@ var app = app || {};
 var ArcticRouter = Parse.Router.extend({
   routes: {
     "about": "showAbout",
-    "conferences": "showAllConferences",
     "conference/:id": "getConference",
-    "reports": "showAllReports",
     "report/:id": "getReport",
     "websites": "showAllWebsites",
     "icon_conference!": "showConferences",
