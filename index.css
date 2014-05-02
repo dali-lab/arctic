@@ -216,6 +216,7 @@ body{
 #websites{
   /*position:relative;*/
   height:100%;
+  padding-top: 30px;
   margin-left:10px;
   margin-right:10px;
   overflow-y:scroll;
@@ -244,10 +245,13 @@ body{
 }
 
 #aboutDiv{
+  display: none;
   background-color: #9999FF;
   /*opacity: 0.5;*/
   height: 100%;
   padding-top: 10px;
+  padding-left:20px;
+  padding-right: 20px;
   margin-left: 10px;
   margin-right: 10px;
   overflow-y:scroll;
