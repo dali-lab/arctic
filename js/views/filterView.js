@@ -5,7 +5,8 @@ app.FilterView = Parse.View.extend({
     events: {
        'change .filter_box' : 'filterCategories',
        'click #icon_report' : 'filterCategories',
-       'click #icon_conference' : 'filterCategories'
+       'click #icon_conference' : 'filterCategories',
+       'click #icon_website' : 'filterCategories'
     },
 
     initialize: function(options) {

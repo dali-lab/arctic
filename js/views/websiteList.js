@@ -3,15 +3,14 @@ var app = app || {};
 
 //define viewsd
 var WebsiteView = Parse.View.extend({
-	initialize: function() {
+    initialize: function() {
         //this.model.bind("change", this.render, this);
         //this.render();
     },
+
     render: function() {
-        // Just render my template
         this.$el.empty();
         var name = this.model.get('name');
-
         var desc = this.model.get('description');
         var url = this.model.get('url');
         var template = _.template( $("#website_template").html(), {"name": name, "description": desc} );
@@ -22,30 +21,46 @@ var WebsiteView = Parse.View.extend({
 
 var WebsiteListView = Parse.View.extend({
     el: $('#websites'),
-    //collection : (new WebsiteCollection()),
+
     initialize: function() {
         this.$el = $('#websites');
         var self = this;
-        this.collection = new WebsiteCollection();
         this.subviews = [];
-        this.collection.on('change', this.render);
-        this.collection.fetch({
-          success: function(collection){
-                for(var i = 0; i < collection.length; i++){
-                    var view = new WebsiteView();
-                    view.model = collection.at(i);
-                    self.subviews.push(view);
-            }
+        //this.collection.on('change', this.render);
+        app.websitesCollection = new WebsiteCollection();
+        app.websitesCollection.fetch({
+          success: function(collection) {
+            self.generateSubviews(collection);
             self.render();
           }
         });
+        app.websitesCollection.getCategoriesList();
+        app.pubSub.on("filter", this.filterCollection, this);
+        app.pubSub.on("websiteCategories", this.initWebsiteFilter, this);
     },
+
+    generateSubviews: function(collection) {
+        this.subviews = [];
+        for(var i = 0; i < collection.length; i++){
+            var view = new WebsiteView();
+            view.model = collection.at(i);
+            this.subviews.push(view);
+        }
+    },
+
     render: function() {
         this.resetCurrentView();
-        this.$el.empty();
+        $("#websiteList").empty();
+        //this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
-            this.$el.append(this.subviews[i].render().$el);
+            $("#websiteList").append(this.subviews[i].render().$el);
         }
+    },
+
+    // Initialize the websites filter. Triggered by the websites collection.
+    initWebsiteFilter: function(websiteCategories) {
+        app.websiteFilter = new app.FilterView({categories: websiteCategories, el: $("#websiteFilter")});
+        app.activeFilter = app.websiteFilter;
     },
 
     resetCurrentView: function() {
@@ -54,5 +69,16 @@ var WebsiteListView = Parse.View.extend({
         $("#content").width("100%");
         app.currentView = this;
         app.currentView.$el.show();
+    },
+
+    filterCollection: function(boxValues) {
+        if (app.activeFilter == app.websiteFilter) {
+            if (boxValues.length === 0) {
+                this.generateSubviews(app.websitesCollection);
+            } else {
+                this.generateSubviews(app.websitesCollection.filterByCategory(boxValues));
+            }
+            this.render();
+        }
     }
 });

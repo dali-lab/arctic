@@ -39,9 +39,15 @@ app.MapView = Parse.View.extend({
 
     setActiveFilter: function(div) {
         if (div == "reports") {
+            if (app.reportFilter) {
+                app.activeFilter = app.reportFilter;
+            }
             $("#conferenceFilter").hide();
             $("#reportFilter").show();
         } else {
+            if (app.conferenceFilter) {
+                app.activeFilter = app.conferenceFilter;
+            }
             $("#reportFilter").hide();
             $("#conferenceFilter").show();
         }
@@ -67,13 +73,13 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {
-        if (app.MapData.LayerStyle == "reports") {
+        if (app.activeFilter == app.reportFilter) {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.reportsCollection;
             } else {
                 app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(boxValues);
             }
-        } else {
+        } else if (app.activeFilter == app.conferenceFilter) {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.conferencesCollection;
             } else {
@@ -104,7 +110,8 @@ app.MapView = Parse.View.extend({
         (new L.control.zoom({position: "topright"})).addTo(app.MapData.MapDiv);
         app.MapData.activeCollection = app.MapData.reportsCollection;
         app.MapData.LayerStyle = "reports";
-        app.MapData.ActiveFilter = this.setActiveFilter("reports");
+        $("#conferenceFilter").hide();
+        $("#reportFilter").show();
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -191,17 +198,16 @@ app.MapView = Parse.View.extend({
             app.currentView = root;
             app.currentView.$el.show();
         }
-        if (app.reportFilter) {
-            if (type === "reports") {
-                app.MapData.activeCollection = app.MapData.reportsCollection;
-                this.setActiveFilter("reports");
-                app.reportFilter.filterCategories();
-            } else {
-                app.MapData.activeCollection = app.MapData.conferencesCollection;
-                this.setActiveFilter("conferences");
-                app.conferenceFilter.filterCategories();
-            }
+
+        if (type === "reports") {
+            app.MapData.activeCollection = app.MapData.reportsCollection;
+            this.setActiveFilter("reports");
+        } else {
+            app.MapData.activeCollection = app.MapData.conferencesCollection;
+            this.setActiveFilter("conferences");
         }
+
+        app.activeFilter.filterCategories();
         return app.MapData.activeCollection;
     },
 
