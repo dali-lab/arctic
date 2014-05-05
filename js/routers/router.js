@@ -28,7 +28,6 @@ var ArcticRouter = Parse.Router.extend({
     var detail = new ReportDetailView(id);
   },
 
-  // Switches the map's popup layer to reports
   showReports: function() {
     app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Map) {

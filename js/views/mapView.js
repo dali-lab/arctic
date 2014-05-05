@@ -73,6 +73,10 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter model
     filterCollection: function(boxValues) {
+        if (!app.activeFilter) {
+            app.activeFilter = app.reportFilter;
+        }
+
         if (app.activeFilter == app.reportFilter) {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.reportsCollection;
