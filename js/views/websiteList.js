@@ -21,9 +21,7 @@ var WebsiteView = Parse.View.extend({
 
 var WebsiteListView = Parse.View.extend({
     el: $('#websites'),
-
     initialize: function() {
-        this.$el = $('#websites');
         var self = this;
         this.subviews = [];
         //this.collection.on('change', this.render);
@@ -64,11 +62,11 @@ var WebsiteListView = Parse.View.extend({
     },
 
     resetCurrentView: function() {
-        app.currentView.$el.hide();
-        $("#spin_navi").hide();
-        $("#content").width("100%");
-        app.currentView = this;
-        app.currentView.$el.show();
+        //app.currentView.$el.hide();
+        //$("#spin_navi").hide();
+        //$("#content").width("100%");
+        //app.currentView = this;
+        //app.currentView.$el.show();
     },
 
     filterCollection: function(boxValues) {

@@ -239,24 +239,15 @@ body{
   width:auto;
 }
 
-.about{
+#about {
+  padding-top:30px;
+  padding-left:50px;
+  padding-right:50px;
+  padding-bottom:30px;
   color:white;
   font-size: 16px;
-}
-
-#aboutDiv{
-  display: none;
-  background-color: #9999FF;
-  /*opacity: 0.5;*/
-  height: 100%;
-  padding-top: 10px;
-  padding-left:20px;
-  padding-right: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
   overflow-y:scroll;
 }
-
 
 /* CSS from reports page*/
 .seperator2{

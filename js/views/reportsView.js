@@ -70,47 +70,45 @@ var ReportDetailView = Parse.View.extend({
         initialize: function(id){
             this.rid = id;
             this.collection = new Reports();
-            this.render();
         },
 
         render: function(){
-            this.resetCurrentView();
             var self = this;
-            $("#content").append("<div id='detail'></div>");
-    	 	this.$el = $("#detail");
-    	  	this.collection.fetch({
-    	      success: function(collection){
-    	      	for(var i = 0; i < collection.length; i++){
-    	      		if(collection.at(i).id === self.rid){
-    	      			var model = collection.at(i);
-    	      			self.$el.empty();
-    			        var name = model.get('name');
-    			        var posttime = model.get('posttime');
-    			        var URL = model.get('url');
-    			        var publishedBy = model.get('publishedBy');
-    			        var issue = model.get('issue');
-    			        var introduction = model.get('introduction');
-    			        var template = _.template( $("#detail_view").html(), {
-    			        	"name": name, 
-    			        	"URL": URL,
-    			        	"publishedBy":publishedBy,
-    			        	"posttime":posttime,
-    			        	"issue":issue,
-    			        	"introduction":introduction
-    			        });
-    			        self.$el.html(template);
-    	      			break;
-    	      		}
-    	      	}
-    	      }
-    	    });
-	   },
-
-       resetCurrentView: function() {
-            app.currentView.$el.hide();
-            $("#spin_navi").hide();
-            $("#content").width("100%");
-            app.currentView = this;
-            app.currentView.$el.show();
+            this.collection.fetch({
+              success: function(collection){
+                debugger;
+                var model = collection.get(self.rid);
+                //for(var i = 0; i < collection.length; i++){
+                    //if(collection.at(i).id === self.rid){
+                        //var model = collection.at(i);
+                        //self.$el.empty();
+                        //var name = model.get('name');
+                        //var posttime = model.get('posttime');
+                        //var URL = model.get('url');
+                        //var publishedBy = model.get('publishedBy');
+                        //var issue = model.get('issue');
+                        //var introduction = model.get('introduction');
+                        //var template = _.template( $("#detail_view").html(), {
+    			//                "name": name,
+    			//        	"URL": URL,
+    			//        	"publishedBy":publishedBy,
+    			//        	"posttime":posttime,
+    			//        	"issue":issue,
+    			//        	"introduction":introduction
+    			//        });
+    			//        self.$el.html(template);
+    	      	//		break;
+    	      	//	}
+    	      var template = _.template( $("#detail_view").html(), {
+    			"name": model.get("name"),
+    			"URL": model.get("url"),
+    			"publishedBy":model.get("publishedBy"),
+    			"posttime":model.get("posttime"),
+    			"issue":model.get("issue"),
+    			"introduction":model.get("introduction")
+    		});
+    		self.$el.html(template);	
+            }
+          });
         }
 });

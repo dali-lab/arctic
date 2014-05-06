@@ -27,10 +27,10 @@ app.MapView = Parse.View.extend({
     },
 
     resetCurrentView: function() {
-        $("#reports").hide();
-        $("#websites").hide();
-        $("#spin_navi").show();
-        $("#content").width("100%");
+        //$("#reports").hide();
+        //$("#websites").hide();
+        //$("#spin_navi").show();
+        //$("#content").width("100%");
         if (app.currentView && app.currentView != app.Map) {
             app.currentView = this;
             app.currentView.$el.show();

@@ -1,7 +1,8 @@
 var app = app || {};
 var ArcticRouter = Parse.Router.extend({
   routes: {
-    "about": "showAbout",
+    "": "showReports",
+    "about_us": "showAbout",
     "conference/:id": "getConference",
     "icon_conference!": "showConferences",
     "icon_forum!": "showForum",
@@ -11,29 +12,51 @@ var ArcticRouter = Parse.Router.extend({
     "websites": "showWebsites"
   },
 
+  initialize: function(appView) {
+      this.appView = appView;
+  },
+
   showWebsites: function() {
     app.Compass.$el.children().find("#arrow").rotate(180);
     if (!app.Websites) {
       app.Websites = new WebsiteListView();
     }
     app.activeFilter = app.websiteFilter;
-    app.Websites.render();
+    this.appView.showView(app.Websites);
+    $("#spin_navi").hide();
+    //app.Websites.render();
   },
 
-  showAbout: function(){
-    var aboutView = new AboutView();
+  showAbout: function() {
+    if (!app.About) {
+        app.About = new app.AboutView();
+    }
+    this.appView.showView(app.About);
+    $("$spin_navi").hide();
+    //app.About.render();
   },
 
   getReport: function(id) {
-    var detail = new ReportDetailView(id);
+    if (!app.ReportDetail) {
+        app.ReportDetail = new ReportDetailView(id);
+    }
+    this.appView.showView(app.ReportDetail);
+    $("#spin_navi").hide();
+    //var detail = new ReportDetailView(id);
   },
 
   showReports: function() {
+    if (!app.Compass) {
+        app.Compass = new app.CompassView();
+    }
+
     app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Map) {
         app.Map = new app.MapView();
     }
-    app.Map.render();
+    this.appView.showView(app.Map);
+    //app.Map.render();
+    $("#spin_navi").show();
     app.Map.switchLayerTo("reports");
   },
 
@@ -43,10 +66,12 @@ var ArcticRouter = Parse.Router.extend({
     if (!app.Map) {
         app.Map = new app.MapView();
     }
-    app.Map.render();
+    //app.Map.render();
+    this.appView.showView(app.Map);
+    $("#spin_navi").show();
     app.Map.switchLayerTo("conferences");
   }
 });
 
-app.myArcticRouter = new ArcticRouter();
-Parse.history.start();
+//app.myArcticRouter = new ArcticRouter();
+//Parse.history.start();
