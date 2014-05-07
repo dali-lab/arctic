@@ -47,9 +47,7 @@ var WebsiteListView = Parse.View.extend({
     },
 
     render: function() {
-        this.resetCurrentView();
         $("#websiteList").empty();
-        //this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
             $("#websiteList").append(this.subviews[i].render().$el);
         }
@@ -59,14 +57,6 @@ var WebsiteListView = Parse.View.extend({
     initWebsiteFilter: function(websiteCategories) {
         app.websiteFilter = new app.FilterView({categories: websiteCategories, el: $("#websiteFilter")});
         app.activeFilter = app.websiteFilter;
-    },
-
-    resetCurrentView: function() {
-        //app.currentView.$el.hide();
-        //$("#spin_navi").hide();
-        //$("#content").width("100%");
-        //app.currentView = this;
-        //app.currentView.$el.show();
     },
 
     filterCollection: function(boxValues) {

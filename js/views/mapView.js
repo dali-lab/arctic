@@ -7,7 +7,6 @@ app.MapView = Parse.View.extend({
     
     // Bind this view to the div with id 'map' in the HTML
     el: $("#map"),
-    // Render our View when we initialize the map view
     initialize: function() {
         app.pubSub.on("filter", this.filterCollection, this);
 
@@ -21,8 +20,7 @@ app.MapView = Parse.View.extend({
 
         app.MapData.conferencesCollection.getCategoriesList();
         app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
-        var root = this;
-        root.render();
+        this.setupMap();
     },
 
     setActiveFilter: function(div) {
@@ -32,7 +30,7 @@ app.MapView = Parse.View.extend({
             }
             $("#conferenceFilter").hide();
             $("#reportFilter").show();
-        } else {
+        } else if (div == "conferences") {
             if (app.conferenceFilter) {
                 app.activeFilter = app.conferenceFilter;
             }
@@ -44,11 +42,13 @@ app.MapView = Parse.View.extend({
     // Initialize the reports filter.  Triggered by the reports collection
     initReportFilter: function(reportCategories) {
         app.reportFilter = new app.FilterView({categories: reportCategories, el: $('#reportFilter')});
+        this.setActiveFilter("reports");
     },
 
     // Initialize the conferences filter.  Triggered by the conferences collection
     initConferenceFilter: function(conferenceCategories) {
         app.conferenceFilter = new app.FilterView({categories: conferenceCategories, el: $('#conferenceFilter')});
+        this.setActiveFilter("conferences");
     },
 
     hide: function() {
@@ -83,13 +83,14 @@ app.MapView = Parse.View.extend({
     // Render the map view. This function is small because most of the map work is being done in setupMap.
     render: function() {
         if (!this.el._leaflet) {
-            var root = this;
-            root.setupMap();
+            //var root = this;
+            //root.setupMap();
         }
         return this;
     },
     
     setupMap: function() {
+        debugger;
         var root = this;
         root.el._leaflet = false;
         app.MapData.MapDiv = new L.map(this.el, {
@@ -99,10 +100,6 @@ app.MapView = Parse.View.extend({
             zoomControl: false
         });
         (new L.control.zoom({position: "topright"})).addTo(app.MapData.MapDiv);
-        app.MapData.activeCollection = app.MapData.reportsCollection;
-        app.MapData.LayerStyle = "reports";
-        $("#conferenceFilter").hide();
-        $("#reportFilter").show();
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -185,20 +182,22 @@ app.MapView = Parse.View.extend({
         var root = this;
         app.MapData.LayerStyle = type;
 
-        if (type === "reports") {
+        if (type == "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
-            this.setActiveFilter("reports");
-        } else {
+            this.setActiveFilter(type);
+        } else if (type == "conferences") {
             app.MapData.activeCollection = app.MapData.conferencesCollection;
-            this.setActiveFilter("conferences");
+            this.setActiveFilter(type);
         }
 
-        app.activeFilter.filterCategories();
+        if (app.activeFilter) {
+            app.activeFilter.filterCategories();
+        }
         return app.MapData.activeCollection;
     },
 
     removePopup : function() {
         //console.log('removed ' + app.MapData.OpenTab);
         app.MapData.OpenTab.close();
-    }  
+    }
 });

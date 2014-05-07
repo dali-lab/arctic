@@ -32,7 +32,6 @@ var ArcticRouter = Parse.Router.extend({
     app.activeFilter = app.websiteFilter;
     this.appView.showView(app.Websites);
     $("#spin_navi").hide();
-    //app.Websites.render();
   },
 
   showAbout: function() {
@@ -40,8 +39,7 @@ var ArcticRouter = Parse.Router.extend({
         app.About = new app.AboutView();
     }
     this.appView.showView(app.About);
-    $("$spin_navi").hide();
-    //app.About.render();
+    $("#spin_navi").hide();
   },
 
   getReport: function(id) {
@@ -59,7 +57,6 @@ var ArcticRouter = Parse.Router.extend({
         app.Map = new app.MapView();
     }
     this.appView.showView(app.Map);
-    //app.Map.render();
     $("#spin_navi").show();
     app.Map.switchLayerTo("reports");
   },
@@ -70,7 +67,6 @@ var ArcticRouter = Parse.Router.extend({
     if (!app.Map) {
         app.Map = new app.MapView();
     }
-    //app.Map.render();
     this.appView.showView(app.Map);
     $("#spin_navi").show();
     app.Map.switchLayerTo("conferences");

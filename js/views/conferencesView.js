@@ -1,9 +1,10 @@
 Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
 var app = app || {};
 var ConferenceView = Parse.View.extend({
+
     initialize: function() {
     },
-    
+
     render: function() {
         this.$el.empty();
         var name = this.model.get('name');

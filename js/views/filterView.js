@@ -13,12 +13,10 @@ app.FilterView = Parse.View.extend({
         this.setElement(options.el);
         this.categories = options.categories;
         _.extend(this, _.pick(options));
-        var root = this;
-        root.render();
+        this.$el.html(this.template({categories: this.categories}));
     },
 
     render: function() {
-        this.$el.html(this.template({categories: this.categories}));
         return this;
     },
 
