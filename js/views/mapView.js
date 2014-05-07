@@ -4,8 +4,7 @@ var app = app || {};
 // Views
 
 app.MapView = Parse.View.extend({
-    
-    // Bind this view to the div with id 'map' in the HTML
+
     el: $("#map"),
     initialize: function() {
         app.pubSub.on("filter", this.filterCollection, this);
@@ -42,13 +41,11 @@ app.MapView = Parse.View.extend({
     // Initialize the reports filter.  Triggered by the reports collection
     initReportFilter: function(reportCategories) {
         app.reportFilter = new app.FilterView({categories: reportCategories, el: $('#reportFilter')});
-        this.setActiveFilter("reports");
     },
 
     // Initialize the conferences filter.  Triggered by the conferences collection
     initConferenceFilter: function(conferenceCategories) {
         app.conferenceFilter = new app.FilterView({categories: conferenceCategories, el: $('#conferenceFilter')});
-        this.setActiveFilter("conferences");
     },
 
     hide: function() {
@@ -59,7 +56,7 @@ app.MapView = Parse.View.extend({
         this.$el.toggle();
     },
 
-    // Filter a collection.  Triggered by the filter model
+    // Filter a collection.  Triggered by the filter view
     filterCollection: function(boxValues) {
         if (!app.activeFilter) {
             app.activeFilter = app.reportFilter;
@@ -82,10 +79,10 @@ app.MapView = Parse.View.extend({
 
     // Render the map view. This function is small because most of the map work is being done in setupMap.
     render: function() {
-        if (!this.el._leaflet) {
+        //if (!this.el._leaflet) {
             //var root = this;
             //root.setupMap();
-        }
+        //}
         return this;
     },
     
