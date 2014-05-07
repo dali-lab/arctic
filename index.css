@@ -135,14 +135,14 @@ body{
   font-size: 14px;
   padding-left: 5px;
 }
-#nav ul li a{
+#nav a{
   text-decoration: none;
   background-color: black;
 }
-#nav ul li a:visited{
+#nav a:visited{
   color:white;
 }
-#nav ul li a:hover{
+#nav a:hover{
   cursor: pointer;
   color:#eee;
 }
