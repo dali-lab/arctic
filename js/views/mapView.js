@@ -9,19 +9,31 @@ app.MapView = Parse.View.extend({
     initialize: function() {
         app.pubSub.on("filter", this.filterCollection, this);
 
-        app.MapData.reportsCollection = new Reports();
-        app.MapData.reportsCollection.fetch();
+        app.MapData.activeCollection = app.MapData.reportsCollection = new Reports();
+        app.MapData.reportsCollection.fetch({
+            success: function(collection) {
+                app.pubSub.trigger("reportsFetched");
+            }
+        });
         app.MapData.conferencesCollection = new Conferences();
         app.MapData.conferencesCollection.fetch();
-
         app.MapData.reportsCollection.getCategoriesList();
         app.pubSub.on("reportCategories", this.initReportFilter, this);
 
         app.MapData.conferencesCollection.getCategoriesList();
         app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
-        this.setupMap();
+        app.pubSub.on("reportsFetched", this.setupMap, this);
     },
+    colorMap: function() {
+        var getColor = _.bind(this.getColor, this);
+        app.MapData.MapLayer.setStyle( function(layer) {
 
+            var color = getColor(layer);
+            return {
+                fillColor: color,
+            };
+        });
+    },
     setActiveFilter: function(div) {
         if (div == "reports") {
             if (app.reportFilter) {
@@ -75,6 +87,8 @@ app.MapView = Parse.View.extend({
                 app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
             }
         }
+        var getColor = _.bind(this.getColor, this);
+        this.colorMap();        
     },
 
     // Render the map view. This function is small because most of the map work is being done in setupMap.
@@ -95,7 +109,6 @@ app.MapView = Parse.View.extend({
             maxZoom: 4,
             zoomControl: false
         });
-        (new L.control.zoom({position: "topright"})).addTo(app.MapData.MapDiv);
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
@@ -143,7 +156,15 @@ app.MapView = Parse.View.extend({
         }
 
         var mouseOut = function(e) {
-            app.MapData.MapLayer.resetStyle(e.target);
+            var layer = e.target;
+            var props = layer.feature.properties;
+            layer.setStyle({
+                weight: .75,
+                opacity: 1,
+                stroke: true,
+                color: "#000000"            
+            });
+
         }
 
         var click = function(e) {
@@ -167,6 +188,7 @@ app.MapView = Parse.View.extend({
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         app.MapData.MapDiv.on('popupclose', this.removePopup);
+        this.colorMap();
         return this;
     },
 
@@ -194,6 +216,21 @@ app.MapView = Parse.View.extend({
         }
         return app.MapData.activeCollection;
     },
+    getColor: function(layer) {
+        var collection = app.MapData.activeCollection;
+        var name;
+        for (var i = 0; i < collection.length; i++) {
+            country = collection.at(i).get("country");
+            if (country && layer.properties.NAME.toLowerCase() === country.toLowerCase() ) {
+                if (app.MapData.LayerStyle === "reports") {
+                    return "#e88d8d";
+                } else {
+                    return "#4c8d5a";
+                }
+            }
+        }
+        return "#FFFFFA";
+    }, 
 
     removePopup : function() {
         //console.log('removed ' + app.MapData.OpenTab);
