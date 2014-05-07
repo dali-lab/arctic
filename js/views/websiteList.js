@@ -51,6 +51,9 @@ var WebsiteListView = Parse.View.extend({
         for(var i = 0; i < this.subviews.length; i++){
             $("#websiteList").append(this.subviews[i].render().$el);
         }
+        if (app.activeFilter) {
+            app.activeFilter.delegateEvents();
+        }
     },
 
     // Initialize the websites filter. Triggered by the websites collection.

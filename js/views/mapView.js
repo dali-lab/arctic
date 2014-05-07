@@ -34,6 +34,7 @@ app.MapView = Parse.View.extend({
             };
         });
     },
+
     setActiveFilter: function(div) {
         if (div == "reports") {
             if (app.reportFilter) {
@@ -54,7 +55,7 @@ app.MapView = Parse.View.extend({
     initReportFilter: function(reportCategories) {
         app.reportFilter = new app.FilterView({categories: reportCategories, el: $('#reportFilter')});
         if (app.MapData.LayerStyle == "reports") {
-            app.activeFilter = reportFilter;
+            app.activeFilter = app.reportFilter;
         }
     },
 
@@ -62,7 +63,7 @@ app.MapView = Parse.View.extend({
     initConferenceFilter: function(conferenceCategories) {
         app.conferenceFilter = new app.FilterView({categories: conferenceCategories, el: $('#conferenceFilter')});
         if (app.MapData.LayerStyle == "conferences") {
-            app.activeFilter = conferenceFilter;
+            app.activeFilter = app.conferenceFilter;
         }
     },
 
@@ -208,6 +209,7 @@ app.MapView = Parse.View.extend({
         }
 
         if (app.activeFilter) {
+            app.activeFilter.delegateEvents();
             app.activeFilter.filterCategories();
         }
         return app.MapData.activeCollection;
