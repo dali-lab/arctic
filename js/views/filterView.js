@@ -21,6 +21,7 @@ app.FilterView = Parse.View.extend({
     },
 
     filterCategories: function(e) {
+        debugger;
         var boxes = this.$el.children().children("input:checked");
         var i;
         var boxValues = [];

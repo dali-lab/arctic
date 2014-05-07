@@ -6,10 +6,10 @@ function AppView() {
         }
 
         this.currentView = view;
-        this.currentView.render();
-        this.currentView.$el.show();
         $("#content").html(this.currentView.el);
         $("#content").width("100%");
+        this.currentView.render();
+        this.currentView.$el.show();
     }
 
 }

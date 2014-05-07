@@ -53,11 +53,17 @@ app.MapView = Parse.View.extend({
     // Initialize the reports filter.  Triggered by the reports collection
     initReportFilter: function(reportCategories) {
         app.reportFilter = new app.FilterView({categories: reportCategories, el: $('#reportFilter')});
+        if (app.MapData.LayerStyle == "reports") {
+            app.activeFilter = reportFilter;
+        }
     },
 
     // Initialize the conferences filter.  Triggered by the conferences collection
     initConferenceFilter: function(conferenceCategories) {
         app.conferenceFilter = new app.FilterView({categories: conferenceCategories, el: $('#conferenceFilter')});
+        if (app.MapData.LayerStyle == "conferences") {
+            app.activeFilter = conferenceFilter;
+        }
     },
 
     hide: function() {
@@ -70,10 +76,6 @@ app.MapView = Parse.View.extend({
 
     // Filter a collection.  Triggered by the filter view
     filterCollection: function(boxValues) {
-        if (!app.activeFilter) {
-            app.activeFilter = app.reportFilter;
-        }
-
         if (app.activeFilter == app.reportFilter) {
             if (boxValues.length === 0) {
                 app.MapData.activeCollection = app.MapData.reportsCollection;
@@ -91,18 +93,12 @@ app.MapView = Parse.View.extend({
         this.colorMap();        
     },
 
-    // Render the map view. This function is small because most of the map work is being done in setupMap.
     render: function() {
-        //if (!this.el._leaflet) {
-            //var root = this;
-            //root.setupMap();
-        //}
         return this;
     },
     
     setupMap: function() {
         var root = this;
-        root.el._leaflet = false;
         app.MapData.MapDiv = new L.map(this.el, {
             center: [10, -110],
             zoom: 2,
