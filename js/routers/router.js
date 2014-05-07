@@ -5,8 +5,10 @@ var ArcticRouter = Parse.Router.extend({
     "about_us": "showAbout",
     "conference/:id": "getConference",
     "icon_conference!": "showConferences",
+    "conferences": "showConferences",
     "icon_forum!": "showForum",
     "icon_report!": "showReports",
+    "reports": "showReports",
     "report/:id": "getReport",
     "icon_website!": "showWebsites",
     "websites": "showWebsites"
@@ -14,6 +16,12 @@ var ArcticRouter = Parse.Router.extend({
 
   initialize: function(appView) {
       this.appView = appView;
+      app.pubSub = _.extend({}, Parse.Events);
+      app.Compass = new app.CompassView();
+  },
+
+  showForum: function() {
+      app.Compass.$el.children().find("#arrow").rotate(0);
   },
 
   showWebsites: function() {
@@ -46,10 +54,6 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showReports: function() {
-    if (!app.Compass) {
-        app.Compass = new app.CompassView();
-    }
-
     app.Compass.$el.children().find("#arrow").rotate(90);
     if (!app.Map) {
         app.Map = new app.MapView();

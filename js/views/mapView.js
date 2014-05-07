@@ -9,7 +9,6 @@ app.MapView = Parse.View.extend({
     el: $("#map"),
     // Render our View when we initialize the map view
     initialize: function() {
-        app.pubSub = _.extend({}, Parse.Events);
         app.pubSub.on("filter", this.filterCollection, this);
 
         app.MapData.reportsCollection = new Reports();
@@ -24,17 +23,6 @@ app.MapView = Parse.View.extend({
         app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
         var root = this;
         root.render();
-    },
-
-    resetCurrentView: function() {
-        //$("#reports").hide();
-        //$("#websites").hide();
-        //$("#spin_navi").show();
-        //$("#content").width("100%");
-        if (app.currentView && app.currentView != app.Map) {
-            app.currentView = this;
-            app.currentView.$el.show();
-        }
     },
 
     setActiveFilter: function(div) {
@@ -98,7 +86,6 @@ app.MapView = Parse.View.extend({
             var root = this;
             root.setupMap();
         }
-        this.resetCurrentView();
         return this;
     },
     
@@ -197,11 +184,6 @@ app.MapView = Parse.View.extend({
     switchLayerTo: function(type) {
         var root = this;
         app.MapData.LayerStyle = type;
-        if (app.currentView && app.currentView != app.Map) {
-            app.currentView.$el.hide();
-            app.currentView = root;
-            app.currentView.$el.show();
-        }
 
         if (type === "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
@@ -216,7 +198,7 @@ app.MapView = Parse.View.extend({
     },
 
     removePopup : function() {
-        console.log('removed ' + app.MapData.OpenTab);
+        //console.log('removed ' + app.MapData.OpenTab);
         app.MapData.OpenTab.close();
     }  
 });
