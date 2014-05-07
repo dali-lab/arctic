@@ -29,7 +29,7 @@ var ArcticRouter = Parse.Router.extend({
     if (!app.Websites) {
       app.Websites = new WebsiteListView();
     }
-    app.activeFilter = app.websiteFilter;
+    //app.activeFilter = app.websiteFilter;
     this.appView.showView(app.Websites);
     $("#spin_navi").hide();
   },

@@ -87,7 +87,6 @@ app.MapView = Parse.View.extend({
     },
     
     setupMap: function() {
-        debugger;
         var root = this;
         root.el._leaflet = false;
         app.MapData.MapDiv = new L.map(this.el, {
@@ -168,7 +167,6 @@ app.MapView = Parse.View.extend({
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         app.MapData.MapDiv.on('popupclose', this.removePopup);
-
         return this;
     },
 
@@ -176,6 +174,10 @@ app.MapView = Parse.View.extend({
     // TODO: Possibly think of a more elegant way to track what type of tab / layer we
     // are displaying.
     switchLayerTo: function(type) {
+        if (app.MapData.OpenTab) {
+            this.removePopup();
+        }
+
         var root = this;
         app.MapData.LayerStyle = type;
 
@@ -195,6 +197,6 @@ app.MapView = Parse.View.extend({
 
     removePopup : function() {
         //console.log('removed ' + app.MapData.OpenTab);
-        app.MapData.OpenTab.close();
+        app.MapData.MapDiv.closePopup();
     }
 });
