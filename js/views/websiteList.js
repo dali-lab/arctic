@@ -24,7 +24,6 @@ var WebsiteListView = Parse.View.extend({
     initialize: function() {
         var self = this;
         this.subviews = [];
-        //this.collection.on('change', this.render);
         app.websitesCollection = new WebsiteCollection();
         app.websitesCollection.fetch({
           success: function(collection) {
@@ -33,7 +32,7 @@ var WebsiteListView = Parse.View.extend({
           }
         });
         app.websitesCollection.getCategoriesList();
-        app.pubSub.on("filter", this.filterCollection, this);
+        app.pubSub.on("filterDropDown", this.filterCollection, this);
         app.pubSub.on("websiteCategories", this.initWebsiteFilter, this);
     },
 
@@ -51,25 +50,22 @@ var WebsiteListView = Parse.View.extend({
         for(var i = 0; i < this.subviews.length; i++){
             $("#websiteList").append(this.subviews[i].render().$el);
         }
-        if (app.activeFilter) {
-            app.activeFilter.delegateEvents();
+        if (app.websiteFilter) {
+            app.websiteFilter.delegateEvents();
         }
     },
 
     // Initialize the websites filter. Triggered by the websites collection.
     initWebsiteFilter: function(websiteCategories) {
-        app.websiteFilter = new app.FilterView({categories: websiteCategories, el: $("#websiteFilter")});
-        app.activeFilter = app.websiteFilter;
+        app.websiteFilter = new app.DropDownView({categories: websiteCategories, el: $("#websiteFilter")});
     },
 
-    filterCollection: function(boxValues) {
-        if (app.activeFilter == app.websiteFilter) {
-            if (boxValues.length === 0) {
-                this.generateSubviews(app.websitesCollection);
-            } else {
-                this.generateSubviews(app.websitesCollection.filterByCategory(boxValues));
-            }
-            this.render();
+    filterCollection: function(option) {
+        if (option == "All") {
+            this.generateSubviews(app.websitesCollection);
+        } else {
+            this.generateSubviews(app.websitesCollection.filterByCategory(option));
         }
+            this.render();
     }
 });

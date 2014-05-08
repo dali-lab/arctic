@@ -91,13 +91,13 @@ app.MapView = Parse.View.extend({
             }
         }
         var getColor = _.bind(this.getColor, this);
-        this.colorMap();        
+        this.colorMap();
     },
 
     render: function() {
         return this;
     },
-    
+
     setupMap: function() {
         var root = this;
         app.MapData.MapDiv = new L.map(this.el, {
@@ -199,7 +199,6 @@ app.MapView = Parse.View.extend({
 
         var root = this;
         app.MapData.LayerStyle = type;
-
         if (type == "reports") {
             app.MapData.activeCollection = app.MapData.reportsCollection;
             this.setActiveFilter(type);
