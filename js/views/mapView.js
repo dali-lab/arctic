@@ -106,6 +106,12 @@ app.MapView = Parse.View.extend({
             maxZoom: 4,
             zoomControl: false
         });
+
+        // Add our zoom control manually where we want to
+        var zoomControl = L.control.zoom({
+            position: 'bottomright'
+        });
+        app.MapData.MapDiv.addControl(zoomControl); 
         var getColor = function(feature) {
             c = feature.properties.MAP_COLOR;
     		return c == 6  ? '#800026' :
