@@ -26,18 +26,12 @@ var WebsiteCollection = Parse.Collection.extend({
         });
     },
 
-    filterByCategory: function(categories) {
-        return new WebsiteCollection(this.filter(function(website) {
-            if (website.has("category")) {
-                var l = categories.length;
-                var i;
-                for (i = 0; i < l; i++) {
-                    if (website.get("category").toLowerCase() == categories[i].toLowerCase()) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }));
-    }
+  filterByCategory: function(category) {
+      return new WebsiteCollection(this.filter(function(website) {
+          if (website.has("category")) {
+              return website.get("category").toLowerCase() == category.toLowerCase();
+          }
+          return false;
+      }));
+  }
 });

@@ -89,6 +89,10 @@
     float: left;
 }
 
+#websiteDropDown {
+    background-color:white;
+}
+
 .filter {
     right: 2%;
     top: 20%;

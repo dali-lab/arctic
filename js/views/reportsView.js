@@ -76,7 +76,6 @@ var ReportDetailView = Parse.View.extend({
             var self = this;
             this.collection.fetch({
               success: function(collection){
-                debugger;
                 var model = collection.get(self.rid);
                 //for(var i = 0; i < collection.length; i++){
                     //if(collection.at(i).id === self.rid){
