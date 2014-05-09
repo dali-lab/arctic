@@ -154,20 +154,13 @@
                     <% } else { %> 
                         Unnamed
                     <% } %>
-                    </li>
-                    <br />
-                    <li>Description: <%= report.get("description") %></li>
                     <li>Category: 
                     <% if (report.has("category")) { %>
                         <%= report.get("category") %>
                     <% } else { %>
                         All 
                     <% } %>
-                    </li>
-                    <% if (report.has("published")) { %>
-                        <li>Published: <%= report.get("published").getFullYear() %></li>
-                    <% } %>
-                <li><a href="#report/<%= report.id %>">More Info</a></li>
+                    <li><a href="#report/<%= report.id %>">More Info</a></li>
                 </ul>
             </div> 
         <% }); %>
