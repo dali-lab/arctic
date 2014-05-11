@@ -128,7 +128,7 @@
 
     <script type="text/template" id="dropdown-template">
         <form action="">
-            <select class="form-contro" name="categories" id="options">
+            <select class="form-control" name="categories" id="options">
             <option value="All">All</option>
             <% _.each(categories, function(category) {%>
                 <option value="<%= category %>"><%= category %></option>
@@ -138,11 +138,14 @@
     </script>
 
     <script type="text/template" id="filter-template">
-            <form action="" class="filter_box">
+        <div class="filter_box">
+            <div class="filter_title">Filter</div>
+            <form action="" class="checkboxes">
             <% _.each(categories, function(category) { %>
                 <input type="checkbox" value="<%= category %>"> <%= category %><br>
             <% }); %>
             </form>
+        </div>
     </script>
     <script type="text/template" id='reports-tab-template'>
         <% _.each(reports, function(report) { %> 
