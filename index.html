@@ -138,6 +138,7 @@
     </script>
 
     <script type="text/template" id="partner-template">
+        <p>Partners</p>
         <% _.each(partners.models, function(partner) { %>
                 <div class="partner">
                     <img class="partner_image" src="<%= partner.get('image').url() %>">
