@@ -230,6 +230,27 @@ body{
   width:100%;
   height:100%;
 }
+
+#partners {
+    height:100%;
+    overflow-y: scroll;
+    margin-left: 10px;
+    padding-top: 30px;
+    margin-right:10px;
+}
+
+.partner {
+    padding:30px;
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+.partner img {
+    width: 100%;
+    max-width: 300px;
+}
+
 #websites{
   position:relative;
   height:100%;

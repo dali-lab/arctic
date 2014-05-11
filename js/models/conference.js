@@ -11,6 +11,6 @@ var Conference = Parse.Object.extend ({
         name: "conference",
         category: "",
         country: "World"
-    },
+    }
 });
 
