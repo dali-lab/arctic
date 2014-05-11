@@ -10,6 +10,7 @@ var ArcticRouter = Parse.Router.extend({
     "icon_report!": "showReports",
     "reports": "showReports",
     "report/:id": "getReport",
+    "reportsList": "showReportsList",
     "icon_website!": "showWebsites",
     "websites": "showWebsites",
     "partners": "showPartners"
@@ -69,6 +70,12 @@ var ArcticRouter = Parse.Router.extend({
     app.Map.switchLayerTo("reports");
   },
 
+  showReportsList: function() {
+      app.ReportList = new ReportListView();
+      this.appView.showView(app.ReportList);
+      $("#spin_navi").hide();
+
+  },
   // Switches the map's popup layer to conferences
   showConferences: function() {
     $("#arrow").rotate(270);

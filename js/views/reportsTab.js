@@ -4,7 +4,9 @@ var app = app || {};
 app.ReportsTabView = Parse.View.extend({
     template: _.template( $("#reports-tab-template").html() ),
     tagName: "div",
-    events: {"click div.close": "remove"}, 
+    events: {
+        "click div.close": "remove",
+    }, 
     initialize: function(options){
         _.extend(this, _.pick(options, "reports"));
     },

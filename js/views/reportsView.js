@@ -31,38 +31,32 @@ var ReportView = Parse.View.extend({
 var ReportListView = Parse.View.extend({
     el: $('#reports'),
     //collection : (new WebsiteCollection()),
-    initialize: function() {
+    initialize: function(reports) {
         var self = this;
-        this.$el = $('#reports');
-        this.collection = new Reports();
+        this.collection = app.ReportListCollection;
         this.subviews = [];
-        this.collection.on('change', this.render);
-        this.collection.fetch({
-          success: function(collection){
-            for(var i = 0; i < collection.length; i++){
-                var view = new ReportView();
-                view.model = collection.at(i);
-                self.subviews.push(view);
-            }
-            self.render();
-          }
-        });
+        app.ReportListCollection.on('change', this.render);
+        for(var i = 0; i < app.ReportListCollection.length; i++){
+            var view = new ReportView();
+            view.model = app.ReportListCollection.at(i);
+            self.subviews.push(view);
+        }
+        self.render();
     },
     render: function() {
-        this.resetCurrentView();
         this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
             this.$el.append(this.subviews[i].render().$el);
         }
     },
 
-    resetCurrentView: function() {
-        app.currentView.$el.hide();
-        $("#spin_navi").hide();
-        $("#content").width("100%");
-        app.currentView = this;
-        app.currentView.$el.show();
-    }
+//    resetCurrentView: function() {
+//        app.currentView.$el.hide();
+//       $("#spin_navi").hide();
+//        $("#content").width("100%");
+//        app.currentView = this;
+//        app.currentView.$el.show();
+//    }
 });
 
 var ReportDetailView = Parse.View.extend({

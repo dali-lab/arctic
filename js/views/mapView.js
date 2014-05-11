@@ -9,7 +9,7 @@ app.MapView = Parse.View.extend({
     initialize: function() {
         app.pubSub.on("filter", this.filterCollection, this);
 
-        app.MapData.activeCollection = app.MapData.reportsCollection = new Reports();
+        app.ReportListCollection = app.MapData.activeCollection = app.MapData.reportsCollection = new Reports();
         app.MapData.reportsCollection.fetch({
             success: function(collection) {
                 app.pubSub.trigger("reportsFetched");
@@ -79,13 +79,13 @@ app.MapView = Parse.View.extend({
     filterCollection: function(boxValues) {
         if (app.activeFilter == app.reportFilter) {
             if (boxValues.length === 0) {
-                app.MapData.activeCollection = app.MapData.reportsCollection;
+                app.ReportListCollection = app.MapData.activeCollection = app.MapData.reportsCollection;
             } else {
                 app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(boxValues);
             }
         } else if (app.activeFilter == app.conferenceFilter) {
             if (boxValues.length === 0) {
-                app.MapData.activeCollection = app.MapData.conferencesCollection;
+                app.ReportListCollection = app.MapData.activeCollection = app.MapData.conferencesCollection;
             } else {
                 app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
             }
@@ -140,6 +140,7 @@ app.MapView = Parse.View.extend({
         var initPopup = function(country, filtered) {
             var marker = new L.Marker(new L.LatLng(90, 90));
             if (app.MapData.LayerStyle === "reports") {
+                app.ReportListCollection = filtered;
                 app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             } else {
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
@@ -206,7 +207,7 @@ app.MapView = Parse.View.extend({
         var root = this;
         app.MapData.LayerStyle = type;
         if (type == "reports") {
-            app.MapData.activeCollection = app.MapData.reportsCollection;
+            app.ReportListCollection = app.MapData.activeCollection = app.MapData.reportsCollection;
             this.setActiveFilter(type);
         } else if (type == "conferences") {
             app.MapData.activeCollection = app.MapData.conferencesCollection;
