@@ -137,6 +137,15 @@
         </form>
     </script>
 
+    <script type="text/template" id="partner-template">
+        <% _.each(partners.models, function(partner) { %>
+                <div class="partner">
+                    <img class="partner_image" src="<%= partner.get('image').url() %>">
+                    <a class="partner_link" href="<%= partner.get('url') %>"><%= partner.get('name') %></a>
+                </div>
+        <% }); %>
+    </script>
+
     <script type="text/template" id="filter-template">
         <div class="filter_box">
             <div class="filter_title">Filter</div>
@@ -147,6 +156,7 @@
             </form>
         </div>
     </script>
+
     <script type="text/template" id='reports-tab-template'>
         <% _.each(reports, function(report) { %> 
             <div id="<%= report.get("name") %>" class="reports-tab">
@@ -223,7 +233,7 @@
                                 <li><a href="#conferences">Conferences</a></li>
                                 <li><a href="#reports">Reports</a></li>
                                 <li><a href="#websites">Websites</a></li>
-		                <li>Partners</li>
+                                <li><a href="#partners">Partners</a></li>
 		                <li>|</li>
 		                <li>Login</li>
 		            </ul>
@@ -271,6 +281,7 @@
               <div id="websiteList"></div>
            </div>
            <div id='reports'></div>
+           <div id='partners'></div>
            <div id='about'>
               <p>About Us</p>
               <p>The Arctic Virtual Forum is an outcome from a joint Carnegie Endowment and University of the Arctic Conference, "A Euro-Atlantic Action Plan for Cooperation and Enhanced Arctic Security", hel on February 11-12, 2013, in Washing, DC.</p><br><br>
@@ -304,10 +315,12 @@
     <script src="js/models/conference.js"></script>
     <script src="js/models/website.js"></script>
     <script src="js/models/about.js"></script>
+    <script src="js/models/partner.js"><script>
     <script src="js/collections/reports.js"></script>
     <script src="js/collections/conferences.js"></script>
     <script src="js/collections/websites.js"></script>
     <script src="js/collections/abouts.js"></script>
+    <script src="js/collections/partners.js"></script>
     <script src="js/views/reportsTab.js"></script>
     <script src="js/views/conferencesTab.js"></script>
     <script src="js/views/mapView.js"></script>
@@ -317,6 +330,7 @@
     <script src="js/views/reportsView.js"></script>
     <script src="js/views/filterView.js"></script>
     <script src="js/views/dropdownView.js"></script>
+    <script src="js/views/partnerView.js"></script>
     <script src="js/routers/router.js"></script>
     <script src="js/views/appView.js"></script>
     <script src="js/app.js"></script>

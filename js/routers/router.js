@@ -11,7 +11,8 @@ var ArcticRouter = Parse.Router.extend({
     "reports": "showReports",
     "report/:id": "getReport",
     "icon_website!": "showWebsites",
-    "websites": "showWebsites"
+    "websites": "showWebsites",
+    "partners": "showPartners"
   },
 
   initialize: function(appView) {
@@ -20,12 +21,20 @@ var ArcticRouter = Parse.Router.extend({
       app.Compass = new app.CompassView();
   },
 
+  showPartners: function() {
+    if (!app.Partners) {
+        app.Partners = new app.PartnerView();
+    }
+    this.appView.showView(app.Partners);
+    $("#spin_navi").hide();
+  },
+
   showForum: function() {
-      app.Compass.$el.children().find("#arrow").rotate(0);
+      $("#arrow").rotate(0);
   },
 
   showWebsites: function() {
-    app.Compass.$el.children().find("#arrow").rotate(180);
+    $("#arrow").rotate(180);
     if (!app.Websites) {
       app.Websites = new WebsiteListView();
     }
@@ -51,7 +60,7 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showReports: function() {
-    app.Compass.$el.children().find("#arrow").rotate(90);
+    $("#arrow").rotate(90);
     if (!app.Map) {
         app.Map = new app.MapView();
     }
@@ -62,7 +71,7 @@ var ArcticRouter = Parse.Router.extend({
 
   // Switches the map's popup layer to conferences
   showConferences: function() {
-    app.Compass.$el.children().find("#arrow").rotate(270);
+    $("#arrow").rotate(270);
     if (!app.Map) {
         app.Map = new app.MapView();
     }
