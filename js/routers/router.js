@@ -62,9 +62,7 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showReportsList: function() {
-      if (!app.ReportList) {
-          app.ReportList = new ReportListView();
-      }
+      app.ReportList = new ReportListView();
       this.appView.showView(app.ReportList);
       $("#spin_navi").hide();
 

@@ -44,6 +44,7 @@ var ReportListView = Parse.View.extend({
         self.render();
     },
     render: function() {
+        this.$el.empty();
         for(var i = 0; i < this.subviews.length; i++){
             this.$el.append(this.subviews[i].render().$el);
         }
