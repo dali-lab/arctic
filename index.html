@@ -128,7 +128,7 @@
 
     <script type="text/template" id="dropdown-template">
         <form action="">
-            <select name="categories" id="options">
+            <select class="form-control" name="categories" id="options">
             <option value="All">All</option>
             <% _.each(categories, function(category) {%>
                 <option value="<%= category %>"><%= category %></option>
@@ -138,11 +138,14 @@
     </script>
 
     <script type="text/template" id="filter-template">
-            <form action="" class="filter_box">
+        <div class="filter_box">
+            <div class="filter_title">Filter</div>
+            <form action="" class="checkboxes">
             <% _.each(categories, function(category) { %>
-                <input class="filter_option" type="checkbox" value="<%= category %>"> <%= category %><br>
+                <input type="checkbox" value="<%= category %>"> <%= category %><br>
             <% }); %>
             </form>
+        </div>
     </script>
     <script type="text/template" id='reports-tab-template'>
         <% _.each(reports, function(report) { %> 
@@ -212,7 +215,7 @@
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
-				<span class='app_name'>Arctic Virtual Forum</span>
+				<span>Arctic Virtual Forum</span>
 			</div>
 			<div id='nav'>
 			    <ul>
@@ -294,6 +297,7 @@
     <script src="js/lib/parse-1.2.18.min.js"></script>
     <script src="js/lib/leaflet/leaflet.js"></script>
     <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap-checkbox.js"></script>
     <script src="js/geoJson/countries.json"></script>
     <script src="js/models/mapData.js"></script>
     <script src="js/models/report.js"></script>

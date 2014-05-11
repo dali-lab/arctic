@@ -3,7 +3,8 @@ var app = app || {};
 app.FilterView = Parse.View.extend({
     template: _.template( $("#filter-template").html() ),
     events: {
-       'change .filter_box' : 'filterCategories',
+       'click .filter_title' : 'toggleFilter',
+       'change .checkboxes' : 'filterCategories',
        'click #icon_report' : 'filterCategories',
        'click #icon_conference' : 'filterCategories',
        'click #icon_website' : 'filterCategories'
@@ -20,8 +21,12 @@ app.FilterView = Parse.View.extend({
         return this;
     },
 
+    toggleFilter: function() {
+        $(".checkboxes").toggle();
+    },
+
     filterCategories: function(e) {
-        var boxes = this.$el.children().children("input:checked");
+        var boxes = $(".checkboxes").children("input:checked");
         var i;
         var boxValues = [];
         for (i = 0; i < boxes.length; i++) {
