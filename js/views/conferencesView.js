@@ -19,39 +19,33 @@ var ConferenceView = Parse.View.extend({
 });
 
 var ConferenceListView = Parse.View.extend({
-    el: $('#reports'),
-    initialize: function() {
+    el: $('#conferences'),
+    initialize: function(conferences) {
         var self = this;
-        this.$el = $('#conferences');
-        this.collection = new Conferences();
+        this.collection = app.ConferenceListCollection;
         this.subviews = [];
-        this.collection.on('change', this.render);
-        this.collection.fetch({
-            success: function(collection) {
-                for (var i = 0; i < collection.length; i++) {
-                    var view = new ConferenceView();
-                    view.model = collection.at(i);
-                    self.subviews.push(view);
-                }
-                self.render():
-            }
-        });
+        app.ConferenceListCollection.on('change', this.render);
+        for (var i = 0; i < app.ConferenceListCollection.length; i++) {
+            var view = new ConferenceView();
+            view.model = app.ConferenceListCollection.at(i);
+            self.subviews.push(view);
+        }
+        self.render();
     },
 
     render: function() {
-        this.resetCurrentView();
         this.$el.empty();
         for (var i = 0; i < this.subviews.length; i++) {
             this.$el.append(this.subviews[i].render().$el);
         }
     },
 
-    resetCurrentView: function() {
-        if (app.currentView != this) {
-            app.currentView.$el.hide();
-            $("#spin_navi").hide();
-            app.currentView = this;
-            app.currentView.$el.show();
-        }
-    }
+//    resetCurrentView: function() {
+//       if (app.currentView != this) {
+//           app.currentView.$el.hide();
+//           $("#spin_navi").hide();
+//           app.currentView = this;
+//           app.currentView.$el.show();
+//       }
+//   }
 });

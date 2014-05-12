@@ -385,7 +385,7 @@ body{
   padding-right: 30px;
   /*padding-top: 30px;*/
 }
-#reports{
+.list {
   float:left;
   /*position:relative;*/
   width: 100%;
