@@ -9,22 +9,6 @@ var Conferences = Parse.Collection.extend({
 
   model: Conference,
 
-  // filterByCategory: function(category) {
-  //   return this.where({category: category});
-  // },
-
-  // filterByCountry: function(country) {
-  //   return this.where({country: country});
-  // },
-
-  // filterByDate: function(date) {
-  //   return _.filter(this, function(num) {
-  //     return(num > date);
-  //   });
-  // },
-  done: function(){
-    return this.filter(function(conference){return conference.get('done'); });
-  }
   
 });
 

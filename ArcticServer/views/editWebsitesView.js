@@ -2,9 +2,8 @@ Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7p
 var app = app || {};
 
 //default view
-var editConferencesView = Parse.View.extend({
+var editWebsitesView = Parse.View.extend({
     initialize: function() {
-        //console.log("in editConferencesView");
         this.render();
     },
 
@@ -14,24 +13,26 @@ var editConferencesView = Parse.View.extend({
       var template = _.template( $("#tab1_template").html())
       this.el.html(template);
       prepareTableForConference();
-      var Conference = Parse.Object.extend("Conference");
-      var query = new Parse.Query(Conference);
+      var website = Parse.Object.extend("Website");
+      var query = new Parse.Query(website);
       query.find({
         success: function(results) {
-          var giCount = 1;
           $('#table_id').dataTable().fnClearTable();
+          var giCount = 1;
+          console.log(results[0]);
           for (var i = 0; i < results.length; i++) {
+            var image = results[i].get('image');
             $('#table_id').dataTable().fnAddData( [
               "<input type='checkbox' />",
               ""+results[i].get('name'),
-              ""+results[i].get('country'),
-              ""+results[i].get('city'),
               ""+results[i].get('category'),
               ""+results[i].get('description'),
+              ""+results[i].get('url'),
+              ""+results[i].get('image').url(),
               ""+results[i].createdAt,
               ""+results[i].updatedAt,
               "<td><span class='ops'>"+
-              "<a  href='#editConference/"+results[i].id+"'><span class='glyphicon glyphicon-edit' data-toggle='modal'></span></a></td>"]);
+              "<a  href='#editWebsite/"+results[i].id+"'><span class='glyphicon glyphicon-edit' data-toggle='modal'></span></a></td>"]);
           }
         }
       });
@@ -39,18 +40,17 @@ var editConferencesView = Parse.View.extend({
 });
 
 
-
-var editConferenceView = Parse.View.extend({
+var editWebsiteView = Parse.View.extend({
     initialize: function(id) {
         //console.log(id);
-        this.collection = new Conferences();
+        this.collection = new WebsiteCollection();
         this.id = id;
         this.render();
     },
 
     render: function() {
       //console.log("begin to render");
-      console.log("begin to retrieve conference with id "+this.id);
+      console.log("begin to retrieve website with id "+this.id);
       var self = this;
       this.collection.fetch({
         success: function() {
@@ -59,21 +59,17 @@ var editConferenceView = Parse.View.extend({
                 if(object.id == self.id){
                     //console.log("found!");
                     this.el = $("#show_modal");
-                    console.log(object.get("name"));
-                    //this.el.empty();
-                    console.log(object.get("name"));
-                    var template = _.template( $("#edit_conference").html(), 
+                    var template = _.template( $("#edit_website").html(), 
                       { "name": object.get("name"),
-                        "country": object.get("country"),
-                        "city": object.get("city"),
+                        "image": object.get("image").url(),
                         "category": object.get("category"),
                         "description": object.get("description"),
                         "url": object.get("url"),
-                        "organization": object.get("organization"),
-                        "objectId": object.id
+                        "objectId": object.id,
+                        "type": 1
                       });
                     this.el.html(template);
-                    $('#myModal').modal('show');
+                    $('#myModal2').modal('show');
                     return;
                 }
             });
@@ -86,31 +82,14 @@ var editConferenceView = Parse.View.extend({
 });
 
 
-
-var addConferenceView = Parse.View.extend({
-    initialize: function() {
-        //console.log(id);
-        this.render();
-    },
-
-    render: function() {
-        this.el = $("#show_modal");
-        var template = _.template( $("#edit_conference").html(), {type:2});
-        this.el.html(template);
-        $('#myModal').modal('show');
-    }
-});
-
-
-
 function prepareTableForConference(){
     $("#table_id thead tr").first().empty();
     $("#table_id thead tr").first().append("<th></th>");
     $("#table_id thead tr").first().append("<th>name</th>");
-    $("#table_id thead tr").first().append("<th>country</th>");
-    $("#table_id thead tr").first().append("<th>city</th>");
     $("#table_id thead tr").first().append("<th>category</th>");
     $("#table_id thead tr").first().append("<th>description</th>");
+    $("#table_id thead tr").first().append("<th>url</th>");
+    $("#table_id thead tr").first().append("<th>image</th>");
     $("#table_id thead tr").first().append("<th>createdAt</th>");
     $("#table_id thead tr").first().append("<th>updatedAt</th>");
     $("#table_id thead tr").first().append("<th></th>");

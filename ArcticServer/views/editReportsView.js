@@ -2,9 +2,8 @@ Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7p
 var app = app || {};
 
 //default view
-var editConferencesView = Parse.View.extend({
+var editReportsView = Parse.View.extend({
     initialize: function() {
-        //console.log("in editConferencesView");
         this.render();
     },
 
@@ -14,24 +13,24 @@ var editConferencesView = Parse.View.extend({
       var template = _.template( $("#tab1_template").html())
       this.el.html(template);
       prepareTableForConference();
-      var Conference = Parse.Object.extend("Conference");
-      var query = new Parse.Query(Conference);
+      var report = Parse.Object.extend("Report");
+      var query = new Parse.Query(report);
       query.find({
         success: function(results) {
-          var giCount = 1;
           $('#table_id').dataTable().fnClearTable();
+          var giCount = 1;
           for (var i = 0; i < results.length; i++) {
             $('#table_id').dataTable().fnAddData( [
               "<input type='checkbox' />",
               ""+results[i].get('name'),
-              ""+results[i].get('country'),
-              ""+results[i].get('city'),
-              ""+results[i].get('category'),
-              ""+results[i].get('description'),
+              // ""+results[i].get('country'),
+              // ""+results[i].get('city'),
+              // ""+results[i].get('category'),
+              // ""+results[i].get('description'),
               ""+results[i].createdAt,
               ""+results[i].updatedAt,
               "<td><span class='ops'>"+
-              "<a  href='#editConference/"+results[i].id+"'><span class='glyphicon glyphicon-edit' data-toggle='modal'></span></a></td>"]);
+              "<a  href='#editConference/"+results[i].id+"'><span class='glyphicon glyphicon-edit' data-toggle='modal'></span></a><span class='glyphicon glyphicon-remove' onclick='confirmDelete()'></span></span></td>"]);
           }
         }
       });
@@ -57,7 +56,7 @@ var editConferenceView = Parse.View.extend({
             //console.log(self.collection.length);
             self.collection.each(function(object) {
                 if(object.id == self.id){
-                    //console.log("found!");
+                    console.log("found!");
                     this.el = $("#show_modal");
                     console.log(object.get("name"));
                     //this.el.empty();
@@ -70,7 +69,8 @@ var editConferenceView = Parse.View.extend({
                         "description": object.get("description"),
                         "url": object.get("url"),
                         "organization": object.get("organization"),
-                        "objectId": object.id
+                        "objectId": object.id,
+                        "type": 1
                       });
                     this.el.html(template);
                     $('#myModal').modal('show');
@@ -84,23 +84,6 @@ var editConferenceView = Parse.View.extend({
       });
     }
 });
-
-
-
-var addConferenceView = Parse.View.extend({
-    initialize: function() {
-        //console.log(id);
-        this.render();
-    },
-
-    render: function() {
-        this.el = $("#show_modal");
-        var template = _.template( $("#edit_conference").html(), {type:2});
-        this.el.html(template);
-        $('#myModal').modal('show');
-    }
-});
-
 
 
 function prepareTableForConference(){

@@ -7,6 +7,36 @@
   <link rel="stylesheet" href="custom_css/main_page.css">
   <LINK href="custom_css/demo_table.css" rel="stylesheet" type="text/css">
   <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+        #footer{
+          height:200px;
+          background-color: #CCC;
+          padding-top: 20px;
+          margin-top: 3px;
+          padding-bottom: 20px;
+        /*      border-style:solid;*/
+          border-top:solid white;
+        }
+        #footer_text span{
+          color:black;
+          font-size: 15px;
+        }
+        #logos{
+          /*padding-top: 40px;*/
+          padding-bottom: 10px;
+        }
+
+        .footer_img {
+            max-width:15%;
+            padding-left:30px;
+            padding-right:30px;
+        }
+        .img_edit_tn{
+            border:1px solid black;
+            width:190px;
+            height:118px;
+        }
+  </style>
 </head>
 <body>
   <div id="main">
@@ -16,55 +46,69 @@
       </div>
       <div id='wrapper'>
         <div id='navi' class='btn-group-vertical'>
-          <button type="button" class="btn btn-default">Conferences</button>
-          <button type="button" class="btn btn-default">Reports</button>
-          <button type="button" class="btn btn-default">Websites</button>
-          <button type="button" class="btn btn-default">Partners</button>
-          <button type="button" class="btn btn-default">About</button>
+          <button id="conf_btn" type="button" class="btn btn-default">Conferences</button>
+          <button id="rep_btn" type="button" class="btn btn-default">Reports</button>
+          <button id="web_btn" type="button" class="btn btn-default">Websites</button>
+          <button id="part_btn" type="button" class="btn btn-default">Partners</button>
+          <button id="abo_btn" type="button" class="btn btn-default">About</button>
         </div>
         <div id='c_content' class='content'>
           <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
             <li class="active"><a href="#">Conference</a></li>
           </ol>
-          <table id="table_id" class="display">
-              <thead>
-                  <tr>
-                      <th></th>
-                      <th>name</th>
-                      <th>country</th>
-                      <th>city</th>
-                      <th>category</th>
-                      <th>description</th>
-                      <th>createdAt</th>
-                      <th>updatedAt</th>
-                      <th></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  
-              </tbody>
-          </table>
-          <div id='opp' align='right'>
-              <span class='ops'>-delete</span>&nbsp;&nbsp;&nbsp;<span class='ops' onclick='add_Conference()'>+add</span>
+          <div id="changable">
+              
           </div>
         </div>      
   </div>
   <div id='show_modal'>
   </div>
+<!--   <div id='loading' class="alert alert-warning" style="display:none">
+      saving
+  </div> -->
+</div>
+<div id='footer'>
+  <div id='logos' align='center'>
+                  <img class="footer_img" src="../imgs/Dartmouth.jpg" alt="place_holder"/>
+                  <img class="footer_img" src='../imgs/dalilogoorange.png' alt='place_holder'/>
+                  <img class="footer_img" src='../imgs/avflogo.png' alt='place_holder' />
+        <div id='footer_text' align='center'>
+          <span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
+        </div>
 
+  </div>
 </div>
 
 
-
 <!-- section of templates-->
+<script type="text/template" id="tab1_template">
+    <div id="first_tab">
+          <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div id='opp' align='right'>
+                <span class='ops' onclick='add_Conference()'>+add</span>
+            </div>
+    </div>
+</script>
+
+
 <script type="text/template" id='edit_conference'>
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <input id="hidden_objid" value="<%if(type==1) print(objectId)%>" style="display:none"/>
         <div class="modal-header">
-          <button type="button" id="cls_btn" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Information</h4>
+          <button type="button" id="cls_btn" class="close" aria-hidden="true" onclick="reset()">&times;</button>
+          <h4 class="modal-title" id="myModalLabel"><% if(type==1) print('Edit Information'); else print('Add New Record');%></h4>
         </div>
         <div class="modal-body">
           <!-- body -->
@@ -72,79 +116,43 @@
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-2 control-label">Conference Name</label>
               <div class="col-sm-8">
-                <input class="form-control" id="inputEmail3" placeholder="conference name">
+                <input class="form-control" id="c_name" value="<% if(type==1) print(name)%>" >
               </div>
             </div>
             <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Tier 1</label>
+              <label for="inputPassword3" class="col-sm-2 control-label">Category</label>
               <div class="col-sm-4">
-                <select class="form-control">
-                    <option value="one">Science</option>
-                    <option value="two">Policy</option>
-                    <option value="three">Education</option>
-                    <option value="four">Other</option>
-                </select>
+                <input class="form-control" id="c_cate" value="<%if(type==1) print(category)%>" >
               </div>
             </div>
             <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Tier 2</label>
+              <label for="inputPassword3" class="col-sm-2 control-label">Country</label>
               <div class="col-sm-4">
-                <select class="form-control">
-                    <option value="one">general</option>
-                    <option value="two">media communication</option>
-                    <option value="three">arctic security</option>
-                    <option value="four">energy</option>
-                    <option value="four">climate change</option>
-                    <option value="four">other</option>
-                </select>
+                <input class="form-control" id="c_country" value="<%if(type==1) print(country)%>" >
               </div>
             </div>
             <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">Tier 3</label>
+              <label for="inputPassword3" class="col-sm-2 control-label">City</label>
               <div class="col-sm-4">
-                <label for="inputPassword3" class="col-sm-2 control-label">Country</label>
-                <select class="form-control">
-                    <option value="one">United States</option>
-                    <option value="two">Finland</option>
-                    <option value="three">Norway</option>
-                </select>
-              </div>
-              <!-- <div class="col-sm-10">
-                <select class="form-control">
-                    <option value="one">Alaska</option>
-                    <option value="two">City</option>
-                    <option value="three">City</option>
-                </select>
-              </div> -->
-            </div>
-            <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label"></label>
-              <!-- <div class="col-sm-10">
-                <select class="form-control">
-                    <option value="one">United States</option>
-                    <option value="two">Finland</option>
-                    <option value="three">Norway</option>
-                </select>
-              </div> -->
-              <div class="col-sm-4">
-                <label for="inputPassword3" class="col-sm-2 control-label">City</label>
-                <select class="form-control">
-                    <option value="one">Alaska</option>
-                    <option value="two">City</option>
-                    <option value="three">City</option>
-                </select>
+                <input class="form-control" id="c_city" value="<%if(type==1) print(city)%>" >
               </div>
             </div>
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-2 control-label">Link</label>
               <div class="col-sm-8">
-                <input class="form-control" id="inputEmail3" placeholder="URL">
+                <input class="form-control" id="c_link" value="<%if(type==1) print(url)%>">
               </div>
             </div>
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-2 control-label">Organization</label>
               <div class="col-sm-8">
-                <input class="form-control" id="inputEmail3" placeholder="Organization">
+                <input class="form-control" id="c_organization" value="<%if(type==1) print(organization)%>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">description</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="c_desc" value="<%if(type==1) print(description)%>">
               </div>
             </div>
           </form>
@@ -152,7 +160,64 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn-my btn">Save</button>
+          <button id="c_sv_btn" type="button" class="btn-my btn" onclick="save_conference()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/template" id='edit_website'>
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <input id="hidden_objid_w" value="<%if(type==1) print(objectId)%>" style="display:none"/>
+        <div class="modal-header">
+          <button type="button" id="cls_btn2" class="close" aria-hidden="true" onclick="reset2()">&times;</button>
+          <h4 class="modal-title" id="myModalLabel"><% if(type==1) print('Edit Information'); else print('Add New Record');%></h4>
+        </div>
+        <div class="modal-body">
+          <!-- body -->
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Website Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="w_name" value="<% if(type==1) print(name)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Thumbnail</label>
+              <div class="col-sm-8">
+                <img id="t_n_preview" class="img_edit_tn" src="<%=image%>"/>
+                <input type="file" id="w_image" onchange="update_thumbnail()">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="w_cate" value="<%if(type==1) print(category)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="w_desc" value="<%if(type==1) print(description)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Link</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="w_link" value="<%if(type==1) print(url)%>">
+              </div>
+            </div>
+          </form>
+          <!-- end of body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="c_sv_btn" type="button" class="btn-my btn" onclick="save_website()">Save</button>
         </div>
       </div>
     </div>
@@ -177,27 +242,126 @@
 
 
 
-
-
   <script type="text/javascript" src="jquery/jquery.js"></script>
   <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
   <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
   <script type="text/javascript" src="underscore.js"></script>
+  <!-- models -->
+  <script type="text/javascript" src="js/model.js"></script>
+  <!-- collections -->
+  <script type="text/javascript" src="js/collection.js"></script>
+  <!-- views -->
   <script type="text/javascript" src="views/editConferencesView.js"></script>
+  <script type="text/javascript" src="views/editReportsView.js"></script>
+  <script type="text/javascript" src="views/editWebsitesView.js"></script>
   <script type="text/javascript" src="admin_router.js"></script>
   
   
   
   <script>
+      $("#conf_btn").click(function(){
+          router.navigate("", true);
+      });
+      $("#rep_btn").click(function(){
+          router.navigate("editReports", true);
+
+      });
+
+      $("#web_btn").click(function(){
+          router.navigate("editWebsites", true);
+      });
+
       $(document).ready( function () {
           $('#table_id').dataTable();
       } );
 
-      $("#cls_btn").click(function(){
-        console.log("close");
-        $("#myModal").modal("hide");
-      });
+      function reset(){
+          $("#myModal").modal("hide");
+          router.navigate("", true);
+      };
+
+      function reset2(){
+          $("#myModal2").modal("hide");
+          router.navigate("editWebsites", true);
+      };
+
+      function add_Conference(){
+          router.navigate("addConference", true);
+      };
+      function save_conference(){
+          attr = [];
+          attr["name"] = $("#c_name").val();
+          attr["country"] = $("#c_country").val();
+          attr["category"] = $("#c_cate").val();
+          attr["city"] = $("#c_city").val();
+          attr["url"] = $("#c_link").val();
+          attr["organization"] = $("#c_organization").val();
+          attr["description"] = $("#c_desc").val();
+          attr["objectId"] = $("#hidden_objid").val();
+          //console.log(attr);
+          var conf = new Conference();
+          conf.id = attr["objectId"];
+          conf.set("name", attr["name"]);
+          conf.set("country", attr["country"]);
+          conf.set("city", attr["city"]);
+          conf.set("category", attr["category"]);
+          conf.set("url", attr["url"]);
+          conf.set("organization", attr["organization"]);
+          conf.set("description", attr["description"]);
+          conf.save(null, {
+              success: function(conference) {
+                  alert("success");
+                  $("#myModal").modal("hide");
+                  router.navigate("", true);
+              },
+              error: function(){
+                  alert("update failed");
+              }
+          });
+      };
+
+      function save_website(){
+          attr = [];
+          attr["name"] = $("#w_name").val();
+          attr["category"] = $("#w_cate").val();
+          attr["url"] = $("#w_link").val();
+          attr["description"] = $("#w_desc").val();
+          attr["objectId"] = $("#hidden_objid_w").val();
+          var file = $("#w_image")[0];
+          if(file.files.length > 0){
+            var file = file.files[0];
+            var name = "photo.jpg";
+           
+            var parseFile = new Parse.File(name, file);
+            attr["image"] = parseFile;
+          }
+          //console.log(attr);
+          var website = new Website();
+          website.id = attr["objectId"];
+          website.set("name", attr["name"]);
+          website.set("category", attr["category"]);
+          website.set("url", attr["url"]);
+          website.set("description", attr["description"]);
+          website.set("image", attr["image"]);
+          website.save(null, {
+              success: function(conference) {
+                  alert("success");
+                  $("#myModal2").modal("hide");
+                  router.navigate("editWebsites", true);
+              },
+              error: function(){
+                  alert("update failed");
+              }
+          });
+          console.log(attr);
+      };
+      function update_thumbnail(){
+          var file = $("#w_image")[0];
+          var file = file.files[0];
+          console.log(file);
+          $("#t_n_preview").attr('src',file["mozFullPath"]);
+      };
   </script>
 </body>
 
