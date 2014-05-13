@@ -25,9 +25,39 @@
     <script type="text/template" id='about_template'>
             <span class='about'><%= content %></span>
     </script>
-
-    <script type="text/template" id='report_template'>
+    <script type="text/template" id='conference_template'>
         <div class='report'>
+            <div class='conf_img'>
+                <img class='conf_logo' src="imgs/placeholder.gif" />
+            </div>
+            <div class='conf_desc'>
+                <div class='conf_header'>
+                    <div class='conf_name'>
+                        <span class='conf_name_span'>
+                            <%= name%>
+                        </span>
+                    </div>
+                    <div class='conf_time'>
+                        <span class='conf_name_span'>
+                        </span>
+                    </div>
+                    <div class='conf_type'>
+
+                    </div>
+                </div>
+                <div class='seperator3'></div>
+                <div class='conf_preview'>
+                    <span class='conf_preview_author'>
+                    </span><br/>
+                    <span class='conf_preview_desc'>
+                        <%= description%>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/template" id='report_template'>
+        <div class='report detail'>
             <div class='conf_img'>
                 <img class='conf_logo' src="imgs/placeholder.gif" />
             </div>
@@ -65,7 +95,7 @@
     </script>
 
     <script type="text/template" id='detail_view'>
-        <div class='report_detail'>
+        <div class='detail'>
             <div class='detail_img'>
                 <img class='conf_logo' src="imgs/placeholder.gif" />
             </div>
@@ -205,10 +235,11 @@
                     <% if (conference.has("published")) { %>
                         <li>Published: <%= conference.get("published").getFullYear() %></li>
                     <% } %>
-                <li><a href="#conference/<%= conference.id %>">More Info</a></li>
                 </ul>
+                
             </div> 
         <% }); %>
+        <a href="#conferencesList">More Info</a>
     </script>
 
     <!-- templates -->
@@ -284,7 +315,8 @@
               <div id="websiteFilter"></div>
               <div id="websiteList"></div>
            </div>
-           <div id='reports'></div>
+           <div id='reports' class='list'></div>
+           <div id='conferences' class='list'></div>
            <div id='partners'></div>
            <div id='about'>
               <p>About Us</p>
@@ -332,6 +364,7 @@
     <script src="js/views/websiteList.js"></script>
     <script src="js/views/aboutView.js"></script>
     <script src="js/views/reportsView.js"></script>
+    <script src="js/views/conferencesView.js"></script>
     <script src="js/views/filterView.js"></script>
     <script src="js/views/dropdownView.js"></script>
     <script src="js/views/partnerView.js"></script>

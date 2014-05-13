@@ -15,14 +15,19 @@ app.MapView = Parse.View.extend({
                 app.pubSub.trigger("reportsFetched");
             }
         });
-        app.MapData.conferencesCollection = new Conferences();
-        app.MapData.conferencesCollection.fetch();
+        app.ConferenceListCollection = app.MapData.conferencesCollection = new Conferences();
+        app.MapData.conferencesCollection.fetch({
+            success: function(collection) {
+                app.pubSub.trigger("conferencesFetched");
+            }
+        });
         app.MapData.reportsCollection.getCategoriesList();
         app.pubSub.on("reportCategories", this.initReportFilter, this);
 
         app.MapData.conferencesCollection.getCategoriesList();
         app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
         app.pubSub.on("reportsFetched", this.setupMap, this);
+        app.pubSub.on("reportsFetched conferencesFetched", this.colorMap, this);
     },
     colorMap: function() {
         var getColor = _.bind(this.getColor, this);
@@ -81,13 +86,13 @@ app.MapView = Parse.View.extend({
             if (boxValues.length === 0) {
                 app.ReportListCollection = app.MapData.activeCollection = app.MapData.reportsCollection;
             } else {
-                app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(boxValues);
+                app.ConferenceListCollection = app.MapData.activeCollection = app.MapData.reportsCollection.filterByCategory(boxValues);
             }
         } else if (app.activeFilter == app.conferenceFilter) {
             if (boxValues.length === 0) {
                 app.ReportListCollection = app.MapData.activeCollection = app.MapData.conferencesCollection;
             } else {
-                app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
+                app.ConferenceListCollection = app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
             }
         }
         var getColor = _.bind(this.getColor, this);
@@ -143,6 +148,7 @@ app.MapView = Parse.View.extend({
                 app.ReportListCollection = filtered;
                 app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             } else {
+                app.ConferenceListCollection = filtered;
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
             }
             country.bindPopup(app.MapData.OpenTab.render().el, {className: app.MapData.LayerStyle.concat("-popup")});
@@ -192,7 +198,6 @@ app.MapView = Parse.View.extend({
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         app.MapData.MapDiv.on('popupclose', this.removePopup);
-        this.colorMap();
         return this;
     },
 
@@ -210,7 +215,7 @@ app.MapView = Parse.View.extend({
             app.ReportListCollection = app.MapData.activeCollection = app.MapData.reportsCollection;
             this.setActiveFilter(type);
         } else if (type == "conferences") {
-            app.MapData.activeCollection = app.MapData.conferencesCollection;
+            app.ConferenceListCollection = app.MapData.activeCollection = app.MapData.conferencesCollection;
             this.setActiveFilter(type);
         }
 
