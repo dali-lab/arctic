@@ -7,6 +7,10 @@ var ArcticAdminRouter = Parse.Router.extend({
     "editReport/:id": "editReport",
     "editWebsites": "editWebsites",
     "editWebsite/:id": "editWebsite",
+    "addWebsite": "addWebsite",
+    "editPartners": "editPartners",
+    "editPartner/:id": "editPartner",
+    "addPartner": "addPartner",
     "editAbout": "editAbout"
   },
 
@@ -24,15 +28,17 @@ var ArcticAdminRouter = Parse.Router.extend({
 
   addConference: function(){
     var addconferenceview = new addConferenceView();
-    console.log("add conference");
   },
 
   editReports: function(){
     var editreportsview = new editReportsView();
-    console.log("in editReports");
   },
 
   editReport: function(id){
+
+  },
+
+  addReport: function(){
 
   },
 
@@ -44,8 +50,26 @@ var ArcticAdminRouter = Parse.Router.extend({
     var editwebsiteview = new editWebsiteView(id);
   },
 
-  editAbout: function(){
+  addWebsite: function(){
+    var addwebsiteview = new addWebsiteView();
+    //console.log("begin to add website");
+  },
 
+  editPartners: function(){
+    var editpartnersview = new editPartnersView();
+  },
+
+  editPartner: function(id){
+    var editpartnersview = new editPartnerView(id);
+  },
+
+  addPartner: function(){
+    var addpartnerview = new addPartnerView();
+  },
+
+
+  editAbout: function(){
+    var editaboutview = new editAboutView();
   }
 });
 

@@ -55,3 +55,12 @@ var About = Parse.Object.extend("About", {
     content: "empty content"
   },
 });
+
+
+//model for partner
+var Partner = Parse.Object.extend("Partner", {
+// Default attributes for the todo.
+  defaults: {
+    name:"undefined",
+  },
+});

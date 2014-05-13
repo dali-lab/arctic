@@ -178,3 +178,8 @@ var AboutCollection = Parse.Collection.extend({
   model: About,
   //query: new Parse.Query(About)
 });
+
+//Partner Collection
+var PartnerCollection = Parse.Collection.extend({
+    model: Partner,
+});

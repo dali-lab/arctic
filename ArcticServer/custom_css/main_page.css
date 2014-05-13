@@ -54,6 +54,12 @@
   width:80%;
   float:left;
 }
+#table_id{
+    width:100%;
+}
+#changable{
+  overflow: scroll; 
+}
 .ops{
 
 }
