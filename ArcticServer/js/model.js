@@ -15,8 +15,7 @@ var Report = Parse.Object.extend ({
         description:"empty",
         posttime:"not known",
         author:"not known",
-        objectId:"null",
-        published:""
+        objectId:"null"
     },
 });
 

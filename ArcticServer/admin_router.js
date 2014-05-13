@@ -5,6 +5,7 @@ var ArcticAdminRouter = Parse.Router.extend({
     "editReports": "editReports",
     "addConference": "addConference",
     "editReport/:id": "editReport",
+    "addReport": "addReport",
     "editWebsites": "editWebsites",
     "editWebsite/:id": "editWebsite",
     "addWebsite": "addWebsite",
@@ -35,11 +36,11 @@ var ArcticAdminRouter = Parse.Router.extend({
   },
 
   editReport: function(id){
-
+    var editreportview = new editReportView(id);
   },
 
   addReport: function(){
-
+    var addreport = new addReportView();
   },
 
   editWebsites: function(){

@@ -8,44 +8,12 @@
   <LINK href="custom_css/demo_table.css" rel="stylesheet" type="text/css">
   <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
-        #footer{
-          height:200px;
-          background-color: #CCC;
-          padding-top: 20px;
-          margin-top: 3px;
-          padding-bottom: 20px;
-        /*      border-style:solid;*/
-          border-top:solid white;
-        }
-        #footer_text span{
-          color:black;
-          font-size: 15px;
-        }
-        #logos{
-          /*padding-top: 40px;*/
-          padding-bottom: 10px;
-        }
-
-        .footer_img {
-            max-width:15%;
-            padding-left:30px;
-            padding-right:30px;
-        }
-        .img_edit_tn{
-            border:1px solid black;
-            width:190px;
-            height:118px;
-        }
-        #edit_ab{
-            width:80%;
-            height:450px;
-        }
   </style>
 </head>
 <body>
   <div id="main">
       <div id='top' align='right'>
-        <span class='glyphicon glyphicon-envelope'></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class='top_span'>Welcome!</span>&nbsp;<span class='admin_acc'>admin</span>&nbsp;
+        <span class='top_span'>Welcome!</span>&nbsp;<span class='admin_acc'>admin</span>&nbsp;
         <span class="glyphicon glyphicon-off"></span>
       </div>
       <div id='wrapper'>
@@ -68,9 +36,6 @@
   </div>
   <div id='show_modal'>
   </div>
-<!--   <div id='loading' class="alert alert-warning" style="display:none">
-      saving
-  </div> -->
 </div>
 <div id='footer'>
   <div id='logos' align='center'>
@@ -100,6 +65,24 @@
             </table>
             <div id='opp' align='right'>
                 <span class='ops' onclick='add_Conference()'>+add</span>
+            </div>
+    </div>
+</script>
+
+<script type="text/template" id="tab2_template">
+    <div id="second_tab">
+          <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+            <div id='opp' align='right'>
+                <span class='ops' onclick='add_Report()'>+add</span>
             </div>
     </div>
 </script>
@@ -142,8 +125,9 @@
 
 <script type="text/template" id="tab5_template">
     <div id="fifth_tab">
+          <input id="hidden_objid_a" value="<%=objectId%>" style="display:none"/>
           <textarea class="form-control" rows="3" id="edit_ab"><%=content%></textarea>
-          <button type="button" class="btn btn-default btn-lg active">Button</button>
+          <button type="button" class="btn btn-default btn-lg active" onclick="save_About()">Save</button>
     </div>
 </script>
 
@@ -213,6 +197,71 @@
   </div>
 </script>
 
+<script type="text/template" id='edit_report'>
+  <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <input id="hidden_objid_r" value="<%if(type==1) print(objectId)%>" style="display:none"/>
+        <div class="modal-header">
+          <button type="button" id="cls_btn" class="close" aria-hidden="true" onclick="reset3()">&times;</button>
+          <h4 class="modal-title" id="myModalLabel"><% if(type==1) print('Edit Information'); else print('Add New Record');%></h4>
+        </div>
+        <div class="modal-body">
+          <!-- body -->
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Report Name</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="r_name" value="<% if(type==1) print(name)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Author</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="r_author" value="<%if(type==1) print(author)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Country</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="r_country" value="<%if(type==1) print(country)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Publisher</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="r_pub_by" value="<%if(type==1) print(publisher)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-2 control-label">Category</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="r_cate" value="<%if(type==1) print(category)%>" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">description</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="r_desc" value="<%if(type==1) print(description)%>">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Link</label>
+              <div class="col-sm-8">
+                <input class="form-control" id="r_link" value="<%if(type==1) print(url)%>">
+              </div>
+            </div>
+          </form>
+          <!-- end of body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="reset3()">Close</button>
+          <button id="c_sv_btn" type="button" class="btn-my btn" onclick="save_report()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
 
 <script type="text/template" id='edit_website'>
   <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -312,22 +361,6 @@
   </div>
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <script type="text/javascript" src="jquery/jquery.js"></script>
   <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
   <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
@@ -344,196 +377,7 @@
   <script type="text/javascript" src="views/editPartnersView.js"></script>
   <script type="text/javascript" src="views/editAboutView.js"></script>
   <script type="text/javascript" src="admin_router.js"></script>
-  
-  
-  
-  <script>
-      var updated = false;
-      $("#conf_btn").click(function(){
-          router.navigate("", true);
-      });
-      $("#rep_btn").click(function(){
-          router.navigate("editReports", true);
-
-      });
-      $("#web_btn").click(function(){
-          router.navigate("editWebsites", true);
-      });
-
-      $("#part_btn").click(function(){
-          router.navigate("editPartners", true);
-      });
-
-      $("#abo_btn").click(function(){
-          router.navigate("editAbout", true);
-      });
-      $(document).ready( function () {
-          $('#table_id').dataTable();
-      } );
-
-      function reset(){
-          $("#myModal").modal("hide");
-          if(updated){
-            router.navigate("", true);
-            updated = false;
-          }else{
-            router.navigate("", false);
-          }
-      };
-
-      function reset2(){
-          $("#myModal2").modal("hide");
-          if(updated){
-            router.navigate("editWebsites", true);
-            updated = false;
-          }else{
-            router.navigate("editWebsites", false);
-          }
-      };
-
-      function reset4(){
-          $("#myModal3").modal("hide");
-          if(updated){
-            router.navigate("editPartners", true);
-            updated = false;
-          }else{
-            router.navigate("editPartners", false);
-          }
-      };
-
-      function add_Conference(){
-          router.navigate("addConference", true);
-      };
-
-      function add_Website(){
-          router.navigate("addWebsite", true);
-      };
-
-      function add_Partner(){
-          router.navigate("addPartner", true);
-      };
-
-      function save_conference(){
-          attr = [];
-          attr["name"] = $("#c_name").val();
-          attr["country"] = $("#c_country").val();
-          attr["category"] = $("#c_cate").val();
-          attr["city"] = $("#c_city").val();
-          attr["url"] = $("#c_link").val();
-          attr["organization"] = $("#c_organization").val();
-          attr["description"] = $("#c_desc").val();
-          attr["objectId"] = $("#hidden_objid").val();
-          //console.log(attr);
-          var conf = new Conference();
-          conf.id = attr["objectId"];
-          conf.set("name", attr["name"]);
-          conf.set("country", attr["country"]);
-          conf.set("city", attr["city"]);
-          conf.set("category", attr["category"]);
-          conf.set("url", attr["url"]);
-          conf.set("organization", attr["organization"]);
-          conf.set("description", attr["description"]);
-          conf.save(null, {
-              success: function(conference) {
-                  alert("success");
-                  updated = true;
-              },
-              error: function(){
-                  alert("update failed");
-              }
-          });
-      };
-
-      function save_website(){
-          attr = [];
-          attr["name"] = $("#w_name").val();
-          attr["category"] = $("#w_cate").val();
-          attr["url"] = $("#w_link").val();
-          attr["description"] = $("#w_desc").val();
-          attr["objectId"] = $("#hidden_objid_w").val();
-          var file = $("#w_image")[0];
-          if(file.files.length > 0){
-            var file = file.files[0];
-            var name = "photo.jpg";
-           
-            var parseFile = new Parse.File(name, file);
-            attr["image"] = parseFile;
-          }
-          //console.log(attr);
-          var website = new Website();
-          website.id = attr["objectId"];
-          website.set("name", attr["name"]);
-          website.set("category", attr["category"]);
-          website.set("url", attr["url"]);
-          website.set("description", attr["description"]);
-          website.set("image", attr["image"]);
-          website.save(null, {
-              success: function(conference) {
-                  alert("success");
-                  // $("#myModal2").modal("hide");
-                  // router.navigate("editWebsites", true);
-                  //get updated thumbnail
-                  var query = new Parse.Query(Website);
-                  query.get(website.id, {
-                    success: function(result) {
-                        //results.get('image').url();
-                        $("#t_n_preview").attr('src',result.get('image').url());
-                    },
-                    error: function(object, error) {
-                      // The object was not retrieved successfully.
-                      // error is a Parse.Error with an error code and description.
-                    }
-                  });
-                  updated = true;
-              },
-              error: function(){
-                  alert("update failed");
-              }
-          });
-          //console.log(attr);
-      };
-
-      function save_partner(){
-          attr = [];
-          attr["name"] = $("#p_name").val();
-          attr["url"] = $("#p_link").val();
-          attr["objectId"] = $("#hidden_objid_p").val();
-          var file = $("#p_image")[0];
-          if(file.files.length > 0){
-            var file = file.files[0];
-            var name = "photo.jpg";
-            var parseFile = new Parse.File(name, file);
-            attr["image"] = parseFile;
-          }
-          //console.log(attr);
-          var partner = new Partner();
-          partner.id = attr["objectId"];
-          partner.set("name", attr["name"]);
-          partner.set("url", attr["url"]);
-          partner.set("image", attr["image"]);
-          partner.save(null, {
-              success: function(conference) {
-                  alert("success");
-                  var query = new Parse.Query(Partner);
-                  query.get(partner.id, {
-                    success: function(result) {
-                        //results.get('image').url();
-                        $("#t_n_preview").attr('src',result.get('image').url());
-                    },
-                    error: function(object, error) {
-                      // The object was not retrieved successfully.
-                      // error is a Parse.Error with an error code and description.
-                    }
-                  });
-                  updated = true;
-              },
-              error: function(){
-                  alert("update failed");
-              }
-          });
-          //console.log(attr);
-      };
-  </script>
+  <script type="text/javascript" src="js/admin.js"></script>
 </body>
 
 </html>

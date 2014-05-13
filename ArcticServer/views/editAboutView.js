@@ -15,7 +15,8 @@ var editAboutView = Parse.View.extend({
           this.el = $("#changable");
           this.el.empty();
           var result = results[0];
-          var template = _.template( $("#tab5_template").html(), {"content": result.get("content")});
+          //debugger;
+          var template = _.template( $("#tab5_template").html(), {"content": result.get("content"),"objectId": result.id});
           this.el.html(template);
         }
       });

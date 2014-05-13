@@ -84,3 +84,36 @@
 .btn-my{
   background-color:#999;
 }
+
+#footer{
+  height:200px;
+  background-color: #CCC;
+  padding-top: 20px;
+  margin-top: 3px;
+  padding-bottom: 20px;
+/*      border-style:solid;*/
+  border-top:solid white;
+}
+#footer_text span{
+  color:black;
+  font-size: 15px;
+}
+#logos{
+  /*padding-top: 40px;*/
+  padding-bottom: 10px;
+}
+
+.footer_img {
+    max-width:15%;
+    padding-left:30px;
+    padding-right:30px;
+}
+.img_edit_tn{
+    border:1px solid black;
+    width:190px;
+    height:118px;
+}
+#edit_ab{
+    width:80%;
+    height:450px;
+}
