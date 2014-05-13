@@ -138,12 +138,15 @@
     </script>
 
     <script type="text/template" id="partner-template">
-        <p>Partners</p>
+        <h1>Partners</h1>
+        <p>Arctic Virtual Forum is made possible through the generous support of/cooperation between the following partner institutions</p>
         <% _.each(partners.models, function(partner) { %>
-                <div class="partner">
-                    <img class="partner_image" src="<%= partner.get('image').url() %>">
-                    <p><a class="partner_link" href="<%= partner.get('url') %>"><%= partner.get('name') %></a></p>
-                </div>
+            <div class="partner">
+                <a class="partner_link" href="<%= partner.get('url') %>">
+                    <img src="<%= partner.get('image').url() %>">
+                    <div class="partner_txt"><%= partner.get('name') %></div>
+                </a>
+            </div>
         <% }); %>
     </script>
 
@@ -294,8 +297,9 @@
     </div>
 	<div id='footer'>
 		<div id='logos' align='center'>
-                    <!-- <img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/> -->
-                    <!-- <img src='imgs/thumb-2.gif' alt='place_holder' height='40px' width='40px'/> -->
+                    <img class="footer_img" src="imgs/Dartmouth.jpg" alt="place_holder"/>
+                    <img class="footer_img" src='imgs/dalilogoorange.png' alt='place_holder'/>
+                    <img class="footer_img" src='imgs/avflogo.png' alt='place_holder' />
 		</div>
 		<div id='footer_text' align='center'>
 			<span>Site managed by the Institute of Arctic studies at Dartmouth College</span>
