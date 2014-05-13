@@ -72,17 +72,25 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showReportsList: function() {
-      app.ReportList = new ReportListView();
-      this.appView.showView(app.ReportList);
-      $("#spin_navi").hide();
-
+      if (app.ReportListCollection) {
+        app.ReportList = new ReportListView();
+        this.appView.showView(app.ReportList);
+        $("#spin_navi").hide();
+      } else {
+          this.navigate("reports", {trigger: true});
+      }
   },
 
   showConferencesList: function() {
-      app.ConferenceList = new ConferenceListView();
-      this.appView.showView(app.ConferenceList);
-      $("#spin_navi").hide();
+      if (app.ConferenceListCollection) {
+        app.ConferenceList = new ConferenceListView();
+        this.appView.showView(app.ConferenceList);
+        $("#spin_navi").hide();
+      } else {
+          this.navigate("conferences", {trigger: true});
+      }
   },
+
   // Switches the map's popup layer to conferences
   showConferences: function() {
     $("#arrow").rotate(270);
