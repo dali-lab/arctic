@@ -50,7 +50,7 @@ var editConferenceView = Parse.View.extend({
 
     render: function() {
       //console.log("begin to render");
-      console.log("begin to retrieve conference with id "+this.id);
+      //console.log("begin to retrieve conference with id "+this.id);
       var self = this;
       this.collection.fetch({
         success: function() {
@@ -59,9 +59,9 @@ var editConferenceView = Parse.View.extend({
                 if(object.id == self.id){
                     //console.log("found!");
                     this.el = $("#show_modal");
-                    console.log(object.get("name"));
+                    //console.log(object.get("name"));
                     //this.el.empty();
-                    console.log(object.get("name"));
+                    //console.log(object.get("name"));
                     var template = _.template( $("#edit_conference").html(), 
                       { "name": object.get("name"),
                         "country": object.get("country"),
@@ -70,8 +70,10 @@ var editConferenceView = Parse.View.extend({
                         "description": object.get("description"),
                         "url": object.get("url"),
                         "organization": object.get("organization"),
-                        "objectId": object.id
+                        "objectId": object.id,
+                        "type": 1,
                       });
+                    //console.log(template);
                     this.el.html(template);
                     $('#myModal').modal('show');
                     return;
