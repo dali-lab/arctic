@@ -167,7 +167,7 @@
         <p>Arctic Virtual Forum is made possible through the generous support of/cooperation between the following partner institutions</p>
         <% _.each(partners.models, function(partner) { %>
             <div class="partner">
-                <a class="partner_link" href="<%= partner.get('url') %>">
+                <a class="partner_link" href="http://<%= partner.get('url') %>">
                     <img src="<%= partner.get('image').url() %>">
                     <div class="partner_txt"><%= partner.get('name') %></div>
                 </a>
