@@ -279,6 +279,11 @@ function login(){
     });
 };
 
+function logout(){
+    console.log("about to log off");
+    Parse.User.logOut();
+    location.reload(false);
+}
 
 function delete_Conference(id){
        var conference = new Conference();

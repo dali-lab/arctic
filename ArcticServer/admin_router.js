@@ -1,4 +1,4 @@
-var au = false;
+// var currentUser = null;
 var ArcticAdminRouter = Backbone.Router.extend({
   routes: {
     "": "editConferences",
@@ -14,39 +14,6 @@ var ArcticAdminRouter = Backbone.Router.extend({
     "editPartner/:id": "editPartner",
     "addPartner": "addPartner",
     "editAbout": "editAbout",
-    "signin": "signin"
-  },
-
-  route: function(route, name, callback) {
-    if (!_.isRegExp(route)) route = this._routeToRegExp(route);
-    if (_.isFunction(name)) {
-      callback = name;
-      name = '';
-    }
-    if (!callback) callback = this[name];
-    // here my custom code
-    // callback = _.wrap(callback, _.bind(function(cb) {
-    //   // if (name == 'login') {
-    //   //   _.bind(cb, this)();
-    //   // } else {
-    //   //   this.navigate('login', {trigger: true});
-    //   // }
-    //   console.log(Parse.User.current());
-    if(!Parse.User.current()){
-      this.navigate('signin', true);
-    }
-    //   _.bind(cb, this)();
-    // }, this));
-    // finish my custom code
-    var router = this;
-    Backbone.history.route(route, function(fragment) {
-      var args = router._extractParameters(route, fragment);
-      callback && callback.apply(router, args);
-      router.trigger.apply(router, ['route:' + name].concat(args));
-      router.trigger('route', name, args);
-      Backbone.history.trigger('route', router, name, args);
-    });
-    return this;
   },
 
   initialize: function() {
@@ -54,61 +21,96 @@ var ArcticAdminRouter = Backbone.Router.extend({
   },
 
   editConferences: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var editconferencesview = new editConferencesView();
   },
 
   editConference: function(id){
+    if(!Parse.User.current()){
+      login();
+    }
     var editconferenceview = new editConferenceView(id);
   },
 
   addConference: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var addconferenceview = new addConferenceView();
   },
 
   editReports: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var editreportsview = new editReportsView();
   },
 
   editReport: function(id){
+    if(!Parse.User.current()){
+      login();
+    }
     var editreportview = new editReportView(id);
   },
 
   addReport: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var addreport = new addReportView();
   },
 
   editWebsites: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var editwebsitesview = new editWebsitesView();
   },
 
   editWebsite: function(id){
+    if(!Parse.User.current()){
+      login();
+    }
     var editwebsiteview = new editWebsiteView(id);
   },
 
   addWebsite: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var addwebsiteview = new addWebsiteView();
     //console.log("begin to add website");
   },
 
   editPartners: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var editpartnersview = new editPartnersView();
   },
 
   editPartner: function(id){
+    if(!Parse.User.current()){
+      login();
+    }
     var editpartnersview = new editPartnerView(id);
   },
 
   addPartner: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var addpartnerview = new addPartnerView();
   },
 
 
   editAbout: function(){
+    if(!Parse.User.current()){
+      login();
+    }
     var editaboutview = new editAboutView();
-  },
-
-  signin: function(){
-    login();
   }
 });
 
