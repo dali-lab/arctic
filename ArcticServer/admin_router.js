@@ -1,4 +1,5 @@
-var ArcticAdminRouter = Parse.Router.extend({
+var au = false;
+var ArcticAdminRouter = Backbone.Router.extend({
   routes: {
     "": "editConferences",
     "editConference/:id": "editConference",
@@ -12,7 +13,40 @@ var ArcticAdminRouter = Parse.Router.extend({
     "editPartners": "editPartners",
     "editPartner/:id": "editPartner",
     "addPartner": "addPartner",
-    "editAbout": "editAbout"
+    "editAbout": "editAbout",
+    "signin": "signin"
+  },
+
+  route: function(route, name, callback) {
+    if (!_.isRegExp(route)) route = this._routeToRegExp(route);
+    if (_.isFunction(name)) {
+      callback = name;
+      name = '';
+    }
+    if (!callback) callback = this[name];
+    // here my custom code
+    // callback = _.wrap(callback, _.bind(function(cb) {
+    //   // if (name == 'login') {
+    //   //   _.bind(cb, this)();
+    //   // } else {
+    //   //   this.navigate('login', {trigger: true});
+    //   // }
+    //   console.log(Parse.User.current());
+    if(!Parse.User.current()){
+      this.navigate('signin', true);
+    }
+    //   _.bind(cb, this)();
+    // }, this));
+    // finish my custom code
+    var router = this;
+    Backbone.history.route(route, function(fragment) {
+      var args = router._extractParameters(route, fragment);
+      callback && callback.apply(router, args);
+      router.trigger.apply(router, ['route:' + name].concat(args));
+      router.trigger('route', name, args);
+      Backbone.history.trigger('route', router, name, args);
+    });
+    return this;
   },
 
   initialize: function() {
@@ -71,8 +105,12 @@ var ArcticAdminRouter = Parse.Router.extend({
 
   editAbout: function(){
     var editaboutview = new editAboutView();
+  },
+
+  signin: function(){
+    login();
   }
 });
 
 var router = new ArcticAdminRouter();
-Parse.history.start();
+Backbone.history.start();

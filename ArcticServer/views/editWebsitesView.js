@@ -1,6 +1,5 @@
 Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
 var app = app || {};
-
 //default view
 var editWebsitesView = Parse.View.extend({
     initialize: function() {
@@ -21,9 +20,8 @@ var editWebsitesView = Parse.View.extend({
           var giCount = 1;
           //console.log(results[0]);
           for (var i = 0; i < results.length; i++) {
-            var image = results[i].get('image');
             $('#table_id').dataTable().fnAddData( [
-              "<input type='checkbox' />",
+              '<span class="glyphicon glyphicon-remove" onclick="delete_Website(\'' + results[i].id + '\')"></span>',
               ""+results[i].get('name'),
               ""+results[i].get('category'),
               ""+results[i].get('description'),

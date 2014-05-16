@@ -361,11 +361,22 @@
   </div>
 </script>
 
+<script type="text/template" id='signin'>
+  <div class="form-signin">
+      <h2 class="form-signin-heading">Please Sign In</h2>
+      <input id="userID" class="form-control" placeholder="ID/Email Address" required autofocus><br/>
+      <input id="password" type="password" class="form-control" placeholder="Password" required>
+  </div>
+</script>
+
+
   <script type="text/javascript" src="jquery/jquery.js"></script>
   <script type="text/javascript" src="jquery/jquery.dataTables.js"></script>
   <script type="text/javascript" src="bootstrap-dist/js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootbox.min.js"></script>
+  <script type="text/javascript" src="js/underscore.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
-  <script type="text/javascript" src="underscore.js"></script>
+  <script type="text/javascript" src="js/backbone-min.js"></script>
   <!-- models -->
   <script type="text/javascript" src="js/model.js"></script>
   <!-- collections -->
@@ -376,8 +387,9 @@
   <script type="text/javascript" src="views/editWebsitesView.js"></script>
   <script type="text/javascript" src="views/editPartnersView.js"></script>
   <script type="text/javascript" src="views/editAboutView.js"></script>
-  <script type="text/javascript" src="admin_router.js"></script>
   <script type="text/javascript" src="js/admin.js"></script>
+  <script type="text/javascript" src="admin_router.js"></script>
+  
 </body>
 
 </html>

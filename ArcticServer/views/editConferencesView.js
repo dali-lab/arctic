@@ -11,7 +11,7 @@ var editConferencesView = Parse.View.extend({
     render: function() {
       this.el = $("#changable");
       this.el.empty();
-      var template = _.template( $("#tab1_template").html())
+      var template = _.template( $("#tab1_template").html());
       this.el.html(template);
       prepareTableForConference();
       var Conference = Parse.Object.extend("Conference");
@@ -21,8 +21,9 @@ var editConferencesView = Parse.View.extend({
           var giCount = 1;
           $('#table_id').dataTable().fnClearTable();
           for (var i = 0; i < results.length; i++) {
+            var id = results[i].id;
             $('#table_id').dataTable().fnAddData( [
-              "<input type='checkbox' />",
+              '<span class="glyphicon glyphicon-remove" onclick="delete_Conference(\'' + id + '\')"></span>',
               ""+results[i].get('name'),
               ""+results[i].get('country'),
               ""+results[i].get('city'),

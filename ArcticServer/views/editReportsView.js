@@ -1,6 +1,5 @@
 Parse.initialize("eipwUxxOCdl2C5VaTwC079iWpncdb0cjrgFDMEat", "k9YFVQUFHfXIHizc7pmnet7akcBom56wEAxouSOk");
 var app = app || {};
-
 //default view
 var editReportsView = Parse.View.extend({
     initialize: function() {
@@ -21,7 +20,7 @@ var editReportsView = Parse.View.extend({
           var giCount = 1;
           for (var i = 0; i < results.length; i++) {
             $('#table_id').dataTable().fnAddData( [
-              "<input type='checkbox' />",
+              '<span class="glyphicon glyphicon-remove" onclick="delete_Report(\'' + results[i].id + '\')"></span>',
               ""+results[i].get('name'),
               ""+results[i].get('author'),
               ""+results[i].get('country'),

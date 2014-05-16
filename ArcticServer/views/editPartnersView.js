@@ -21,9 +21,8 @@ var editPartnersView = Parse.View.extend({
           var giCount = 1;
           //console.log(results[0]);
           for (var i = 0; i < results.length; i++) {
-            var image = results[i].get('image');
             $('#table_id').dataTable().fnAddData( [
-              "<input type='checkbox' />",
+              '<span class="glyphicon glyphicon-remove" onclick="delete_Partner(\'' + results[i].id + '\')"></span>',
               ""+results[i].get('name'),
               ""+results[i].get('url'),
               ""+results[i].get('image').url(),

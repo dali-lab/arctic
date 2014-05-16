@@ -1,3 +1,13 @@
+// Parse.User.logIn("myname", "mypass", {
+//   success: function(user) {
+//     // Do stuff after successful login.
+//     alert("success");
+//   },
+//   error: function(user, error) {
+//     // The login failed. Check error to see why.
+//     alert("failed");
+//   }
+// });
 var updated = false;
 $("#conf_btn").click(function(){
     router.navigate("", true);
@@ -245,3 +255,97 @@ function save_About(){
         }
     });
 };
+
+
+function login(){
+    var template = _.template( $("#signin").html());
+    bootbox.alert(template, function(result) {
+        var username = $("#userID").val();
+        var password = $("#password").val();
+        console.log(username);
+        console.log(password);
+        Parse.User.logIn(username, password, {
+          success: function(user) {
+            // Do stuff after successful login.
+            // console.log("logged in");
+            // var currentUser = Parse.User.current();
+          },
+          error: function(user, error) {
+            // The login failed. Check error to see why.
+            console.log("failed");
+            login();
+          }
+        });
+    });
+};
+
+
+function delete_Conference(id){
+       var conference = new Conference();
+       conference.id = id;
+       conference.destroy({
+          success: function(myObject) {
+            // The object was deleted from the Parse Cloud.
+            alert("deleted");
+            location.reload(false);
+          },
+          error: function(myObject, error) {
+            alert("failed");
+            // The delete failed.
+            // error is a Parse.Error with an error code and description.
+          }
+        });
+}
+
+function delete_Report(id){
+    //get checked checkboxs
+        var report = new Report();
+       report.id = id;
+       report.destroy({
+          success: function(myObject) {
+            // The object was deleted from the Parse Cloud.
+            alert("deleted");
+            location.reload(false);
+          },
+          error: function(myObject, error) {
+            alert("failed");
+            // The delete failed.
+            // error is a Parse.Error with an error code and description.
+          }
+        });
+}
+
+function delete_Website(id){
+    //get checked checkboxs
+    var website = new Website();
+       website.id = id;
+       website.destroy({
+          success: function(myObject) {
+            // The object was deleted from the Parse Cloud.
+            alert("deleted");
+            location.reload(false);
+          },
+          error: function(myObject, error) {
+            alert("failed");
+            // The delete failed.
+            // error is a Parse.Error with an error code and description.
+          }
+        });
+}
+
+function delete_Partner(id){
+    var partner = new Partner();
+       partner.id = id;
+       partner.destroy({
+          success: function(myObject) {
+            // The object was deleted from the Parse Cloud.
+            alert("deleted");
+            location.reload(false);
+          },
+          error: function(myObject, error) {
+            alert("failed");
+            // The delete failed.
+            // error is a Parse.Error with an error code and description.
+          }
+        });
+}
