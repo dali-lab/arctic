@@ -9,9 +9,19 @@ var ConferenceView = Parse.View.extend({
         this.$el.empty();
         var name = this.model.get('name');
         var desc = this.model.get('description');
+        if (this.model.has('image')) {
+            var image = this.model.get('image');
+        } else {
+            var image = {
+                url: function() {
+                    return "imgs/placeholder.gif";
+                }
+            }
+        }
         var template = _.template( $("#conference_template").html(), {
             "name": name,
-            "description": desc
+            "description": desc,
+            "image": image
         });
         this.$el.html(template);
         return this;

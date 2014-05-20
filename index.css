@@ -475,3 +475,8 @@ body {
 .conferences-popup {
     background: rgba(76, 141, 90, .8);
 }
+
+.dynamic-image {
+    width: 190px;
+    height: 118px;
+}

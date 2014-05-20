@@ -14,7 +14,7 @@
     <!-- templates -->
     <script type="text/template" id='website_template'>
         <div class='website' align='center'>
-            <img src="imgs/thumbnail.png" class="web_cache"/>
+            <img src=<%= image.url() %> class="web_cache dynamic-image" />
             <div class='web_text' align='left'>
                 <span class='website_name'><%= name%></span><br/>
                 <span class='website_desc'><%= description%></span>
@@ -23,18 +23,18 @@
     </script>
 
     <script type="text/template" id='about_template'>
-            <span class='about'><%= content %></span>
+        <span class='about'><%= content %></span>
     </script>
     <script type="text/template" id='conference_template'>
         <div class='report'>
             <div class='conf_img'>
-                <img class='conf_logo' src="imgs/placeholder.gif" />
+                <img class='conf_logo' src="<%= image.url() %>" />
             </div>
             <div class='conf_desc'>
                 <div class='conf_header'>
                     <div class='conf_name'>
                         <span class='conf_name_span'>
-                            <%= name%>
+                            <%= name %>
                         </span>
                     </div>
                     <div class='conf_time'>
@@ -241,7 +241,7 @@
     <script type="text/template">
         <script type="text/template" id='website_template'>
         <div class='website' align='center'>
-            <img src="thumbnail.png" class="web_cache"/>
+            <img src=<%= image.url() %> />
             <div class='web_text' align='left'>
                 <span class='website_name'><%= name%></span><br/>
                 <span class='website_desc'><%= description%></span>

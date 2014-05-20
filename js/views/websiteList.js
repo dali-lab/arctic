@@ -13,7 +13,8 @@ var WebsiteView = Parse.View.extend({
         var name = this.model.get('name');
         var desc = this.model.get('description');
         var url = this.model.get('url');
-        var template = _.template( $("#website_template").html(), {"name": name, "description": desc} );
+        var image = this.model.get('image');
+        var template = _.template( $("#website_template").html(), {"name": name, "description": desc, "url": url, "image": image } );
         this.$el.html(template);
         return this;
     }
