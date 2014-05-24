@@ -27,7 +27,9 @@ app.MapView = Parse.View.extend({
         app.MapData.conferencesCollection.getCategoriesList();
         app.pubSub.on("conferenceCategories", this.initConferenceFilter, this);
         app.pubSub.on("reportsFetched", this.setupMap, this);
-        app.pubSub.on("reportsFetched conferencesFetched", this.colorMap, this);
+	    var waitColorMap = _.after(2, this.colorMap);
+    	app.pubSub.on("reportsFetched", waitColorMap, this);
+	    app.pubSub.on("conferencesFetched", waitColorMap, this);
     },
     colorMap: function() {
         var getColor = _.bind(this.getColor, this);
@@ -96,7 +98,7 @@ app.MapView = Parse.View.extend({
             }
         }
         var getColor = _.bind(this.getColor, this);
-        this.colorMap();
+
     },
 
     render: function() {
@@ -223,6 +225,9 @@ app.MapView = Parse.View.extend({
             app.activeFilter.delegateEvents();
             app.activeFilter.filterCategories();
         }
+	if (app.MapData.MapLayer) {
+	    this.colorMap();
+	}
         return app.MapData.activeCollection;
     },
     getColor: function(layer) {
