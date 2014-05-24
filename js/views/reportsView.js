@@ -11,6 +11,7 @@ var ReportView = Parse.View.extend({
         this.$el.empty();
         var name = this.model.get('name');
         var desc = this.model.get('description');
+	var category = this.model.get('category') || "All";
         var url = this.model.get('url');
         var author = this.model.get('author');
         var posttime = this.model.get('posttime');
@@ -23,6 +24,7 @@ var ReportView = Parse.View.extend({
         var template = _.template( $("#report_template").html(), {
             "name": name, 
             "description": desc,
+	    "category": category,
             "author":author,
             "posttime":posttime,
             "url":url,

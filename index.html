@@ -81,9 +81,13 @@
                     <span class='conf_preview_author'>
                         <%= author%>
                     </span><br/>
+		    <span class='conf_preview_category'>
+		      <%= category %>
+		      </span><br/>
                     <span class='conf_preview_desc'>
                         <%= description%>
                     </span>
+                    <a href="http://<%= url %>" style="color: blue;"><%= url %></a>
                 </div>
             </div>
         </div>
@@ -190,18 +194,18 @@
         <% _.each(reports, function(report) { %> 
             <div id="<%= report.get("name") %>" class="reports-tab">
                 <ul>
-                    <li> 
+                    <li><strong> 
                     <% if (report.has("name")) { %>
                         <%= report.get("name") %>
                     <% } else { %> 
                         Unnamed
-                    <% } %>
+                    <% } %></strong></li>
                     <li>Category: 
                     <% if (report.has("category")) { %>
                         <%= report.get("category") %>
                     <% } else { %>
                         All 
-                    <% } %>
+                    <% } %></li>
                 </ul>
             <% }); %>
             <a href="#reportsList">More Info</a>
@@ -213,12 +217,12 @@
                 <ul>
                     <li> 
                     <% if (conference.has("name")) { %>
-                        <%= conference.get("name") %>
+                        <strong><%= conference.get("name") %></strong>
                     <% } else { %> 
                         Unnamed
                     <% } %>
                     </li>
-                    <br />
+
                     <li>Description: <%= conference.get("description") %></li>
                     <li>Category: 
                     <% if (conference.has("category")) { %>

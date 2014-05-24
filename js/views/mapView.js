@@ -194,9 +194,6 @@ app.MapView = Parse.View.extend({
 
         app.MapData.MapLayer = L.geoJson(countryData, {
             style: getStyle,
-            filter: function(feature, layer) {
-                return (feature.properties.name != 'Antarctica');
-            },
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         app.MapData.MapDiv.on('popupclose', this.removePopup);
