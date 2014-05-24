@@ -206,7 +206,9 @@ body {
 .reports-tab li {
     list-style-type: none;
 }
-
+.conferences-tab li {
+    list-style-type: none;
+}
 /* CSS from website template */
 #searchbox{
   float:right;
