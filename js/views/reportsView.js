@@ -15,13 +15,19 @@ var ReportView = Parse.View.extend({
         var author = this.model.get('author');
         var posttime = this.model.get('posttime');
         var objectId = "#report/" + this.model.id;
+	if (this.model.has('image')) {
+	    var image = this.model.get('image').url();
+	} else {
+	    var image = "imgs/placeholder.gif";
+	}
         var template = _.template( $("#report_template").html(), {
-        	"name": name, 
-        	"description": desc,
-        	"author":author,
-        	"posttime":posttime,
-        	"url":url,
-        	"objectId":objectId
+            "name": name, 
+            "description": desc,
+            "author":author,
+            "posttime":posttime,
+            "url":url,
+            "objectId":objectId,
+	    "image": image
         });
         this.$el.html(template);
         return this;
