@@ -334,8 +334,19 @@ body {
   height: 100%;
   background-color: rgba(76, 104, 129, .5);
   opacity: 80%;
-  font-size: 16px;
   overflow-y:scroll;
+}
+
+#about p {
+    font-size: 16px;
+}
+
+#about h2 {
+    font-size: 18px;
+}
+
+#about h1 {
+    font-size: 22px;
 }
 
 /* CSS from reports page*/
