@@ -3,7 +3,9 @@
   padding: 0;
   -webkit-backface-visibility: hidden;
 }
-
+.header-text {
+    color: white;
+}
 .header a {
   color: #999;
 }
@@ -21,9 +23,11 @@
 }
 
 #compass_toggle {
-    ;
+    background-color: transparent;
+    border: none;
     position: absolute;
     width: 30px;
+    outline: none;
     z-index: 999;
 }
 

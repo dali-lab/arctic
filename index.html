@@ -200,7 +200,7 @@
                     <% } else { %> 
                         Unnamed
                     <% } %></strong></li>
-                    <li>Category: 
+                    <li><i>Category</i>: 
                     <% if (report.has("category")) { %>
                         <%= report.get("category") %>
                     <% } else { %>
@@ -223,8 +223,8 @@
                     <% } %>
                     </li>
 
-                    <li>Description: <%= conference.get("description") %></li>
-                    <li>Category: 
+                    <li><i>Description</i>: <%= conference.get("description") %></li>
+                    <li><i>Category</i>: 
                     <% if (conference.has("category")) { %>
                         <%= conference.get("category") %>
                     <% } else { %>
@@ -259,7 +259,7 @@
 	<div id='header'>
 		<div id='inner' style="overflow:hidden">
 			<div id='header_name'>
-				<span>Arctic Virtual Forum</span>
+				<span class="header-text">Arctic Virtual Forum</span>
 			</div>
 			<div id='nav'>
 			    <ul>

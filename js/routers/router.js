@@ -24,6 +24,7 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showPartners: function() {
+      $("#arrow").rotate(310);
     if (!app.Partners) {
         app.Partners = new app.PartnerView();
     }
@@ -45,6 +46,7 @@ var ArcticRouter = Parse.Router.extend({
   },
 
   showAbout: function() {
+    $("#arrow").rotate(310);
     if (!app.About) {
         app.About = new app.AboutView();
     }
