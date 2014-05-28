@@ -97,7 +97,8 @@ app.MapView = Parse.View.extend({
                 app.ConferenceListCollection = app.MapData.activeCollection = app.MapData.conferencesCollection.filterByCategory(boxValues);
             }
         }
-        var getColor = _.bind(this.getColor, this);
+	this.colorMap();
+
 
     },
 
@@ -255,6 +256,7 @@ app.MapView = Parse.View.extend({
         return app.MapData.activeCollection;
     },
     getColor: function(layer) {
+	debugger;
         var collection = app.MapData.activeCollection;
         var name;
         for (var i = 0; i < collection.length; i++) {
