@@ -134,7 +134,6 @@ app.MapView = Parse.View.extend({
 
         var getStyle = function(feature) {
 	    if (feature.properties.NAME === 'Arctic') {
-		debugger;
 		return {
 	            weight: .75,
                     opacity: 1,
@@ -197,12 +196,18 @@ app.MapView = Parse.View.extend({
 	    var layer = e.target;
             var props = layer.feature.properties;
 	    var filtered = app.MapData.activeCollection.filterByCountry(props.NAME);
+	    var toOpenPopup = true;
+	    if (filtered.length === 0) {
+		toOpenPopup = false;
+	    }
 	    if (app.MapData.LayerStyle === "reports") {
 		app.ReportListCollection = filtered;
 	    } else {
 		app.ConferenceListCollection = filtered
 	    }
-	    app.MapData.MapDiv.openPopup(app.MapData.OpenPopup);
+	    if (toOpenPopup) {
+		app.MapData.MapDiv.openPopup(app.MapData.OpenPopup);
+	    }
         }
 
         var onEachFeature = function(feature, layer) {
