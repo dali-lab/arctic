@@ -110,6 +110,7 @@ app.MapView = Parse.View.extend({
         app.MapData.MapDiv = new L.map(this.el, {
             center: [10, -110],
             zoom: 2,
+	    scrollWheelZoom: false,
             maxZoom: 4,
             zoomControl: false
         });
@@ -153,7 +154,12 @@ app.MapView = Parse.View.extend({
                 app.ConferenceListCollection = filtered;
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
             }
-            country.bindPopup(app.MapData.OpenTab.render().el, {className: app.MapData.LayerStyle.concat("-popup")});
+
+	    app.MapData.OpenPopup = L.popup({className: app.MapData.LayerStyle.concat("-popup")})
+	        .setLatLng(app.MapData.MapDiv.getCenter())
+	        .setContent(app.MapData.OpenTab.render().el)
+
+	    
         }
 
         var mouseOver = function(e) {
@@ -180,8 +186,7 @@ app.MapView = Parse.View.extend({
         }
 
         var click = function(e) {
-            var layer = e.target;
-            var props = layer.feature.properties;
+	    app.MapData.OpenPopup.addTo(app.MapData.MapDiv);
         }
 
         var onEachFeature = function(feature, layer) {
