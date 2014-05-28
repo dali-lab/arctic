@@ -101,8 +101,16 @@
 }
 
 .filter_title {
-    padding-left:30px;
-    padding-right:30px;
+    position:relative;
+    font-size:14px;
+    width:80px;
+    height:26px;
+}
+
+.filter_title p {
+    top:10%;
+    left:0%;
+    position: absolute;
 }
 
 .form-control {
@@ -110,15 +118,26 @@
 }
 
 .filter {
-    right: 2%;
-    top: 20%;
-    padding-top:10px;
+    right: 1%;
+    top: 2%;
     padding-left:10px;
     padding-right:10px;
-    padding-bottom:10px;
     background-color:white;
     position:absolute;
     z-index: 999;
+}
+
+.filter form {
+    padding-bottom:10px;
+    padding-top:10px;
+}
+
+.filter_tab {
+    position:absolute;
+    right:0%;
+    top:2%;
+    width:25px;
+    height:25px;
 }
 
 body {

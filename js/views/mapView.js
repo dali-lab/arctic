@@ -134,7 +134,6 @@ app.MapView = Parse.View.extend({
 
         var getStyle = function(feature) {
 	    if (feature.properties.NAME === 'Arctic') {
-		debugger;
 		return {
 	            weight: .75,
                     opacity: 1,

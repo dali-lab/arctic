@@ -15,6 +15,7 @@ app.FilterView = Parse.View.extend({
         this.categories = options.categories;
         _.extend(this, _.pick(options));
         this.$el.html(this.template({categories: this.categories}));
+        $(".checkboxes").hide();
     },
 
     render: function() {
@@ -22,6 +23,12 @@ app.FilterView = Parse.View.extend({
     },
 
     toggleFilter: function() {
+        if ($(".checkboxes").is(":visible")) {
+            $(".filter_tab").rotate(0);
+        } else {
+            $(".filter_tab").rotate(270);
+        }
+
         $(".checkboxes").toggle();
     },
 
