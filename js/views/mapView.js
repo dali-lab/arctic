@@ -256,7 +256,6 @@ app.MapView = Parse.View.extend({
         return app.MapData.activeCollection;
     },
     getColor: function(layer) {
-	debugger;
         var collection = app.MapData.activeCollection;
         var name;
         for (var i = 0; i < collection.length; i++) {
