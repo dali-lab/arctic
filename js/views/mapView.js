@@ -145,7 +145,7 @@ app.MapView = Parse.View.extend({
 
         // Create a modal on a country, using either a collection
         // passed to the function or this collection.
-        var initPopup = function(country, filtered) {
+        var initPopup = function(country, filtered, remove) {
             var marker = new L.Marker(new L.LatLng(90, 90));
             if (app.MapData.LayerStyle === "reports") {
                 app.ReportListCollection = filtered;
@@ -154,12 +154,10 @@ app.MapView = Parse.View.extend({
                 app.ConferenceListCollection = filtered;
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
             }
-
+//	    app.MapData.MapDiv.removeLayer(app.MapData.OpenPopup);
 	    app.MapData.OpenPopup = L.popup({className: app.MapData.LayerStyle.concat("-popup")})
 	        .setLatLng(app.MapData.MapDiv.getCenter())
-	        .setContent(app.MapData.OpenTab.render().el)
-
-	    
+	        .setContent(app.MapData.OpenTab.render().el);   
         }
 
         var mouseOver = function(e) {
@@ -186,7 +184,7 @@ app.MapView = Parse.View.extend({
         }
 
         var click = function(e) {
-	    app.MapData.OpenPopup.addTo(app.MapData.MapDiv);
+	    app.MapData.MapDiv.openPopup(app.MapData.OpenPopup);
         }
 
         var onEachFeature = function(feature, layer) {
@@ -209,7 +207,7 @@ app.MapView = Parse.View.extend({
     // TODO: Possibly think of a more elegant way to track what type of tab / layer we
     // are displaying.
     switchLayerTo: function(type) {
-        if (app.MapData.OpenTab) {
+        if (app.MapData.OpenPopup) {
             this.removePopup();
         }
 
