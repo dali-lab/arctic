@@ -14,9 +14,9 @@
     <!-- templates -->
     <script type="text/template" id='website_template'>
         <div class='website' align='center'>
-            <img src=<%= image.url() %> class="web_cache dynamic-image" />
+	  <a href="http://<%= url %>"><img src=<%= image.url() %> class="web_cache dynamic-image" /></a>
             <div class='web_text' align='left'>
-                <span class='website_name'><%= name%></span><br/>
+                <span class='website_name'><a href="http://<%= url %>"><%= name%></a></span><br/>
                 <span class='website_desc'><%= description%></span>
             </div>
         </div>
