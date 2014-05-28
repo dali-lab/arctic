@@ -118,6 +118,8 @@
 }
 
 .filter {
+    border-radius:5px;
+    border-style:solid;
     right: 1%;
     top: 2%;
     padding-left:10px;
