@@ -133,14 +133,26 @@ app.MapView = Parse.View.extend({
 		} 
 
         var getStyle = function(feature) {
-            return {
-                weight: .75,
-                opacity: 1,
-                stroke: true,
-                color: "#000000",
-                fillColor: "#FFFFFA",
-                fillOpacity: 1,
-            }
+	    if (feature.properties.NAME === 'Arctic') {
+		debugger;
+		return {
+	            weight: .75,
+                    opacity: 1,
+                    stroke: true,
+                    color: "#e88d8d",
+                    fillColor: "#FFFFFA",
+                    fillOpacity: .1,
+		}
+	    } else {
+		return {
+                    weight: .75,
+                    opacity: 1,
+                    stroke: true,
+                    color: "#000000",
+                    fillColor: "#FFFFFA",
+                    fillOpacity: 1,
+		}
+	    }
         }
 
         // Create a modal on a country, using either a collection
@@ -148,10 +160,8 @@ app.MapView = Parse.View.extend({
         var initPopup = function(country, filtered, remove) {
             var marker = new L.Marker(new L.LatLng(90, 90));
             if (app.MapData.LayerStyle === "reports") {
-                app.ReportListCollection = filtered;
                 app.MapData.OpenTab = new app.ReportsTabView({reports: filtered});
             } else {
-                app.ConferenceListCollection = filtered;
                 app.MapData.OpenTab = new app.ConferencesTabView({conferences: filtered});
             }
 //	    app.MapData.MapDiv.removeLayer(app.MapData.OpenPopup);
@@ -183,7 +193,15 @@ app.MapView = Parse.View.extend({
 
         }
 
-        var click = function(e) {
+        var click = function(e) {            
+	    var layer = e.target;
+            var props = layer.feature.properties;
+	    var filtered = app.MapData.activeCollection.filterByCountry(props.NAME);
+	    if (app.MapData.LayerStyle === "reports") {
+		app.ReportListCollection = filtered;
+	    } else {
+		app.ConferenceListCollection = filtered
+	    }
 	    app.MapData.MapDiv.openPopup(app.MapData.OpenPopup);
         }
 
@@ -200,6 +218,7 @@ app.MapView = Parse.View.extend({
             onEachFeature: onEachFeature
         }).addTo(app.MapData.MapDiv);
         app.MapData.MapDiv.on('popupclose', this.removePopup);
+	app.MapData.MapDiv.doubleClickZoom.disable();
         return this;
     },
 
