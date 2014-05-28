@@ -163,7 +163,10 @@
 
     <script type="text/template" id="filter-template">
         <div class="filter_box">
-            <div class="filter_title">Filter</div>
+            <div class="filter_title">
+                <p>Filter</p>
+                <img class="filter_tab" src="imgs/expand.png"/>
+            </div>
             <form action="" class="checkboxes">
             <% _.each(categories, function(category) { %>
                 <input type="checkbox" value="<%= category %>"> <%= category %><br>
