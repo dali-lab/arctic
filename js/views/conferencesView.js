@@ -9,6 +9,9 @@ var ConferenceView = Parse.View.extend({
         this.$el.empty();
         var name = this.model.get('name');
         var desc = this.model.get('description');
+        var category = this.model.get('category') || "All";
+        var url = this.model.get('url');
+        var posttime = this.model.get('posttime'); 
         if (this.model.has('image')) {
             var image = this.model.get('image');
         } else {
@@ -21,7 +24,10 @@ var ConferenceView = Parse.View.extend({
         var template = _.template( $("#conference_template").html(), {
             "name": name,
             "description": desc,
-            "image": image
+            "image": image,
+            "category": category,
+            "url": url,
+            "posttime": posttime
         });
         this.$el.html(template);
         return this;

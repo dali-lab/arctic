@@ -40,6 +40,7 @@
                     </div>
                     <div class='conf_time'>
                         <span class='conf_name_span'>
+                            <%= posttime %>
                         </span>
                     </div>
                     <div class='conf_type'>
@@ -48,10 +49,15 @@
                 <div class='seperator3'></div>
                 <div class='conf_preview'>
                     <span class='conf_preview_author'>
-                    </span><br/>
-                    <span class='conf_preview_desc'>
+                        <%= category %>
+                        </span><br/>
+                   <span class='conf_preview_desc'>
                         <%= description%>
-                    </span>
+                   </span>
+                   <span>
+                       <a class="conference_link" href="<%= url %>"><%= url %></a>
+                    </span><br/>
+                    
                 </div>
             </div>
         </div>
