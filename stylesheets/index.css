@@ -1,7 +1,15 @@
 * {
-  margin: 0;
-  padding: 0;
-  -webkit-backface-visibility: hidden;
+    font-family: "Roboto Condensed";
+    margin: 0;
+    padding: 0;
+    -webkit-backface-visibility: hidden;
+}
+/* Normal */
+@font-face {
+	font-family: "Roboto Condensed";
+	font-style: normal;
+	font-weight: 400;
+	src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("RobotoCondensed-Regular.ttf") format('truetype');
 }
 .header-text {
     color: white;
