@@ -11,6 +11,10 @@ The main outside library we use is [Parse, a wrapper around Backbone to serve ou
 The images that we include on the client side for the single page app.
   * stylesheets/
 The main "index.css" file we use to style the single page app. Also contains the minified CSS for Twitter Bootstrap.
+  * ArcticServer/
+This contains the admin panel code and html file. As this is a separate app, it is linked to through a normal "a href" HTML link.
 2. Running the Site
    
-   To run the site, upload the contents of this github repository to an S3 bucket and set "Static File Hosting" to enabled.
+   To run the site online, upload the contents of this github repository to an S3 bucket and set "Static File Hosting" to enabled.
+
+   To run the site locally, open your Chrome browser and navigate to the directory where you have cloned this Github repository. Open the index.html file in the top-level of this directory.
