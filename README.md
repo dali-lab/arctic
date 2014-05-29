@@ -12,4 +12,4 @@ The images that we include on the client side for the single page app.
   * stylesheets/
 The main "index.css" file we use to style the single page app. Also contains the minified CSS for Twitter Bootstrap.
 2. Running the Site
-...To run the site, upload the contents of this github repository to an S3 bucket and set "Static File Hosting" to enabled.
+   To run the site, upload the contents of this github repository to an S3 bucket and set "Static File Hosting" to enabled.
